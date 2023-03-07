@@ -1,7 +1,9 @@
-plotly_express
-nltk
 dask[complete]
-utils
-spacy
-scikit-learn
+matplotlib
+nltk
 pandas
+plotly_express
+scikit-learn
+seaborn
+spacy
+utils
