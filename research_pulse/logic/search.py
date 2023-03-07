@@ -23,7 +23,7 @@ tfidf_matrix = tfidf_vectorizer.fit_transform(data['abstract'])
 # Define the chatbot function
 def chatbot():
     # Greet the user
-    print('Hi, I am a chatbot that can help you find research papers in machine learning and deep learning. What can I do for you?')
+    print('Hi, I can help you find research papers in AI, ML and related matters at large. What are you looking for?')
 
     # Loop until the user says goodbye
     while True:
