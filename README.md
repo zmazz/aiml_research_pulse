@@ -1,2 +1,12 @@
 # aiml_research_pulse
-AI/ML-related reserch assitive explorer
+--- Assistive explorer for AI/ML-related research papers ---
+
+## Summary
+
+## Roadmap
+
+## Team
+
+## Environment preparation
+
+## Bibliography
