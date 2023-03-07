@@ -4,6 +4,8 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+import scipy.sparse as sp
+import pickle
 
 # Load the dataset
 data = pd.read_csv('raw_data/aiml_arxiv_with_cit.csv',low_memory=False)
@@ -13,6 +15,10 @@ data=data[data['abstract'].notna()]
 stop_words = stopwords.words('english')
 tfidf_vectorizer = TfidfVectorizer(stop_words=stop_words)
 tfidf_matrix = tfidf_vectorizer.fit_transform(data['abstract'])
+
+## instead of loading dataset and redoing vectorization
+#tfidf_vectorizer= pickle.load(open('raw_data/search_tfidf_vectorizer.pk','rb'))
+#tfidf_matrix=sp.load_npz('raw_data/search_tfidf_matrix.npz')
 
 # Define the chatbot function
 def chatbot():
@@ -46,5 +52,3 @@ def chatbot():
 
 if __name__ =='__main__':
     chatbot()
-
-#tfidf_matrix.to_csv("raw_data/search_tfidf_matrix.csv",index=False,encoding="utf-8")
