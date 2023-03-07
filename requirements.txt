@@ -1,0 +1,6 @@
+plotly_express
+nltk
+dask[complete]
+utils
+spacy
+scikit-learn
