@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load the dataset
-data = pd.read_csv('../raw_data/aiml_arxiv_with_cit.csv',low_memory=False)
+data = pd.read_csv('raw_data/aiml_arxiv_with_cit.csv',low_memory=False)
 data=data[data['abstract'].notna()]
 
 # Preprocess the data
@@ -46,3 +46,5 @@ def chatbot():
 
 if __name__ =='__main__':
     chatbot()
+
+#tfidf_matrix.to_csv("raw_data/search_tfidf_matrix.csv",index=False,encoding="utf-8")

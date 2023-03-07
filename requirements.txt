@@ -4,3 +4,4 @@ dask[complete]
 utils
 spacy
 scikit-learn
+pandas
