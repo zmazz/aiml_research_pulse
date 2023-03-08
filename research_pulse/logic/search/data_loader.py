@@ -17,7 +17,7 @@ def data_loader():
                     'math.OC','math.PR','math.RT','math.ST','nlin.AO','nlin.CD',
                     'stat.AP','stat.CO','stat.ME','stat.ML','stat.OT','stat.TH',]
 
-    records=db.read_text("../../datasets/arxiv-metadata-oai-snapshot.json").map(lambda x:json.loads(x))
+    records=db.read_text("../../../datasets/arxiv-metadata-oai-snapshot.json").map(lambda x:json.loads(x))
     ai_docs = (records.filter(lambda x:any(ele in x['categories'] for ele in ai_category_list)==True))
 
     get_metadata = lambda x: {'id': x['id'],
