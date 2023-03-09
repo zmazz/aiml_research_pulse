@@ -9,6 +9,7 @@ prefect
 scikit-learn
 seaborn
 spacy
+streamlit
 unidecode
 utils
 wordcloud

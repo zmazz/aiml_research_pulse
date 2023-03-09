@@ -13,10 +13,10 @@ run:
 	python app.py
 
 streamlit:
-	streamlit run app.py
+	streamlit run research_pulse/interface/app.py
 
 run_api:
-	uvicorn taxifare.api.fast:app --reload
+	uvicorn research_pulse.api.fast:app --reload
 
 ################### DATA SOURCES ACTIONS ################
 

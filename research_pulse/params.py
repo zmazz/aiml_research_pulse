@@ -26,19 +26,29 @@ GCR_MEMORY = os.environ.get("GCR_MEMORY")
 LOCAL_DATA_PATH = os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "data")
 LOCAL_REGISTRY_PATH =  os.path.join(os.path.expanduser('~'), ".lewagon", "mlops", "training_outputs")
 
-COLUMN_NAMES_RAW = ['fare_amount','pickup_datetime', 'pickup_longitude', 'pickup_latitude', 'dropoff_longitude', 'dropoff_latitude', 'passenger_count']
+COLUMN_NAMES_RAW = ['id', 'title', 'category', 'authors', 'url', 'journal_ref', 'abstract',
+       'doi', 'year', 'month', 'day', 'hour', 'minute', 'num_authors',
+       'num_cit']
 
 DTYPES_RAW = {
-    "fare_amount": "float32",
-    "pickup_datetime": "datetime64[ns, UTC]",
-    "pickup_longitude": "float32",
-    "pickup_latitude": "float32",
-    "dropoff_longitude": "float32",
-    "dropoff_latitude": "float32",
-    "passenger_count": "int16"
+    "id": "object",
+    "title": "object",
+    "category": "object",
+    "authors": "object",
+    "url": "object",
+    "journal_ref": "object",
+    "abstract": "object",
+    "doi": "object",
+    "year": "int64",
+    "month": "int64",
+    "day": "int64",
+    "hour": "int64",
+    "minute": "int64",
+    "num_authors": "int64",
+    "num_cit": "float64"
 }
 
-DTYPES_PROCESSED = np.float32
+DTYPES_PROCESSED = np.float64
 
 
 
