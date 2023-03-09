@@ -17,7 +17,7 @@ def data_loader():
                     'math.OC','math.PR','math.RT','math.ST','nlin.AO','nlin.CD',
                     'stat.AP','stat.CO','stat.ME','stat.ML','stat.OT','stat.TH',]
 
-    records=db.read_text("~/.deepdipper/data/raw/arxiv-metadata-oai-snapshot.json").map(lambda x:json.loads(x))
+    records=db.read_text("~/deepdipper/data/raw/arxiv-metadata-oai-snapshot.json").map(lambda x:json.loads(x))
     ai_docs = (records.filter(lambda x:any(ele in x['categories'] for ele in ai_category_list)==True))
 
     get_metadata = lambda x: {'id': x['id'],
@@ -33,7 +33,7 @@ def data_loader():
 
     data=ai_docs.map(get_metadata).to_dataframe().compute()
     # OR THIS
-    #data=pd.read_csv("~/.deepdipper/data/raw/AI_ML_ArXiv_Papers.csv",low_memory=False)
+    #data=pd.read_csv("~/deepdipper/data/raw/AI_ML_ArXiv_Papers.csv",low_memory=False)
 
     ### Load citation dataset
     with open("/tmp/internal-citations.json") as f:
@@ -45,7 +45,7 @@ def data_loader():
             for k in citations[id]:
                 f_out.write(f'{id},{k}\n')
 
-    df_citations = pd.read_csv("~/.deepdipper/data/raw/arxiv-metadata-ext-citation.csv",dtype={"id":object,"id_reference":object})
+    df_citations = pd.read_csv("~/deepdipper/data/raw/arxiv-metadata-ext-citation.csv",dtype={"id":object,"id_reference":object})
 
     ##########################################
     ### Data preprocessing

@@ -8,7 +8,7 @@ import scipy.sparse as sp
 import pickle
 
 # Load the dataset
-data = pd.read_csv('~/.deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
+data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
 data=data[data['abstract'].notna()]
 
 # Preprocess the data
