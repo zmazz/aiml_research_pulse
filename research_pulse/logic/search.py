@@ -26,8 +26,8 @@ def vectorizer(df):
     #tfidf_matrix = tfidf_vectorizer.fit_transform(df['abstract'])
 
     ## instead of loading dataset and redoing vectorization
-    tfidf_vectorizer= pickle.load(open('~/deepdipper/training_outputs/search_tfidf_vectorizer.pk','rb'))
-    tfidf_matrix=sp.load_npz('~/deepdipper/training_outputs/search_tfidf_matrix.npz')
+    tfidf_vectorizer= pickle.load(open('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_vectorizer.pk','rb'))
+    tfidf_matrix=sp.load_npz('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_matrix.npz')
     return tfidf_vectorizer,tfidf_matrix
 
 # Define the search function
@@ -48,12 +48,17 @@ def search(query, data, vector, matrix):
     ranked_indices = scores.argsort()[::-1]
 
     # Return the top 5 results
-    for i in range(5):
-        top5=[]
+    top5=[]
+    for i in range(0,5):
         paper = data.iloc[ranked_indices[i]]
-        top5.append(f'Title: {paper["title"]}\nAuthors: {paper["authors"]}\nYear: {paper["year"]}\nLink: {paper["url"]}\nAbstract: {paper["abstract"]}\n')
-
+        top5=top5+[{'Title': paper["title"],'Authors': paper["authors"],
+                    'Year': paper["year"],'Link': paper["url"],'Abstract': paper["abstract"]}]
     return top5
+
+    # Return the top 5 results
+    #for i in range(5):
+    #    paper = data.iloc[ranked_indices[i]]
+    #    print(f'Title: {paper["title"]}\nAuthors: {paper["authors"]}\nYear: {paper["year"]}\nLink: {paper["url"]}\nAbstract: {paper["abstract"]}\n')
 
 
 if __name__ =='__main__':
