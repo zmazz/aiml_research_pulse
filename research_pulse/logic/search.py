@@ -47,13 +47,13 @@ def search(query, data, vector, matrix):
     scores = cosine_similarity(query_tfidf, matrix).flatten()
     ranked_indices = scores.argsort()[::-1]
 
-    # Return the top 5 results
-    top5=[]
-    for i in range(0,5):
+    # Return the top 10 results
+    top20=[]
+    for i in range(0,20):
         paper = data.iloc[ranked_indices[i]]
-        top5=top5+[{'Title': paper["title"],'Authors': paper["authors"],
-                    'Year': paper["year"],'Link': paper["url"],'Abstract': paper["abstract"]}]
-    return top5
+        top20=top20+[{'Title': paper["title"],'Authors': paper["authors"],
+                    'Year': str(paper["year"]),'Link': paper["url"],'Abstract': paper["abstract"]}]
+    return top20
 
     # Return the top 5 results
     #for i in range(5):
