@@ -1,7 +1,7 @@
-import streamlit as st
+#import streamlit as st
 
 import datetime
-import requests
+#import requests
 import research_pulse.logic.search as ls
 
 '''
