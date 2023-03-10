@@ -12,7 +12,7 @@ def load_data():
     """
     Load the dataset from the processed folder
     """
-    data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
+    data = pd.read_csv('gs://deepdipper_data/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
     return data
 
 def vectorizer(df):
@@ -26,8 +26,8 @@ def vectorizer(df):
     #tfidf_matrix = tfidf_vectorizer.fit_transform(df['abstract'])
 
     ## instead of loading dataset and redoing vectorization
-    tfidf_vectorizer= pickle.load(open('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_vectorizer.pk','rb'))
-    tfidf_matrix=sp.load_npz('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_matrix.npz')
+    tfidf_vectorizer= pickle.load(open('gs://deepdipper_data/training_outputs/search_tfidf_vectorizer.pk','rb'))
+    tfidf_matrix=sp.load_npz('gs://deepdipper_data/training_outputs/search_tfidf_matrix.npz')
     return tfidf_vectorizer,tfidf_matrix
 
 # Define the search function
