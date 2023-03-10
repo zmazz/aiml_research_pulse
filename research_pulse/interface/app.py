@@ -21,9 +21,10 @@ with st.form(key='params_for_api'):
         params = query.replace(' ','-').lower()
 
         #research_pulse_api_url = 'http://127.0.0.1:8000/search?query='
-        research_pulse_api_url = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search?query='
+        research_pulse_api_url = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
-        response = requests.get(research_pulse_api_url+params)
+        #response = requests.get(research_pulse_api_url+params)
+        response = requests.get(research_pulse_api_url, params=params)
 
         results = response.json()
 
