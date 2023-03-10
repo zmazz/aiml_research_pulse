@@ -53,7 +53,10 @@ def search(query, data, vector, matrix):
         paper = data.iloc[ranked_indices[i]]
         top20=top20+[{'Title': paper["title"],'Authors': paper["authors"],
                     'Year': str(paper["year"]),'Link': paper["url"],'Abstract': paper["abstract"]}]
-    return top20
+    return {'#1': top20[0], '#2': top20[1], '#3': top20[2], '#4': top20[3], '#5': top20[4],
+            '#6': top20[5], '#7': top20[6], '#8': top20[7], '#9': top20[8], '#10': top20[9],
+            '#11': top20[10], '#12': top20[11], '#13': top20[12], '#14': top20[13], '#15': top20[14],
+            '#16': top20[15], '#17': top20[16], '#18': top20[17], '#19': top20[18], '#20': top20[19]}
 
     # Return the top 5 results
     #for i in range(5):
