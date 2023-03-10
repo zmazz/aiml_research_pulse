@@ -2,7 +2,6 @@
 dask[complete]
 google-cloud-bigquery
 google-cloud-storage
-matplotlib
 nltk
 pandas
 plotly_express
@@ -22,8 +21,8 @@ tensorflow==2.10.0; sys_platform != 'darwin' # Windows & Ubuntu Intel chips
 
 # API
 fastapi         # API framework
-pytz            # time zone management
+#pytz            # time zone management
 uvicorn         # web server
 # tests
-httpx           # HTTP client
-pytest-asyncio  # asynchronous I/O support for pytest
+# httpx           # HTTP client
+# pytest-asyncio  # asynchronous I/O support for pytest
