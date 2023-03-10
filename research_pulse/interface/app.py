@@ -2,7 +2,7 @@
 
 import datetime
 #import requests
-import research_pulse.logic.search as ls
+#import research_pulse.logic.search as ls
 
 '''
 # AI/ML Research Pulse
