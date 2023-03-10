@@ -28,6 +28,8 @@ with st.form(key='params_for_api'):
 
         results = response.json()
 
+        print(results)
+
         #data=ls.load_data()
         #vector, matrix = ls.vectorizer(data)
 
