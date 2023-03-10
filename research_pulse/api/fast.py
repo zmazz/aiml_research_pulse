@@ -17,7 +17,7 @@ app.add_middleware(
 @app.get("/search")
 def search(query: str):  # "bayesian neural networks" / "adam optimizers" / ...
     """
-    Calls search function from logic/search.py and returns the top 5 results in list of str format.
+    Calls search function from logic/search.py and returns the top 20 results in list of str format.
     """
     import research_pulse.logic.search as ls
     data=ls.load_data()

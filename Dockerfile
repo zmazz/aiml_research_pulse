@@ -1,5 +1,7 @@
-#FROM python:3.10.6-bullseye
+FROM python:3.10.6
 FROM --platform=linux/amd64 tensorflow/tensorflow:2.10.0
+
+EXPOSE 8080
 
 COPY research_pulse research_pulse
 COPY requirements.txt requirements.txt
