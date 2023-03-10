@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 
 
 #CMD make run_api
-CMD uvicorn research_pulse.api.fast:app --host 0.0.0.0 --port $PORT
+CMD uvicorn research_pulse.api.fast:app --host 0.0.0.0 --port 8080
