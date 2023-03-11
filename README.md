@@ -64,7 +64,7 @@ Tools:
 Bene\
 Ibra\
 Sam\
-Ziad\
+Ziad
 
 with help from TAs: \
 Charlotte, Romain, Adrien, Elizabeth, Charles...
