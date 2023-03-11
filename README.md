@@ -1,34 +1,34 @@
 # aiml_research_pulse
---- Assistive explorer for searchers of AI/ML-related research papers ---
+--=-=-=-=-=-=-=-=-=-=-->>> Assistive explorer of AI/ML-related research papers <<<<--=-=-=-=-=-=-=-=-=-=--
 
 ## Data
-arXiv database of ~2.2m research papers from 1991 to today.
-Skimmed for AI/ML-related papers: ~774k kept from 2000.
+- arXiv database of ~2.2m research papers from 1991 to today.\
+- skimmed for AI/ML-related papers: ~774k kept from 2000.
 
 
 ## Project architecture
 Dashboard analytics:
 - subpages: global views / ranking
 - user inputs: aggregate or category {&} last 1y, 5y or 23y
-- source & packages: GCS then GBQ {&} GCE {&} streamlit
-- associated .py (&folder): app.py (interface), dashboard.py (logic),
+- source & services: GCS then GBQ {&} GCE {&} streamlit
+- associated worksheets: app.py (interface), dashboard.py (logic)
 
 Search:
 - user inputs: query {&} number (top n) {&} criteria (scoring method)
-- source & packages: GCS then GBQ {&} GCE {&} streamlit
-- associated .py (&folder): app.py (interface), search.py (logic), fast.py (api)
+- source & services: GCS then GBQ {&} GCE {&} streamlit
+- associated worksheets: app.py (interface), search.py (logic), fast.py (api)
 
 Research:
 - subpages: papers / authors / citations parsers
 - user inputs: paper id or author name or category
-- sources & packages: GCS then GBQ {&} GCE {&} Fast API then GBQ {&} streamlit {&} prefect (for citations)
-- associated .py (&folder): app.py (interface), r_papers.py (logic), r_authors.py (logic), r_citations.py (logic), r_recommend.py (logic)
+- sources & services: GCS then GBQ {&} GCE {&} Fast API then GBQ {&} streamlit {&} prefect (for citations)
+- associated worksheets: app.py (interface), r_papers.py (logic), r_authors.py (logic), r_citations.py (logic), r_recommend.py (logic)
 
 Tools:
 - subpages: translation / summarization / topic alert bot
 - user inputs: paper id or category
-- sources & packages: GCS {&} GCE {&} Fast API {&} streamlit {&} prefect (for bot)
-- associated .py (&folder): app.py (inteface), t_translate.py (logic), t_summarize.py (logic), t_alert.py (logic), fast.py (api)
+- sources & services: GCS {&} GCE {&} Fast API {&} streamlit {&} prefect (for bot)
+- associated worksheets: app.py (inteface), t_translate.py (logic), t_summarize.py (logic), t_alert.py (logic), fast.py (api)
 
 ## Folder tree:
  as of 11.03.2023:
