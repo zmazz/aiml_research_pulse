@@ -33,42 +33,41 @@ Tools:
 ## Folder tree:
  as of 11.03.2023:
 
-├── Dockerfile
-├── LICENSE
-├── Makefile
-├── README.md
-├── requirements.txt
-├── research_pulse
-│   ├── api
-│   │   └── fast.py
-│   ├── interface
-│   │   ├── app.py
-│   │   └── main.py
-│   ├── logic
-│   │   ├── dashboard.py
-│   │   ├── data_loader.py
-│   │   ├── r_authors.py
-│   │   ├── r_citations.py
-│   │   ├── r_papers.py
-│   │   ├── r_recommendation.py
-│   │   ├── search.py
-│   │   ├── t_alert.py
-│   │   ├── t_summarize.py
-│   │   └── t_translate.py
-│   ├── params.py
-│   └── utils.py
-├── setup.py
+├── Dockerfile\
+├── LICENSE\
+├── Makefile\
+├── README.md\
+├── requirements.txt\
+├── research_pulse\
+│   ├── api\
+│   │   └── fast.py\
+│   ├── interface\
+│   │   ├── app.py\
+│   │   └── main.py\
+│   ├── logic\
+│   │   ├── dashboard.py\
+│   │   ├── data_loader.py\
+│   │   ├── r_authors.py\
+│   │   ├── r_citations.py\
+│   │   ├── r_papers.py\
+│   │   ├── r_recommendation.py\
+│   │   ├── search.py\
+│   │   ├── t_alert.py\
+│   │   ├── t_summarize.py\
+│   │   └── t_translate.py\
+│   ├── params.py\
+│   └── utils.py\
+├── setup.py\
 └── tests
 
-
 ## Team
-Bene
-Ibra
-Sam
-Ziad
+Bene\
+Ibra\
+Sam\
+Ziad\
 
-with help from TAs: Charlotte, Romain, Adrien, Elizabeth, Charles...
-
+with help from TAs: \
+Charlotte, Romain, Adrien, Elizabeth, Charles...
 
 ## Roadmap
 
