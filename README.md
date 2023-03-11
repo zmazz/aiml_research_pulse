@@ -1,15 +1,76 @@
 # aiml_research_pulse
---- Assistive explorer for AI/ML-related research papers ---
-## Usage instruction:
-Make "datasets" folder inside main folder.
+--- Assistive explorer for searchers of AI/ML-related research papers ---
 
-Folder tree:
+## Data
+arXiv database of ~2.2m research papers from 1991 to today.
+Skimmed for AI/ML-related papers: ~774k kept from 2000.
 
-## Summary
 
-## Roadmap
+## Project architecture
+Dashboard analytics:
+- subpages: global views / ranking
+- user inputs: aggregate or category {&} last 1y, 5y or 23y
+- source & packages: GCS then GBQ {&} GCE {&} streamlit
+- associated .py (&folder): app.py (interface), dashboard.py (logic),
+
+Search:
+- user inputs: query {&} number (top n) {&} criteria (scoring method)
+- source & packages: GCS then GBQ {&} GCE {&} streamlit
+- associated .py (&folder): app.py (interface), search.py (logic), fast.py (api)
+
+Research:
+- subpages: papers / authors / citations parsers
+- user inputs: paper id or author name or category
+- sources & packages: GCS then GBQ {&} GCE {&} Fast API then GBQ {&} streamlit {&} prefect (for citations)
+- associated .py (&folder): app.py (interface), r_papers.py (logic), r_authors.py (logic), r_citations.py (logic), r_recommend.py (logic)
+
+Tools:
+- subpages: translation / summarization / topic alert bot
+- user inputs: paper id or category
+- sources & packages: GCS {&} GCE {&} Fast API {&} streamlit {&} prefect (for bot)
+- associated .py (&folder): app.py (inteface), t_translate.py (logic), t_summarize.py (logic), t_alert.py (logic), fast.py (api)
+
+## Folder tree:
+ as of 11.03.2023:
+
+├── Dockerfile
+├── LICENSE
+├── Makefile
+├── README.md
+├── requirements.txt
+├── research_pulse
+│   ├── api
+│   │   └── fast.py
+│   ├── interface
+│   │   ├── app.py
+│   │   └── main.py
+│   ├── logic
+│   │   ├── dashboard.py
+│   │   ├── data_loader.py
+│   │   ├── r_authors.py
+│   │   ├── r_citations.py
+│   │   ├── r_papers.py
+│   │   ├── r_recommendation.py
+│   │   ├── search.py
+│   │   ├── t_alert.py
+│   │   ├── t_summarize.py
+│   │   └── t_translate.py
+│   ├── params.py
+│   └── utils.py
+├── setup.py
+└── tests
+
 
 ## Team
+Bene
+Ibra
+Sam
+Ziad
+
+with help from TAs: Charlotte, Romain, Adrien, Elizabeth, Charles...
+
+
+## Roadmap
 
 ## Environment preparation
 
