@@ -21,6 +21,7 @@ wordcloud
 
 # API
 fastapi         # API framework
+gcsfs           # Google Cloud Storage
 #pytz            # time zone management
 uvicorn         # web server
 # tests

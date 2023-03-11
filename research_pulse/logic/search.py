@@ -7,13 +7,21 @@ from sklearn.metrics.pairwise import cosine_similarity
 import scipy.sparse as sp
 import pickle
 
+nltk.download('stopwords')
+
 # Load the dataset
 def load_data():
     """
     Load the dataset from the processed folder
     """
     #data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
-    data = pd.read_csv('gs://deepdipper_data/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
+
+    import gcsfs
+
+    fs = gcsfs.GCSFileSystem(project='deepdipper')
+    with fs.open('deepdipper_data/data/processed/aiml_arxiv_with_cit.csv') as f:
+        data = pd.read_csv(f)
+
     return data
 
 def vectorizer(df):
@@ -29,8 +37,13 @@ def vectorizer(df):
     ## instead of loading dataset and redoing vectorization
     #tfidf_vectorizer= pickle.load(open('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_vectorizer.pk','rb'))
     #tfidf_matrix=sp.load_npz('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_matrix.npz')
-    tfidf_vectorizer= pickle.load(open('gs://deepdipper_data/training_outputs/search_tfidf_vectorizer.pk','rb'))
-    tfidf_matrix=sp.load_npz('gs://deepdipper_data/training_outputs/search_tfidf_matrix.npz')
+    import gcsfs
+    fs = gcsfs.GCSFileSystem(project='deepdipper')
+    with fs.open('deepdipper_data/training_outputs/search_tfidf_vectorizer.pk', 'rb') as f:
+        tfidf_vectorizer = pickle.load(f)
+    with fs.open('deepdipper_data/training_outputs/search_tfidf_matrix.npz') as g:
+        tfidf_matrix = sp.load_npz(g)
+
     return tfidf_vectorizer,tfidf_matrix
 
 # Define the search function
@@ -61,7 +74,7 @@ def search(query, data, vector, matrix):
             '#11': top20[10], '#12': top20[11], '#13': top20[12], '#14': top20[13], '#15': top20[14],
             '#16': top20[15], '#17': top20[16], '#18': top20[17], '#19': top20[18], '#20': top20[19]}
 
-    # Return the top 5 results
+    # Return the top 5 resultsgit add .
     #for i in range(5):
     #    paper = data.iloc[ranked_indices[i]]
     #    print(f'Title: {paper["title"]}\nAuthors: {paper["authors"]}\nYear: {paper["year"]}\nLink: {paper["url"]}\nAbstract: {paper["abstract"]}\n')

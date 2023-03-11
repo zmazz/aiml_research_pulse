@@ -2,7 +2,7 @@ import streamlit as st
 
 import datetime
 import requests
-#import research_pulse.logic.search as ls
+import research_pulse.logic.search as ls
 
 '''
 # AI/ML Research Pulse
@@ -14,21 +14,21 @@ st.text('Corpus of research papers published after 2000 and openly available on 
 st.text('')
 with st.form(key='params_for_api'):
 
-    query = st.text_input('Please input topic or notion to get most relevent papers:')
+    input = st.text_input('Please input topic or notion to get most relevent papers:')
 
     if st.form_submit_button('Browse the arXiv net!'):
 
-        params = query.replace(' ','-').lower()
+        params = input.replace(' ','-').lower()
 
         #research_pulse_api_url = 'http://127.0.0.1:8000/search?query='
         research_pulse_api_url = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
         #response = requests.get(research_pulse_api_url+params)
-        response = requests.get(research_pulse_api_url, params=params)
+        response = requests.get(research_pulse_api_url, params=dict(query=params))
 
         results = response.json()
 
-        print(results)
+        #print(results)
 
         #data=ls.load_data()
         #vector, matrix = ls.vectorizer(data)
