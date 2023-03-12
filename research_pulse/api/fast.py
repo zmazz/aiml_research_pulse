@@ -31,16 +31,16 @@ def search(query: str):  # "bayesian neural networks" / "adam optimizers" / ...
 
     return top20
 
-# https://deepdipper-rp6v7d7m4q-ew.a.run.app/research_paper?query=0704%2E0672%2F
+# https://deepdipper-rp6v7d7m4q-ew.a.run.app/research_paper?query=0704.0672
 @app.get("/research_paper")
-def research_paper(query: float):  # 704.0193/ / ...
+def research_paper(query: str):  # 704.0193/ / ...
     """
     Calls research_paper function from logic/r_papers.py and returns line in dataset of paper.
     """
 
     data=dl.load_data()
 
-    paper_info=lrp.get_paper(str(query), data)
+    paper_info=lrp.get_paper(query, data)
 
     return paper_info
 
