@@ -6,23 +6,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import scipy.sparse as sp
 import pickle
-
-nltk.download('stopwords')
-
-# Load the dataset
-def load_data():
-    """
-    Load the dataset from the processed folder
-    """
-    #data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
-
-    import gcsfs
-
-    fs = gcsfs.GCSFileSystem(project='deepdipper')
-    with fs.open('deepdipper_data/data/processed/aiml_arxiv_with_cit.csv') as f:
-        data = pd.read_csv(f)
-
-    return data
+import research_pulse.logic.data_loader as dl
 
 def vectorizer(df):
     """
@@ -81,6 +65,6 @@ def search(query, data, vector, matrix):
 
 
 if __name__ =='__main__':
-    data=load_data()
+    data=dl.load_data()
     vector, matrix = vectorizer(data)
     search(query=input('Enter your query: '), vector=vector, matrix=matrix)

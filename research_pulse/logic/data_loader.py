@@ -3,12 +3,26 @@ import pandas as pd
 import json
 import dask.bag as db
 
-##########################################
-### Load initial dataset
-# OR THIS
-def data_loader():
+### Load cleaned and merged  dataset
+def load_data():
+    """
+    Load the dataset from the processed folder
+    """
+    #data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
 
-    ai_category_list=['cond-mat.dis-nn','cond-mat.stat-mech','cond-mat.str-el','cs.AI',
+    import gcsfs
+
+    fs = gcsfs.GCSFileSystem(project='deepdipper')
+    with fs.open('deepdipper_data/data/processed/aiml_arxiv_with_cit.csv') as f:
+        data = pd.read_csv(f)
+
+    return data
+
+##########################################
+# OR THIS from original dataframe in json format
+def dataset_creator_local():
+
+    aiml_category_list=['cond-mat.dis-nn','cond-mat.stat-mech','cond-mat.str-el','cs.AI',
                     'cs.CE','cs.CG','cs.CL','cs.CR','cs.CV','cs.CY','cs.DB','cs.DC',
                     'cs.DL','cs.DM','cs.DS','cs.ET','cs.FL','cs.GL','cs.GT','cs.HC',
                     'cs.IR','cs.IT','cs.LG','cs.LO','cs.MA','cs.MS','cs.NA','cs.NE',
@@ -18,7 +32,7 @@ def data_loader():
                     'stat.AP','stat.CO','stat.ME','stat.ML','stat.OT','stat.TH',]
 
     records=db.read_text("~/deepdipper/data/raw/arxiv-metadata-oai-snapshot.json").map(lambda x:json.loads(x))
-    ai_docs = (records.filter(lambda x:any(ele in x['categories'] for ele in ai_category_list)==True))
+    ai_docs = (records.filter(lambda x:any(ele in x['categories'] for ele in aiml_category_list)==True))
 
     get_metadata = lambda x: {'id': x['id'],
                     'title': x['title'],

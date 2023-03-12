@@ -1,5 +1,5 @@
 # aiml_research_pulse
---=-=-=-=-=-=-=-=-=-=-->>> Assistive explorer of AI/ML-related research papers <<<<--=-=-=-=-=-=-=-=-=-=--
+----------------->>> Assistive explorer of AI/ML-related research papers <<<-----------------
 
 ## Data
 - arXiv database of ~2.2m research papers from 1991 to today.\
