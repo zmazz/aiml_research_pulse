@@ -1,9 +1,16 @@
-# aiml_research_pulse
+
+░█▀▀█ █▀▀ █▀▀ █▀▀ █▀▀█ █▀▀█ █▀▀ █──█ 　 ░█▀▀█ █──█ █── █▀▀ █▀▀
+░█▄▄▀ █▀▀ ▀▀█ █▀▀ █▄▄█ █▄▄▀ █── █▀▀█ 　 ░█▄▄█ █──█ █── ▀▀█ █▀▀
+░█─░█ ▀▀▀ ▀▀▀ ▀▀▀ ▀──▀ ▀─▀▀ ▀▀▀ ▀──▀ 　 ░█─── ─▀▀▀ ▀▀▀ ▀▀▀ ▀▀▀
+
+Ｒｅｓｅａｒｃｈ Ｐｕｌｓｅ
+
 ----------------->>> Assistive explorer of AI/ML-related research papers <<<-----------------
 
 ## Data
 - arXiv database of ~2.2m research papers from 1991 to today.\
 - skimmed for AI/ML-related papers: ~774k kept from 2000.
+
 
 
 ## Project architecture

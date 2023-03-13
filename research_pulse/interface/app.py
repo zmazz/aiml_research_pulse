@@ -13,7 +13,7 @@ import streamlit as st
 
 
 st.set_page_config(
-    page_title="DeepDipper",
+    page_title="ResPulse",
     page_icon=":smiley:",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -62,39 +62,40 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.markdown("<h4 style='text-align: center; color: yellow'>-- Research Pulse --</h4>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ Ｒｅｓｅａｒｃｈ Ｐｕｌｓｅ ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey'>NLP tools to master your exploration of research paper</h5>", unsafe_allow_html=True)
 
 with st.container():
-    About, Search, Research, Dashboard, Tools = st.tabs(["About","-Search engine-","-Research papers or authors-","-tbd Analytics dashboard-","-NLP-based tools-"])
+    About, Search, Research, Dashboard, Tools = st.tabs(["About","- Search engine -","- Research authors or papers -","- Analytics dashboard -","- NLP-assistive tools -"])
 
     with About:
+        st.markdown(' ')
         st.markdown("AI, ML and related research areas are evolving at a rapid pace.", unsafe_allow_html=True)
         st.markdown("Research Pulse is a tool that helps you to explore the research papers and their authors", unsafe_allow_html=True)
         st.markdown("It is a NLP tool that helps you to find the most relevant papers and authors in your research area", unsafe_allow_html=True)
         st.markdown(' ')
-        st.markdown("<h6 style='text-align: center; color: yellow'>---- Search engine ----</h6>", unsafe_allow_html=True)
+        st.markdown("<h6 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ Search engine ﮩ٨ـﮩﮩ٨ـ</h6>", unsafe_allow_html=True)
         st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
         st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
         st.markdown(' ')
-        st.markdown("<h6 style='text-align: center; color: yellow'>---- Research papers & authors ----</h6>", unsafe_allow_html=True)
+        st.markdown("<h6 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ Research papers & authors ﮩ٨ـﮩﮩ٨ـ</h6>", unsafe_allow_html=True)
         st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
         st.markdown("Look for an author by inputting his/her name.", unsafe_allow_html=True)
-        st.markdown("--tobedone: citation network parser and code navigator per category", unsafe_allow_html=True)
+        st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
         st.markdown(' ')
-        st.markdown("<h6 style='text-align: center; color: yellow'>---- tobedone: Analytics dashboard ----</h6>", unsafe_allow_html=True)
+        st.markdown("<h6 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ tobedone: Analytics dashboard ﮩ٨ـﮩﮩ٨ـ</h6>", unsafe_allow_html=True)
         st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
         st.markdown("Available for all papers, by category, by year filtrage, with key metrics dissected.", unsafe_allow_html=True)
         st.markdown(' ')
-        st.markdown("<h6 style='text-align: center; color: yellow'>---- tobedone: NLP-based tools ----</h6>", unsafe_allow_html=True)
+        st.markdown("<h6 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ tobedone: NLP-based tools ﮩ٨ـﮩﮩ٨ـ</h6>", unsafe_allow_html=True)
         st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
-        st.markdown("--tobedone: translation, summarization, bot alert tool", unsafe_allow_html=True)
+        st.markdown("--tobedone: translation, summarization, bot alert tool...", unsafe_allow_html=True)
 
     with Search:
         st.markdown("<h6 style='text-align: center; color: white'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
         with st.form(key='params_for_api_search') as search_form:
             input1 = st.text_input('> input 1 to 5 keywords of interest separated by space')
-            if st.form_submit_button('Search the AI&ML net!'):
+            if st.form_submit_button('Search for papers!'):
 
                 params1 = input1.replace(' ','-').lower()
 
@@ -136,7 +137,7 @@ with st.container():
 
                 input2 = st.text_input('> input author name to get detailed info on them')
 
-                if st.form_submit_button('Research the AI&ML net!'):
+                if st.form_submit_button('Research Author!'):
 
                     params2 = input2.replace(' ','-').lower()
 
@@ -161,7 +162,7 @@ with st.container():
 
                 input3 = st.text_input('> input paper ID to get detailed info on it (e.g. 2023-12345)')
 
-                if st.form_submit_button('Research the arXiv net!'):
+                if st.form_submit_button('Research Paper!'):
 
                     params3 = input3.replace(' ','-').lower()
 
@@ -187,10 +188,13 @@ with st.container():
                         st.text('ABSTRACT -- ' + str(results3[key]['Abstract']))
                         st.text(' ')
                         st.text(' ')
+
         with Dashboard:
-            st.markdown('coming soon, stay tuned!')
+            st.markdown('-- coming soon, stay tuned! --')
+
         with Tools:
-            st.markdown('coming soon, stay tuned!')
+            st.markdown('-- coming soon, stay tuned! --')
+
     # with Dashboard:
     #     #First row - overall and top50 view
     #     Overall, Top50 = Dashboard.tabs(["Overall", "Top50"])
