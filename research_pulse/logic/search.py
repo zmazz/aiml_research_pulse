@@ -18,15 +18,15 @@ def vectorizer(df):
     #tfidf_vectorizer = TfidfVectorizer(stop_words=stop_words)
     #tfidf_matrix = tfidf_vectorizer.fit_transform(df['abstract'])
 
-    tfidf_vectorizer= pickle.load(open('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_vectorizer.pk','rb'))
-    tfidf_matrix=sp.load_npz('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_matrix.npz')
+    #tfidf_vectorizer= pickle.load(open('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_vectorizer.pk','rb'))
+    #tfidf_matrix=sp.load_npz('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_matrix.npz')
 
-    #import gcsfs
-    #fs = gcsfs.GCSFileSystem(project='deepdipper')
-    #with fs.open('deepdipper_data/training_outputs/search_tfidf_vectorizer.pk', 'rb') as f:
-    #    tfidf_vectorizer = pickle.load(f)
-    #with fs.open('deepdipper_data/training_outputs/search_tfidf_matrix.npz') as g:
-    #    tfidf_matrix = sp.load_npz(g)
+    import gcsfs
+    fs = gcsfs.GCSFileSystem(project='deepdipper')
+    with fs.open('deepdipper_data/training_outputs/search_tfidf_vectorizer.pk', 'rb') as f:
+        tfidf_vectorizer = pickle.load(f)
+    with fs.open('deepdipper_data/training_outputs/search_tfidf_matrix.npz') as g:
+        tfidf_matrix = sp.load_npz(g)
 
     return tfidf_vectorizer,tfidf_matrix
 

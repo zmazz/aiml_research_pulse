@@ -98,11 +98,11 @@ with st.container():
 
                 params1 = input1.replace(' ','-').lower()
 
-                research_pulse_api_url1 = 'http://127.0.0.1:8000/search?query='
-                #research_pulse_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
+                #research_pulse_api_url1 = 'http://127.0.0.1:8000/search?query='
+                research_pulse_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
-                response1 = requests.get(research_pulse_api_url1+params1)
-                #response1 = requests.get(research_pulse_api_url1, params=dict(query=params1))
+                #response1 = requests.get(research_pulse_api_url1+params1)
+                response1 = requests.get(research_pulse_api_url1, params=dict(query=params1))
 
                 results1 = response1.json()
 
@@ -140,11 +140,11 @@ with st.container():
 
                     params2 = input2.replace(' ','-').lower()
 
-                    research_pulse_api_url2 = 'http://127.0.0.1:8000/authors?query='
-                    #research_pulse_api_url2 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
+                    #research_pulse_api_url2 = 'http://127.0.0.1:8000/authors?query='
+                    research_pulse_api_url2 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
 
-                    response2 = requests.get(research_pulse_api_url2+params2)
-                    #response2 = requests.get(research_pulse_api_url2, params=dict(query=params2))
+                    #response2 = requests.get(research_pulse_api_url2+params2)
+                    response2 = requests.get(research_pulse_api_url2, params=dict(query=params2))
 
                     results2 = response2.json()
 
@@ -166,11 +166,11 @@ with st.container():
                     params3 = input3.replace(' ','-').lower()
 
 
-                    research_pulse_api_url3 = 'http://127.0.0.1:8000/papers?query='
-                    #research_pulse_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
+                    #research_pulse_api_url3 = 'http://127.0.0.1:8000/papers?query='
+                    research_pulse_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
 
-                    response3 = requests.get(research_pulse_api_url3+params3)
-                    #response3 = requests.get(research_pulse_api_url3, params=dict(query=params3))
+                    #response3 = requests.get(research_pulse_api_url3+params3)
+                    response3 = requests.get(research_pulse_api_url3, params=dict(query=params3))
 
                     results3 = response3.json()
 
