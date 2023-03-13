@@ -84,4 +84,5 @@ def dataset_creator_local():
     df=pd.merge(data,df_citcount,how='left',left_on='id',right_index=True)
     df.rename(columns={'id_x':'id','id_y':'num_cit'},inplace=True)
     df['id']=df['id'].astype(str)
+    df['num_cit']=df['num_cit'].fillna(0)
     return df

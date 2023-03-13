@@ -4,6 +4,7 @@ from fastapi.middleware.cors import CORSMiddleware
 import research_pulse.logic.search as ls
 import research_pulse.logic.data_loader as dl
 import research_pulse.logic.r_papers as lrp
+import research_pulse.logic.r_authors as lra
 import research_pulse.logic.data_loader as dl
 
 app = FastAPI()
@@ -17,35 +18,39 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-# http://127.0.0.1:8000/search?query=bayesian-neural-networks
+df=dl.load_data()
+vector, matrix = ls.vectorizer(df)
+
+# http://deepdipper-rp6v7d7m4q-ew.a.run.app/search?query=bayesian-neural-networks
 @app.get("/search")
 def search(query: str):  # "bayesian neural networks" / "adam optimizers" / ...
     """
     Calls search function from logic/search.py and returns the top 20 results in list of str format.
     """
-
-    data=dl.load_data()
-
-    vector, matrix = ls.vectorizer(data)
-    top20=ls.search(query.lower(), data, vector, matrix)
-
+    # Search for the query
+    top20=ls.search(query.lower(), df, vector, matrix)
+    # Return the top 20 results
     return top20
 
-# https://deepdipper-rp6v7d7m4q-ew.a.run.app/research_paper?query=0704.0672
-@app.get("/research_paper")
-def research_paper(query: str):  # 704.0193/ / ...
+# http://deepdipper-rp6v7d7m4q-ew.a.run.app/papers?query=704.0019
+@app.get("/papers")
+def get_paper(query: str):
     """
-    Calls research_paper function from logic/r_papers.py and returns line in dataset of paper.
+    Get a row from the ArXiv dataset by ID
     """
+    paper_details = lrp.get_paper(query, df)
+    print(paper_details)
+    return paper_details
 
-    data=dl.load_data()
-
-    paper_info=lrp.get_paper(query, data)
-
-    return paper_info
-
-
+# http://deepdipper-rp6v7d7m4q-ew.a.run.app/authors?query=theran-louis
+@app.get("/authors")
+def get_author(query: str):
+    """
+    Get author appearances from the ArXiv dataset by name
+    """
+    author_occ=lra.get_author(query, df)
+    return author_occ
 
 @app.get("/")
 def root():
-    return {'greeting':'Hello'}
+    return {'greeting':'Hello, welcome to the Research Pulse API!'}
