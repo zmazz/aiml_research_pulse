@@ -1,5 +1,3 @@
-import streamlit as st
-
 #import datetime
 import requests
 # import research_pulse.logic.search as ls
@@ -9,7 +7,7 @@ import streamlit as st
 #import numpy as np
 #import matplotlib.pyplot as plt
 #import plotly.express as px
-import research_pulse.logic.data_loader as ldl
+#import research_pulse.logic.data_loader as ldl
 #import research_pulse.logic.analytics_agg as laa
 
 
@@ -26,12 +24,12 @@ st.set_page_config(
     }
 )
 
-@st.cache_data
-def load_data():
-    data=ldl.load_data()
-    return data
+#@st.cache_data
+#def load_data():
+#    data=ldl.load_data()
+#    return data
 
-df=load_data()
+#df=load_data()
 
 html_temp = """
             <div style="background-color:{};padding:1px">
