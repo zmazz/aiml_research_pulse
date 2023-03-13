@@ -41,9 +41,10 @@ with st.form(key='params_for_api'):
         #### Top 20 results:
         '''
         for i in range(0,20):
-            st.markdown(f'#{i} -- ' + results[i]['Title'])
-            st.markdown(str(results[i]['Year'])+ ', ' + str(results[i]['Authors']) + ', ' + results[i]['Link'])
-            st.text('ABSTRACT -- ' + results[i]['Abstract'])
+            k=f'{i}'
+            st.markdown(f'#{i} -- ' + results[k]['Title'])
+            st.markdown(str(results[k]['Year'])+ ', ' + str(results[k]['Authors']) + ', ' + results[k]['Link'])
+            st.text('ABSTRACT -- ' + results[k]['Abstract'])
             st.text('')
         # st.markdown('#1 -- ' + results['#1']['Title'])
         # st.markdown(str(results['#1']['Year'])+ ', ' + str(results['#1']['Authors']) + ', ' + results['#1']['Link'])
