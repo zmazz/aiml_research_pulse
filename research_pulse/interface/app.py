@@ -176,11 +176,11 @@ with st.container():
                         st.text(' ')
                         st.text(' ')
 
-        with Dashboard:
-            st.markdown('-- coming soon, stay tuned! --')
+    with Dashboard:
+        st.markdown('-- coming soon, stay tuned! --')
 
-        with Tools:
-            st.markdown('-- coming soon, stay tuned! --')
+    with Tools:
+        st.markdown('-- coming soon, stay tuned! --')
 
     # with Dashboard:
     #     #First row - overall and top50 view
