@@ -44,20 +44,6 @@ st.markdown(
             text-align: center;
         }}
     </style>
-    <style>
-        /* Center all Streamlit tabs */
-        .stTab {{
-            display: flex;
-            justify-content: center;
-        }}
-    </style>
-    <style>
-        /* Center Streamlit tab menu */
-        .stTabBar {{
-            display: flex;
-            justify-content: center;
-        }}
-    </style>
     """,
     unsafe_allow_html=True,
 )
