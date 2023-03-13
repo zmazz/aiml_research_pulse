@@ -40,7 +40,7 @@ with st.form(key='params_for_api'):
         '''
         #### Top 20 results:
         '''
-        for i in range(0,len(response)):
+        for i in range(0,20):
             st.markdown(f'#{i} -- ' + results[i]['Title'])
             st.markdown(str(results[i]['Year'])+ ', ' + str(results[i]['Authors']) + ', ' + results[i]['Link'])
             st.text('ABSTRACT -- ' + results[i]['Abstract'])
