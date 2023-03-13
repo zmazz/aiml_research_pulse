@@ -6,12 +6,14 @@ def get_author(author: str, df: pd.DataFrame):
     Get author appearances from the ArXiv dataset by name
     """
     author_processed = author.replace("-", " ").title()
+
     try :
         lst=df.loc[df['authors'].str.contains(author_processed)].to_dict(orient='records')
         results=[]
         for paper in lst:
-            results=results+[{'Title': paper["title"],'Authors': paper["authors"],
-                        'Year': str(paper["year"]),'Link': paper["url"],'Abstract': paper["abstract"]}]
+            results=results+[{'Title': paper["title"],'Authors': paper["authors"],'Id': paper["id"],
+                        'Year': str(paper["year"]),'Link': paper["url"],'Category':paper['category'],
+                        'Number_citations':str(paper['num_cit']),'Abstract': paper["abstract"]}]
 
         return {f'{i}': d for i, d in enumerate(results)}
     except:

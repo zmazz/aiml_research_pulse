@@ -18,22 +18,22 @@ def vectorizer(df):
     #tfidf_vectorizer = TfidfVectorizer(stop_words=stop_words)
     #tfidf_matrix = tfidf_vectorizer.fit_transform(df['abstract'])
 
-    #tfidf_vectorizer= pickle.load(open('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_vectorizer.pk','rb'))
-    #tfidf_matrix=sp.load_npz('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_matrix.npz')
+    tfidf_vectorizer= pickle.load(open('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_vectorizer.pk','rb'))
+    tfidf_matrix=sp.load_npz('/Users/ziadmazzawi/deepdipper/training_outputs/search_tfidf_matrix.npz')
 
-    import gcsfs
-    fs = gcsfs.GCSFileSystem(project='deepdipper')
-    with fs.open('deepdipper_data/training_outputs/search_tfidf_vectorizer.pk', 'rb') as f:
-        tfidf_vectorizer = pickle.load(f)
-    with fs.open('deepdipper_data/training_outputs/search_tfidf_matrix.npz') as g:
-        tfidf_matrix = sp.load_npz(g)
+    #import gcsfs
+    #fs = gcsfs.GCSFileSystem(project='deepdipper')
+    #with fs.open('deepdipper_data/training_outputs/search_tfidf_vectorizer.pk', 'rb') as f:
+    #    tfidf_vectorizer = pickle.load(f)
+    #with fs.open('deepdipper_data/training_outputs/search_tfidf_matrix.npz') as g:
+    #    tfidf_matrix = sp.load_npz(g)
 
     return tfidf_vectorizer,tfidf_matrix
 
 # Define the search function
 def search(query, data, vector, matrix):
     """
-    Compare query to vectorized abstracts, and return top 5 results based on scoring.
+    Compare query to vectorized abstracts, and return top 20 results based on scoring.
     """
     stop_words = stopwords.words('english')
 
@@ -51,8 +51,10 @@ def search(query, data, vector, matrix):
     top20=[]
     for i in range(0,20):
         paper = data.iloc[ranked_indices[i]]
-        top20=top20+[{'Title': paper["title"],'Authors': paper["authors"],
-                    'Year': str(paper["year"]),'Link': paper["url"],'Abstract': paper["abstract"]}]
+        top20=top20+[{'Title': paper["title"],'Authors': paper["authors"],'Id': paper["id"],
+                        'Year': str(paper["year"]),'Link': paper["url"],'Category':paper['category'],
+                        'Number_citations':str(paper['num_cit']),'Abstract': paper["abstract"]}]
+
     return {f'{i}': d for i, d in enumerate(top20)}
 
     # Return the top 5 resultsgit add .

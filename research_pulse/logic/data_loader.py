@@ -8,13 +8,13 @@ def load_data():
     """
     Load the dataset from the processed folder
     """
-    #data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
+    data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
 
-    import gcsfs
+    #import gcsfs
 
-    fs = gcsfs.GCSFileSystem(project='deepdipper')
-    with fs.open('deepdipper_data/data/processed/aiml_arxiv_with_cit.csv') as f:
-        data = pd.read_csv(f)
+    #fs = gcsfs.GCSFileSystem(project='deepdipper')
+    #with fs.open('deepdipper_data/data/processed/aiml_arxiv_with_cit.csv') as f:
+    #    data = pd.read_csv(f)
 
     return data
 
@@ -29,7 +29,7 @@ def dataset_creator_local():
                     'cs.NI','cs.RO','cs.SI','econ.EM','eess.AS','eess.IV','eess.SP',
                     'math.CA','math.CT','math.DS','math.FA','math.GN','math.NA',
                     'math.OC','math.PR','math.RT','math.ST','nlin.AO','nlin.CD',
-                    'stat.AP','stat.CO','stat.ME','stat.ML','stat.OT','stat.TH',]
+                    'stat.AP','stat.CO','stat.ME','stat.ML','stat.OT','stat.TH']
 
     records=db.read_text("~/deepdipper/data/raw/arxiv-metadata-oai-snapshot.json").map(lambda x:json.loads(x))
     ai_docs = (records.filter(lambda x:any(ele in x['categories'] for ele in aiml_category_list)==True))

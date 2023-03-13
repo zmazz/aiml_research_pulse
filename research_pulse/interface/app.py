@@ -1,167 +1,307 @@
 import streamlit as st
 
-import datetime
+#import datetime
 import requests
 # import research_pulse.logic.search as ls
 
-'''
-# AI/ML Research Pulse
+import streamlit as st
+#import pandas as pd
+#import numpy as np
+#import matplotlib.pyplot as plt
+#import plotly.express as px
+import research_pulse.logic.data_loader as ldl
+#import research_pulse.logic.analytics_agg as laa
 
-'''
-st.text('--- Research papers search engine ---')
-st.text('Curated dataset of 774k research papers in areas related by close or by far to AI/ML')
-st.text('Corpus of research papers published after 2000 and openly available on arXiv.org')
-st.text('')
-with st.form(key='params_for_api'):
 
-    input = st.text_input('Please input topic or notion to get most relevent papers:')
 
-    if st.form_submit_button('Browse the arXiv net!'):
+st.set_page_config(
+    page_title="DeepDipper",
+    page_icon=":smiley:",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    menu_items={
+        'Get Help': 'https://www.extremelycoolapp.com/help',
+        'Report a bug': "https://www.extremelycoolapp.com/bug",
+        'About': "AI, ML and related research areas are evolving at a rapid pace. Research Pulse is a tool that helps you to explore the research papers and their authors. It is a NLP tool that helps you to find the most relevant papers and authors in your research area."
+    }
+)
 
-        params = input.replace(' ','-').lower()
+@st.cache_data
+def load_data():
+    data=ldl.load_data()
+    return data
 
-        #research_pulse_api_url = 'http://127.0.0.1:8000/search?query='
-        research_pulse_api_url = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
+df=load_data()
 
-        #response = requests.get(research_pulse_api_url+params)
-        response = requests.get(research_pulse_api_url, params=dict(query=params))
+html_temp = """
+            <div style="background-color:{};padding:1px">
+            </div>
+            """
 
-        results = response.json()
+st.markdown(
+    f"""
+    <style>
+        /* Center all text in Streamlit page */
+        .stApp {{
+            text-align: center;
+        }}
+    </style>
+    <style>
+        /* Center all Streamlit tabs */
+        .stTab {{
+            display: flex;
+            justify-content: center;
+        }}
+    </style>
+    <style>
+        /* Center Streamlit tab menu */
+        .stTabBar {{
+            display: flex;
+            justify-content: center;
+        }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-        #print(results)
+st.markdown("<h4 style='text-align: center; color: yellow'>-- Research Pulse --</h4>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center; color: grey'>NLP tools to master your exploration of research paper</h5>", unsafe_allow_html=True)
 
-        #data=ls.load_data()
-        #vector, matrix = ls.vectorizer(data)
+with st.container():
+    About, Search, Research, Dashboard, Tools = st.tabs(["About","-Search engine-","-Research papers or authors-","-tbd Analytics dashboard-","-NLP-based tools-"])
 
-        #results = ls.search(query=query, data=data, vector=vector, matrix=matrix)
+    with About:
+        st.markdown("AI, ML and related research areas are evolving at a rapid pace.", unsafe_allow_html=True)
+        st.markdown("Research Pulse is a tool that helps you to explore the research papers and their authors", unsafe_allow_html=True)
+        st.markdown("It is a NLP tool that helps you to find the most relevant papers and authors in your research area", unsafe_allow_html=True)
+        st.markdown(' ')
+        st.markdown("<h6 style='text-align: center; color: yellow'>---- Search engine ----</h6>", unsafe_allow_html=True)
+        st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
+        st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
+        st.markdown(' ')
+        st.markdown("<h6 style='text-align: center; color: yellow'>---- Research papers & authors ----</h6>", unsafe_allow_html=True)
+        st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
+        st.markdown("Look for an author by inputting his/her name.", unsafe_allow_html=True)
+        st.markdown("--tobedone: citation network parser and code navigator per category", unsafe_allow_html=True)
+        st.markdown(' ')
+        st.markdown("<h6 style='text-align: center; color: yellow'>---- tobedone: Analytics dashboard ----</h6>", unsafe_allow_html=True)
+        st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
+        st.markdown("Available for all papers, by category, by year filtrage, with key metrics dissected.", unsafe_allow_html=True)
+        st.markdown(' ')
+        st.markdown("<h6 style='text-align: center; color: yellow'>---- tobedone: NLP-based tools ----</h6>", unsafe_allow_html=True)
+        st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
+        st.markdown("--tobedone: translation, summarization, bot alert tool", unsafe_allow_html=True)
 
-        #st.header('Top result:')
+    with Search:
+        st.markdown("<h6 style='text-align: center; color: white'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
+        with st.form(key='params_for_api_search') as search_form:
+            input1 = st.text_input('> input 1 to 5 keywords of interest separated by space')
+            if st.form_submit_button('Search the AI&ML net!'):
 
-        '''
-        #### Top 20 results:
-        '''
-        for i in range(0,20):
-            k=f'{i}'
-            st.markdown(f'#{i} -- ' + results[k]['Title'])
-            st.markdown(str(results[k]['Year'])+ ', ' + str(results[k]['Authors']) + ', ' + results[k]['Link'])
-            st.text('ABSTRACT -- ' + results[k]['Abstract'])
-            st.text('')
-        # st.markdown('#1 -- ' + results['#1']['Title'])
-        # st.markdown(str(results['#1']['Year'])+ ', ' + str(results['#1']['Authors']) + ', ' + results['#1']['Link'])
-        # st.text('ABSTRACT -- ' + results['#1']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#2 -- ' + results['#2']['Title'])
-        # st.markdown(str(results['#2']['Year'])+ ', ' + str(results['#2']['Authors']) + ', ' + results['#2']['Link'])
-        # st.text('ABSTRACT -- ' + results['#2']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#3 -- ' + results['#3']['Title'])
-        # st.markdown(str(results['#3']['Year'])+ ', ' + str(results['#3']['Authors']) + ', ' + results['#3']['Link'])
-        # st.text('ABSTRACT -- ' + results['#3']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#4 -- ' + results['#4']['Title'])
-        # st.markdown(str(results['#4']['Year'])+ ', ' + str(results['#4']['Authors']) + ', ' + results['#4']['Link'])
-        # st.text('ABSTRACT -- ' + results['#4']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#5 -- ' + results['#5']['Title'])
-        # st.markdown(str(results['#5']['Year'])+ ', ' + str(results['#5']['Authors']) + ', ' + results['#5']['Link'])
-        # st.text('ABSTRACT -- ' + results['#5']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#6 -- ' + results['#6']['Title'])
-        # st.markdown(str(results['#6']['Year'])+ ', ' + str(results['#6']['Authors']) + ', ' + results['#6']['Link'])
-        # st.text('ABSTRACT -- ' + results['#6']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#7 -- ' + results['#7']['Title'])
-        # st.markdown(str(results['#7']['Year'])+ ', ' + str(results['#7']['Authors']) + ', ' + results['#7']['Link'])
-        # st.text('ABSTRACT -- ' + results['#7']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#8 -- ' + results['#8']['Title'])
-        # st.markdown(str(results['#8']['Year'])+ ', ' + str(results['#8']['Authors']) + ', ' + results['#8']['Link'])
-        # st.text('ABSTRACT -- ' + results['#8']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#9 -- ' + results['#9']['Title'])
-        # st.markdown(str(results['#9']['Year'])+ ', ' + str(results['#9']['Authors']) + ', ' + results['#9']['Link'])
-        # st.text('ABSTRACT -- ' + results['#9']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#10 -- ' + results['#10']['Title'])
-        # st.markdown(str(results['#10']['Year'])+ ', ' + str(results['#10']['Authors']) + ', ' + results['#10']['Link'])
-        # st.text('ABSTRACT -- ' + results['#10']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#11 -- ' + results['#11']['Title'])
-        # st.markdown(str(results['#11']['Year'])+ ', ' + str(results['#11']['Authors']) + ', ' + results['#11']['Link'])
-        # st.text('ABSTRACT -- ' + results['#11']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#12 -- ' + results['#12']['Title'])
-        # st.markdown(str(results['#12']['Year'])+ ', ' + str(results['#12']['Authors']) + ', ' + results['#12']['Link'])
-        # st.text('ABSTRACT -- ' + results['#12']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#13 -- ' + results['#13']['Title'])
-        # st.markdown(str(results['#13']['Year'])+ ', ' + str(results['#13']['Authors']) + ', ' + results['#13']['Link'])
-        # st.text('ABSTRACT -- ' + results['#13']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#14 -- ' + results['#14']['Title'])
-        # st.markdown(str(results['#14']['Year'])+ ', ' + str(results['#14']['Authors']) + ', ' + results['#14']['Link'])
-        # st.text('ABSTRACT -- ' + results['#14']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#15 -- ' + results['#15']['Title'])
-        # st.markdown(str(results['#15']['Year'])+ ', ' + str(results['#15']['Authors']) + ', ' + results['#15']['Link'])
-        # st.text('ABSTRACT -- ' + results['#15']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#16 -- ' + results['#16']['Title'])
-        # st.markdown(str(results['#16']['Year'])+ ', ' + str(results['#16']['Authors']) + ', ' + results['#16']['Link'])
-        # st.text('ABSTRACT -- ' + results['#16']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#17 -- ' + results['#17']['Title'])
-        # st.markdown(str(results['#17']['Year'])+ ', ' + str(results['#17']['Authors']) + ', ' + results['#17']['Link'])
-        # st.text('ABSTRACT -- ' + results['#17']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#18 -- ' + results['#18']['Title'])
-        # st.markdown(str(results['#18']['Year'])+ ', ' + str(results['#18']['Authors']) + ', ' + results['#18']['Link'])
-        # st.text('ABSTRACT -- ' + results['#18']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#19 -- ' + results['#19']['Title'])
-        # st.markdown(str(results['#19']['Year'])+ ', ' + str(results['#19']['Authors']) + ', ' + results['#19']['Link'])
-        # st.text('ABSTRACT -- ' + results['#19']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
-        # st.text('')
-        # st.markdown('#20 -- ' + results['#20']['Title'])
-        # st.markdown(str(results['#20']['Year'])+ ', ' + str(results['#20']['Authors']) + ', ' + results['#20']['Link'])
-        # st.text('ABSTRACT -- ' + results['#20']['Abstract'])
-        # st.text('')
-        # st.text('--------------------------------------------------------------------------------')
+                params1 = input1.replace(' ','-').lower()
+
+                research_pulse_api_url1 = 'http://127.0.0.1:8000/search?query='
+                #research_pulse_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
+
+                response1 = requests.get(research_pulse_api_url1+params1)
+                #response1 = requests.get(research_pulse_api_url1, params=dict(query=params1))
+
+                results1 = response1.json()
+
+                #print(results)
+
+                #data=ls.load_data()
+                #vector, matrix = ls.vectorizer(data)
+
+                #results = ls.search(query=query, data=data, vector=vector, matrix=matrix)
+
+                #st.header('Top result:')
+
+                '''
+                #### Top 20 results:
+                '''
+                for i in range(0,20):
+                    k=f'{i}'
+                    st.markdown(f'#{i+1} -- ' + results1[k]['Title'] + ', cited ' + str(results1[k]['Number_citations']) + ' times')
+                    st.markdown(str(results1[k]['Year'])+ ', ' + str(results1[k]['Authors']) + ', ' + results1[k]['Link'])
+                    st.markdown('Paper ID: ' + str(results1[k]['Id'])+ ' -- Category: ' + str(results1[k]['Category']))
+                    st.text('ABSTRACT -- ' + results1[k]['Abstract'])
+                    st.text(' ')
+                    st.text(' ')
+
+    with Research:
+        st.markdown("<h6 style='text-align: center; color: white'>Research authors and papers to get info on them:</h6>", unsafe_allow_html=True)
+        Authors,Papers = Research.tabs(["Authors - by name","Papers - by ID"])
+
+        with Authors:
+            with st.form(key='params_for_api_authors'):
+
+                input2 = st.text_input('> input author name to get detailed info on them')
+
+                if st.form_submit_button('Research the AI&ML net!'):
+
+                    params2 = input2.replace(' ','-').lower()
+
+                    research_pulse_api_url2 = 'http://127.0.0.1:8000/authors?query='
+                    #research_pulse_api_url2 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
+
+                    response2 = requests.get(research_pulse_api_url2+params2)
+                    #response2 = requests.get(research_pulse_api_url2, params=dict(query=params2))
+
+                    results2 = response2.json()
+
+                    for key in results2:
+                        st.markdown('-- ' + str(results2[key]['Title']) + ', cited ' + str(results2[key]['Number_citations']) + ' times')
+                        st.markdown(str(results2[key]['Year'])+ ', ' + str(results2[key]['Authors']) + ', ' + str(results2[key]['Link']))
+                        st.markdown('Paper ID: ' + str(results2[key]['Id'])+ ' -- Category: ' + str(results2[key]['Category']))
+                        st.text('ABSTRACT -- ' + str(results2[key]['Abstract']))
+                        st.text(' ')
+                        st.text(' ')
+
+        with Papers:
+            with st.form(key='params_for_api_papers'):
+
+                input3 = st.text_input('> input paper ID to get detailed info on it (e.g. 2023-12345)')
+
+                if st.form_submit_button('Research the arXiv net!'):
+
+                    params3 = input3.replace(' ','-').lower()
+
+
+                    research_pulse_api_url3 = 'http://127.0.0.1:8000/papers?query='
+                    #research_pulse_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
+
+                    response3 = requests.get(research_pulse_api_url3+params3)
+                    #response3 = requests.get(research_pulse_api_url3, params=dict(query=params3))
+
+                    results3 = response3.json()
+
+                    # for key in results3.keys():
+                    #     st.markdown('-- ' + results3[key]['Title'])
+                    #     st.markdown(str(results3[key]['Year'])+ ', ' + str(results3[key]['Authors']) + ', ' + results3[key]['Link'])
+                    #     st.text('ABSTRACT -- ' + results3[key]['Abstract'])
+                    #     st.text('')
+
+                    for key in results3:
+                        st.markdown('-- ' + str(results3[key]['Title']) + ', cited ' + str(results3[key]['Number_citations']) + ' times')
+                        st.markdown(str(results3[key]['Year'])+ ', ' + str(results3[key]['Authors']) + ', ' + str(results3[key]['Link']))
+                        st.markdown('Paper ID: ' + str(results3[key]['Id'])+ ' -- Category: ' + str(results3[key]['Category']))
+                        st.text('ABSTRACT -- ' + str(results3[key]['Abstract']))
+                        st.text(' ')
+                        st.text(' ')
+        with Dashboard:
+            st.markdown('coming soon, stay tuned!')
+        with Tools:
+            st.markdown('coming soon, stay tuned!')
+    # with Dashboard:
+    #     #First row - overall and top50 view
+    #     Overall, Top50 = Dashboard.tabs(["Overall", "Top50"])
+
+    #     with Overall:
+    #         col1, col2, col3= st.columns([5,5,5])
+    #         Overall.subheader("Reserved for the overall view of the data")
+    #         Overall.pyplot(laa.plot_publications_per_year(laa.get_publications_by_time_range(laa.get_publications_per_year(df), 2000, 2023)))
+    #         col4, col5, col6= st.columns([5,5,5])
+    #         Overall.subheader("Reserved for the overall view of the data")
+
+    #         Overall.write(df)
+
+    #         #Second row - interactive view
+    #         Overall.header("Interactive View")
+
+    #         # -- Get the user input
+    #         year_col, category_col, log_x_col = Overall.columns([5, 5, 5])
+    #         with year_col:
+    #             year_choice = Overall.slider(
+    #                 "What year would you like to examine?",
+    #                 min_value=2000,
+    #                 max_value=2023,
+    #                 step=1,
+    #                 value=2023,
+    #             )
+    #         with category_col:
+    #             category_choice = Overall.selectbox(
+    #                 "Which category would you like to look at?",
+    #                 ("All", 'cond-mat.dis-nn','cond-mat.stat-mech','cond-mat.str-el','cs.AI',
+    #                     'cs.CE','cs.CG','cs.CL','cs.CR','cs.CV','cs.CY','cs.DB','cs.DC',
+    #                     'cs.DL','cs.DM','cs.DS','cs.ET','cs.FL','cs.GL','cs.GT','cs.HC',
+    #                     'cs.IR','cs.IT','cs.LG','cs.LO','cs.MA','cs.MS','cs.NA','cs.NE',
+    #                     'cs.NI','cs.RO','cs.SI','econ.EM','eess.AS','eess.IV','eess.SP',
+    #                     'math.CA','math.CT','math.DS','math.FA','math.GN','math.NA',
+    #                     'math.OC','math.PR','math.RT','math.ST','nlin.AO','nlin.CD',
+    #                     'stat.AP','stat.CO','stat.ME','stat.ML','stat.OT','stat.TH'))
+
+    #         with log_x_col:
+    #             log_x_choice = Overall.checkbox("Log X Axis?")
+
+    #         # -- Apply the year filter given by the user
+
+    #         filtered_df = df.loc[(df['year'] >= int(year_choice))]
+    #         # -- Apply the continent filter
+    #         if category_choice != "All":
+    #             filtered_df = filtered_df.loc[filtered_df['category'].str.contains(category_choice.str)]
+
+    #         # -- Create the figure in Plotly
+    #         fig = px.scatter(
+    #             filtered_df,
+    #             x="year",
+    #             y="lifeExp",
+    #             size="pop",
+    #             color="continent",
+    #             hover_name="country",
+    #             log_x=log_x_choice,
+    #             size_max=60)
+    #         fig.update_layout(title="GDP per Capita vs. Life Expectancy")
+    #         # -- Input the Plotly chart to the Streamlit interface
+    #         Overall.plotly_chart(fig, use_container_width=True)
+    #         #The end of the interactive view
+
+    #         #Third row - Last 3 months view in global and category perspective
+    #         Overall.header("Last 3 months view in global and category perspective")
+
+    #         Global_view, Cat_view= Overall.tabs(["Global View", "Categorical View"])
+
+    #         with Global_view:
+    #             col1, col2, col3= Global_view.columns([5,5,5])
+    #             Global_view.subheader("Reserved for the global view of the data")
+    #             col4, col5, col6= Global_view.columns([5,5,5])
+    #             Global_view.subheader("Reserved for the global view of the data")
+
+    #         with Cat_view:
+    #             col1, col2, col3= Cat_view.columns([5,5,5])
+    #             Cat_view.subheader("Reserved for the categorical view of the data")
+    #             col4, col5, col6= Cat_view.columns([5,5,5])
+    #             Cat_view.subheader("Reserved for the categorical view of the data")
+
+
+
+    #         #End of Overall view
+
+    #     with Top50:
+    #             col1, col2, col3= st.columns([5,5,5])
+    #             Top50.subheader("Reserved for the top50 view of the data")
+    #             col4, col5, col6= st.columns([5,5,5])
+    #             Top50.subheader("Reserved for the top50 view of the data")
+
+    #             Top50.write(df.head(50))
+
+
+
+
+
+        # @st.cache_data(persist="disk")
+        # def fetch_and_clean_data(url):
+        #     # Fetch data from URL here, and then clean it up.
+        #     return data
+
+        # fetch_and_clean_data.clear()
+        # d1 = fetch_and_clean_data(DATA_URL)
+        # # Actually executes the function, since this is the first time it was
+        # # encountered.
+
+        # d2 = fetch_and_clean_data(DATA_URL_1)
+        # # Does not execute the function. Instead, returns its previously computed
+        # # value. This means that now the data in d1 is the same as in d2.
+
+        # d3 = fetch_and_clean_data(DATA_URL_2)
+        # This is a different URL, so the function executes.

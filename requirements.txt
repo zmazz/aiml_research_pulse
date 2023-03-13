@@ -1,4 +1,3 @@
-
 dask[complete]
 google-cloud-bigquery
 google-cloud-storage
@@ -9,7 +8,9 @@ prefect
 scikit-learn
 seaborn
 spacy
+squarify
 streamlit
+streamlit-option-menu
 unidecode
 utils
 wordcloud

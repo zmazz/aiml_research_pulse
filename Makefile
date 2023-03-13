@@ -15,6 +15,12 @@ run:
 streamlit:
 	streamlit run research_pulse/interface/app.py
 
+streamlit2:
+	streamlit run research_pulse/interface/app2.py
+
+streamlit3:
+	streamlit run research_pulse/interface/app3.py
+
 run_api:
 	uvicorn research_pulse.api.fast:app --reload
 

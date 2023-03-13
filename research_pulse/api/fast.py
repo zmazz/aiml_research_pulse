@@ -32,14 +32,13 @@ def search(query: str):  # "bayesian neural networks" / "adam optimizers" / ...
     # Return the top 20 results
     return top20
 
-# http://deepdipper-rp6v7d7m4q-ew.a.run.app/papers?query=704.0019
+# http://deepdipper-rp6v7d7m4q-ew.a.run.app/papers?query=704-0019
 @app.get("/papers")
 def get_paper(query: str):
     """
-    Get a row from the ArXiv dataset by ID
+    Get a row from the ArXiv dataset by ID (with - instead of .)
     """
     paper_details = lrp.get_paper(query, df)
-    print(paper_details)
     return paper_details
 
 # http://deepdipper-rp6v7d7m4q-ew.a.run.app/authors?query=theran-louis
@@ -53,4 +52,4 @@ def get_author(query: str):
 
 @app.get("/")
 def root():
-    return {'greeting':'Hello, welcome to the Research Pulse API!'}
+    return {'greeting':'Hello, welcome to the DeepDipper API!'}
