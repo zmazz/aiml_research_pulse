@@ -209,7 +209,8 @@ with Research:
 
                     # pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf"></iframe>'
 
-                    st.markdown(f'<embed src={pdf_url} width="700" height="1000">', unsafe_allow_html=True)
+                    pdf_display = F'<iframe src="{pdf_url}" width="700" height="900" type="application/pdf"></iframe>'
+                    st.markdown(pdf_display, unsafe_allow_html=True)
                     # # st.markdown(pdf_display, unsafe_allow_html=True)
                     # response_pdf = requests.get(pdf_url)
 
