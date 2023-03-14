@@ -209,7 +209,7 @@ with Research:
                     for key in results3:
                         pdf_url = results3[key]['Link']
                         # Use pdfjs to display the PDF
-                        pdf_viewer = st.components.v1.html(pdf_viewer)(src=pdf_url, width=600, height=800)
+                        pdf_viewer = st.components.v1.html(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', width=600, height=800, scrolling=True)
                         # Display the PDF viewer
                         st.write(pdf_viewer)
                         #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
