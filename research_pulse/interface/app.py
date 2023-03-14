@@ -210,24 +210,17 @@ with Research:
                 with col8 :
                     for key in results3:
                         pdf_url = results3[key]['Link']
-                        pdf_response = requests.get(pdf_url)
-                        # Use pdfjs to display the PDF
-                        #pdf_viewer = components.html(f'<iframe src="{pdf_url}" width=600 height=800></iframe>')
-                        # Display the PDF viewer
-                        #st.write(pdf_viewer)
-                        #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
-                        #st.markdown(f'<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={pdf_url}" width="600" height="800">', unsafe_allow_html=True)
-                        if pdf_response.status_code == 200:
+                        response_pdf = requests.get(pdf_url)
+                        if response_pdf.status_code == 200:
                             # Read the downloaded binary data into a BytesIO object
-                            pdf_data = BytesIO(pdf_response.content)
-
+                            pdf_data = BytesIO(response_pdf.content)
+                            # Generate the HTML code to display the PDF
+                            base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+                            pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+                            # Display the PDF
+                            st.markdown(pdf_display, unsafe_allow_html=True)
                         else:
                             st.error('Failed to download PDF')
-                        with open(pdf_data,"rb") as f:
-                            base64_pdf = b64encode(f.read()).decode('utf-8')
-                        pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">'
-                        st.markdown(pdf_display, unsafe_allow_html=True)
-                        # Opening file from file path
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
