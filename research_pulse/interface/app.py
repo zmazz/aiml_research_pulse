@@ -53,7 +53,7 @@ st.markdown("<h3 style='text-align: center; color: #a2ff7e'>ﮩ٨ـﮩﮩ٨ـ   
 #st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP tools to master your exploration of research paper</h5>", unsafe_allow_html=True)
 
-About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard (soon)","Tools (soon)"])
+About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard (soon)","Tools (soon)"], unsafe_allow_html=True)
 
 with About:
     st.markdown(' ')
@@ -80,7 +80,7 @@ with About:
 
 
 with Search:
-    st.markdown("<h6 style='text-align: center; color: white'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
+    st.markdown("Search topics and notions to get top 20 most relevant papers :", unsafe_allow_html=True)
     with st.form(key='params_for_api_search') as search_form:
         input1 = st.text_input('> input 1 to 5 keywords of interest separated by space')
         if st.form_submit_button('Search for papers!'):
@@ -117,8 +117,8 @@ with Search:
                 st.text(' ')
 
 with Research:
-    st.markdown("<h6 style='text-align: center; color: white'>Research authors and papers to get info on them:</h6>", unsafe_allow_html=True)
-    Authors,Papers = Research.tabs(["Authors - by name","Papers - by ID"])
+    st.markdown("Research authors and papers to get info on them:", unsafe_allow_html=True)
+    Authors,Papers = Research.tabs(["Authors - by name","Papers - by ID"], unsafe_allow_html=True)
 
     with Authors:
         with st.form(key='params_for_api_authors'):
