@@ -17,10 +17,12 @@ st.set_page_config(
     page_icon=":smiley:",
     layout="wide",
     initial_sidebar_state="expanded",
+    dark=True,
+    background_color='#000000',
     menu_items={
-        'Get Help': 'https://www.extremelycoolapp.com/help',
-        'Report a bug': "https://www.extremelycoolapp.com/bug",
-        'About': "AI, ML and related research areas are evolving at a rapid pace. Research Pulse is a tool that helps you to explore the research papers and their authors. It is a NLP tool that helps you to find the most relevant papers and authors in your research area."
+        'Get Help': 'https://github.com/zmazz/aiml_research_pulse',
+        'Report a bug': "https://github.com/zmazz/aiml_research_pulse",
+        'About': "AI, ML and related research areas are evolving at a rapid pace. Research Pulse is a tool that helps you to explore the research papers and their authors. It is a NLP tool that helps you to find the most relevant papers and authors in your research area. For more info, please contact https://github.com/zmazz."
     }
 )
 
@@ -49,7 +51,7 @@ st.markdown(
 )
 
 #st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ  Ｒｅｓｅａｒｃｈ Ｐｕｌｓｅ  ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ  Rᴇsᴇᴀʀcʜ Puʟsᴇ  ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ  🔎  Rᴇsᴇᴀʀcʜ Puʟsᴇ  🔎  ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
 #st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP tools to master your exploration of research paper</h5>", unsafe_allow_html=True)
 
