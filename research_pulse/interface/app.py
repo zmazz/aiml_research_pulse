@@ -12,6 +12,7 @@ import streamlit as st
 import streamlit.components.v1 as components
 from base64 import b64encode
 from io import BytesIO
+import PyPDF2
 
 st.set_page_config(
     page_title="ResPulse",
@@ -219,13 +220,19 @@ with Research:
                     # st.markdown(pdf_display, unsafe_allow_html=True)
                     response_pdf = requests.get(pdf_url)
 
-                    # Read the downloaded binary data into a BytesIO object
-                    pdf_data = BytesIO(response_pdf.content)
-                    # Generate the HTML code to display the PDF
-                    base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
-                    # Display the PDF
-                    st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">', unsafe_allow_html=True)
+                    # # Read the downloaded binary data into a BytesIO object
+                    # pdf_data = BytesIO(response_pdf.content)
+                    # # Generate the HTML code to display the PDF
+                    # base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+                    # # Display the PDF
+                    # st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">', unsafe_allow_html=True)
 
+                    # Check if response contains valid PDF data
+                    try:
+                        pdf_reader = PyPDF2.PdfFileReader(BytesIO(response_pdf.content))
+                        print(pdf_reader)
+                    except PyPDF2.utils.PdfReadError:
+                        print('Invalid PDF data in response')
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
