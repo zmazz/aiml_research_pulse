@@ -10,6 +10,7 @@ import streamlit as st
 #import research_pulse.logic.data_loader as ldl
 #import research_pulse.logic.analytics_agg as laa
 import streamlit.components.v1 as components
+from base64 import b64encode
 
 
 st.set_page_config(
@@ -213,8 +214,13 @@ with Research:
                         #pdf_viewer = components.html(f'<iframe src="{pdf_url}" width=600 height=800></iframe>')
                         # Display the PDF viewer
                         #st.write(pdf_viewer)
-                        st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
+                        #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
                         #st.markdown(f'<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={pdf_url}" width="600" height="800">', unsafe_allow_html=True)
+                        with open(pdf_url,"rb") as f:
+                            base64_pdf = b64encode(f.read()).decode('utf-8')
+                        pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+                        st.markdown(pdf_display, unsafe_allow_html=True)
+                        # Opening file from file path
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
