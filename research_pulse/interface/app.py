@@ -209,7 +209,7 @@ with Research:
                     for key in results3:
                         pdf_url = results3[key]['Link']+"#toolbar=0"
                         # Use pdfjs to display the PDF
-                        pdf_viewer = iframe(src=pdf_url, width="100%", height=800)
+                        pdf_viewer = iframe(src=pdf_url, width=600, height=800)
                         # Display the PDF viewer
                         st.write(pdf_viewer)
                         #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
