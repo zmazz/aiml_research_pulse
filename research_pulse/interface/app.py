@@ -58,8 +58,8 @@ About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research"
 with About:
     st.markdown(' ')
     st.markdown("AI, ML and related research areas are evolving at a rapid pace.", unsafe_allow_html=True)
-    st.markdown("Research Pulse is a tool that helps you to explore the research papers and their authors", unsafe_allow_html=True)
-    st.markdown("It is a NLP tool that helps you to find the most relevant papers and authors in your research area", unsafe_allow_html=True)
+    st.markdown("Research Pulse is a tool that helps in the exploration of research papers and their authors.", unsafe_allow_html=True)
+    st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant insight in large and fast-evolving research areas.", unsafe_allow_html=True)
     st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>--- Search engine ---</h6>", unsafe_allow_html=True)
     st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
