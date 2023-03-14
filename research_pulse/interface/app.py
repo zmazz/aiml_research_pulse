@@ -104,52 +104,52 @@ with Dashboard:
         st.image('https://storage.googleapis.com/deepdipper_data/images/7-Treemap.png', caption='Treemap of keywords', use_column_width=True)
 
 with Search:
-    st.markdown("<h6 style='text-align: center; color: #289c68'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
-    with st.form(key='params_for_api_search') as search_form:
-        input1 = st.text_input('\> input 1 to 5 keywords of interest separated by space')
-        if st.form_submit_button('Search for papers!'):
+    st.markdown("<h6 style='text-align: center; color: #289c68'>Search papers and authors to get most relevant content:</h6>", unsafe_allow_html=True)
+    Papers,Authors = Search.tabs(["Papers top20 by notion & topic","Author(s) papers by name"])
 
-            params1 = input1.replace(' ','-').lower()
+    with Papers:
+        st.markdown("<h6 style='text-align: center; color: #289c68'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
+        with st.form(key='params_for_api_search') as search_form:
+            input1 = st.text_input('\> input 1 to 5 keywords of interest separated by space')
+            if st.form_submit_button('Search for Papers !'):
 
-            #research_pulse_api_url1 = 'http://127.0.0.1:8000/search?query='
-            research_pulse_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
+                params1 = input1.replace(' ','-').lower()
 
-            #response1 = requests.get(research_pulse_api_url1+params1)
-            response1 = requests.get(research_pulse_api_url1, params=dict(query=params1))
+                #research_pulse_api_url1 = 'http://127.0.0.1:8000/search?query='
+                research_pulse_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
-            results1 = response1.json()
+                #response1 = requests.get(research_pulse_api_url1+params1)
+                response1 = requests.get(research_pulse_api_url1, params=dict(query=params1))
 
-            #print(results)
+                results1 = response1.json()
 
-            #data=ls.load_data()
-            #vector, matrix = ls.vectorizer(data)
+                #print(results)
 
-            #results = ls.search(query=query, data=data, vector=vector, matrix=matrix)
+                #data=ls.load_data()
+                #vector, matrix = ls.vectorizer(data)
 
-            #st.header('Top result:')
+                #results = ls.search(query=query, data=data, vector=vector, matrix=matrix)
 
-            '''
-            #### Top 20 results:
-            '''
-            for i in range(0,20):
-                k=f'{i}'
-                st.markdown(f'#{i+1} -- ' + results1[k]['Title'] + ', cited ' + str(results1[k]['Number_citations']) + ' times')
-                st.markdown(str(results1[k]['Year'])+ ', ' + str(results1[k]['Authors']) + ', ' + results1[k]['Link'])
-                st.markdown('Paper ID: ' + str(results1[k]['Id'])+ ' -- Category: ' + str(results1[k]['Category']))
-                st.text('ABSTRACT -- ' + results1[k]['Abstract'])
-                st.text(' ')
-                st.text(' ')
+                #st.header('Top result:')
 
-with Research:
-    st.markdown("<h6 style='text-align: center; color: #289c68'>Research authors and papers to get info on them:</h6>", unsafe_allow_html=True)
-    Authors,Papers = Research.tabs(["Authors - by name","Papers - by ID"])
+                '''
+                #### Top 20 results:
+                '''
+                for i in range(0,20):
+                    k=f'{i}'
+                    st.markdown(f'#{i+1} -- ' + results1[k]['Title'] + ', cited ' + str(results1[k]['Number_citations']) + ' times')
+                    st.markdown(str(results1[k]['Year'])+ ', ' + str(results1[k]['Authors']) + ', ' + results1[k]['Link'])
+                    st.markdown('Paper ID: ' + str(results1[k]['Id'])+ ' -- Category: ' + str(results1[k]['Category']))
+                    st.text('ABSTRACT -- ' + results1[k]['Abstract'])
+                    st.text(' ')
+                    st.text(' ')
 
     with Authors:
         with st.form(key='params_for_api_authors'):
 
             input2 = st.text_input('\> input author name to get detailed info on them')
 
-            if st.form_submit_button('Research Author!'):
+            if st.form_submit_button('Search for Authors !'):
 
                 params2 = input2.replace(' ','-').lower()
 
@@ -169,12 +169,16 @@ with Research:
                     st.text(' ')
                     st.text(' ')
 
-    with Papers:
+with Research:
+    st.markdown("<h6 style='text-align: center; color: #289c68'>Research authors and papers to get info on them:</h6>", unsafe_allow_html=True)
+    Paper_details,Author_details = Research.tabs(["Papers' details by ID","Author's details by name"])
+
+    with Paper_details:
         with st.form(key='params_for_api_papers'):
 
             input3 = st.text_input('\> input paper ID to get detailed info on it (e.g. 1903-06236)')
 
-            if st.form_submit_button('Research Paper!'):
+            if st.form_submit_button('Research Paper !'):
 
                 params3 = input3.replace(' ','-').lower()
 
@@ -201,9 +205,33 @@ with Research:
                     st.text(' ')
                     st.text(' ')
 
+    with Author_details:
+        with st.form(key='params_for_api_authors'):
 
+            input4 = st.text_input('\> input author name to get detailed info on them')
+
+            if st.form_submit_button('Research Author !'):
+
+                params4 = input4.replace(' ','-').lower()
+
+                #research_pulse_api_url4 = 'http://127.0.0.1:8000/authors?query='
+                research_pulse_api_url4 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
+
+                #response4 = requests.get(research_pulse_api_url4+params4)
+                response4 = requests.get(research_pulse_api_url4, params=dict(query=params4))
+
+                results4 = response4.json()
+
+                for key in results4:
+                    st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
+                    st.markdown(str(results4[key]['Year'])+ ', ' + str(results4[key]['Authors']) + ', ' + str(results4[key]['Link']))
+                    st.markdown('Paper ID: ' + str(results4[key]['Id'])+ ' -- Category: ' + str(results4[key]['Category']))
+                    st.text('ABSTRACT -- ' + str(results4[key]['Abstract']))
+                    st.text(' ')
+                    st.text(' ')
 
 with Tools:
+    st.text(' ')
     st.markdown('-- coming soon, stay tuned! --')
 
 # with Dashboard:
