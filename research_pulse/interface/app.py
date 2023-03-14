@@ -12,7 +12,6 @@ import streamlit as st
 import streamlit.components.v1 as components
 from base64 import b64encode
 from io import BytesIO
-import PyPDF2
 
 st.set_page_config(
     page_title="ResPulse",
