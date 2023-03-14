@@ -224,7 +224,7 @@ with Research:
                     # Generate the HTML code to display the PDF
                     base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
                     # Display the PDF
-                    st.markdown(base64_pdf)
+                    st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">', unsafe_allow_html=True)
 
 
     with Author_details:
