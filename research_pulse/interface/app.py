@@ -200,8 +200,8 @@ with Research:
 
                 for key in results3:
                     st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
+                    st.markdown('By : ' + str(results3[key]['Authors']))
                     st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
-                    st.markdown('Authors:' + str(results3[key]['Authors']))
                     st.markdown('arXiv category : ' + str(results3[key]['Category']) + '-- Paper ID: ' + str(results3[key]['Id']))
 
                     st.text(' ')
@@ -209,9 +209,14 @@ with Research:
 
                 for key in results3:
                     pdf_url = results3[key]['Link']
-                    pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
-                    st.markdown(pdf_viewer, unsafe_allow_html=True)
+                    # pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
+                    # st.markdown(pdf_viewer, unsafe_allow_html=True)
+                    with open(pdf_url, 'rb') as f:
+                        base64_pdf = b64encode(f.read()).decode('utf-8')
 
+                    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="900" height="1200" type="application/pdf"></iframe>'
+
+                    st.markdown(pdf_display, unsafe_allow_html=True)
                     # response_pdf = requests.get(pdf_url)
                     # if response_pdf.status_code == 200:
                     #     # Read the downloaded binary data into a BytesIO object
