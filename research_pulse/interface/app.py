@@ -210,15 +210,16 @@ with Research:
                 with col8 :
                     for key in results3:
                         pdf_url = results3[key]['Link']
+                        pdf_response = requests.get(pdf_url)
                         # Use pdfjs to display the PDF
                         #pdf_viewer = components.html(f'<iframe src="{pdf_url}" width=600 height=800></iframe>')
                         # Display the PDF viewer
                         #st.write(pdf_viewer)
                         #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
                         #st.markdown(f'<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={pdf_url}" width="600" height="800">', unsafe_allow_html=True)
-                        with open(pdf_url,"rb") as f:
+                        with open(pdf_response,"rb") as f:
                             base64_pdf = b64encode(f.read()).decode('utf-8')
-                        pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+                        pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">'
                         st.markdown(pdf_display, unsafe_allow_html=True)
                         # Opening file from file path
 
