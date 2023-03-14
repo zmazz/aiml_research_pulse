@@ -10,14 +10,11 @@ from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
 from collections import Counter
 
-import nltk
-from nltk.corpus import stopwords
-
-#df = pd.read_csv("data_processed_aiml_arxiv_with_cit.csv")
-#df.head(5)
+df = pd.read_csv("data_processed_aiml_arxiv_with_cit.csv")
+df.head(5)
 
 #create me a sample of 1000 rows from df and call it df_sample
-#df_sample = df.sample(n=3000, random_state=42)
+df_sample = df.sample(n=3000, random_state=42)
 
 #Part 1 - Top 50 most cited authors
 
@@ -47,8 +44,8 @@ def top_cited_authors_V2(arxiv_df):
 
     return top_authors
 
-#top_cited_authors_V1(df_sample)
-#top_cited_authors_V2(df_sample)
+top_cited_authors_V1(df_sample)
+top_cited_authors_V2(df_sample)
 
 #2 - Preprocessing - Categorical Criteria
 def top_cited_authors_by_category(df, category, k=10):
@@ -70,12 +67,12 @@ def top_cited_authors_by_category(df, category, k=10):
 
     return top_authors
 
-#top_cited_authors_by_category(df_sample, 'cs.AI')
+top_cited_authors_by_category(df_sample, 'cs.AI')
 
 #Part 2 - Treatment/Logic Function
 
 #1 - Global Criteria
-#top_cited_authors= top_cited_authors_V2(df_sample)
+top_cited_authors= top_cited_authors_V2(df_sample)
 
 def display_top_authors(top_authors, k):
     if k > 100:
@@ -85,8 +82,8 @@ def display_top_authors(top_authors, k):
         top_authors_bar = top_authors.head(k).set_index('author')
         top_authors_bar = top_authors_bar.reset_index()
         return top_authors_bar
-
-#display_top_authors(top_cited_authors,10)
+    
+display_top_authors(top_cited_authors,10)
 
 #2 - Categorical Criteria
 def top_cited_authors_by_category(df, category, k=10):
@@ -111,7 +108,7 @@ def top_cited_authors_by_category(df, category, k=10):
 #Part 3 - Visualization Function
 
 #1 - Global Criteria
-#top_authors = display_top_authors(top_cited_authors, 50)
+top_authors = display_top_authors(top_cited_authors, 50)
 
 def display_bar_chart(df_top_authors):
     df_top_authors = df_top_authors.rename(columns={'num_cit': 'citations'})
@@ -125,10 +122,10 @@ def display_bar_chart(df_top_authors):
     plt.show()
 
 #Graph 1
-#display_bar_chart(top_authors)
+display_bar_chart(top_authors)
 
 #2 - Categorical Criteria
-#op_authors_by_category = top_cited_authors_by_category(df_sample, 'cs.AI',k=50)
+top_authors_by_category = top_cited_authors_by_category(df_sample, 'cs.AI',k=50)
 
 def display_bar_chart(df_top_authors):
     fig, ax = plt.subplots(figsize=(12, 6))
@@ -142,15 +139,15 @@ def display_bar_chart(df_top_authors):
     plt.show()
 
 #Graph 2
-#display_bar_chart(top_authors_by_category)
+display_bar_chart(top_authors_by_category)
 
 #Part 4 - Top 50 most keywords
 
 #1 - Preprocessing - Both for Global Criteria and Categorical Criteria
-#df_abstract_and_category = df_sample[['category', 'abstract']].copy()
-#df_abstract_and_category.reset_index(inplace=True)
-#df_abstract_and_category.set_index('index', inplace=True)
-#df_abstract_and_category
+df_abstract_and_category = df_sample[['category', 'abstract']].copy()
+df_abstract_and_category.reset_index(inplace=True)
+df_abstract_and_category.set_index('index', inplace=True)
+df_abstract_and_category
 
 #2 - Treatment/Logic Function - Global Criteria
 def get_top_words_in_general(df, n=10):
@@ -163,7 +160,7 @@ def get_top_words_in_general(df, n=10):
     return word_freq.most_common(n)
 
 #Display the 10 most frequents keywords in the abstracts
-#get_top_words_in_general(df_abstract_and_category)
+get_top_words_in_general(df_abstract_and_category)
 
 #3 - Treatment/Logic Function - Categorical Criteria
 def get_top_words_by_category(df, category=None,k=10):
@@ -189,11 +186,11 @@ def get_top_words_by_category(df, category=None,k=10):
 
     return word_freq
 
-#get_top_words_by_category(df_abstract_and_category,'math.CO cs.CG',50)
+get_top_words_by_category(df_abstract_and_category,'math.CO cs.CG',50)
 
 #4 - Visualization Function - Categorical Criteria
-#top50_keywords_by_global = get_top_words_in_general(df_abstract_and_category,50)
-#top50_keywords_by_category = get_top_words_by_category(df_abstract_and_category,'math.CO cs.CG',50)
+top50_keywords_by_global = get_top_words_in_general(df_abstract_and_category,50)
+top50_keywords_by_category = get_top_words_by_category(df_abstract_and_category,'math.CO cs.CG',50)
 
 def display_treemap(top_words):
     word_freq = [x[1] for x in top_words]
@@ -223,4 +220,4 @@ def display_treemap(top_words):
         ax2.text(0.35, i/len(freqs)+0.4/len(freqs), handle.get_label(), fontsize=12, transform=ax2.transAxes)
 
 #Graph 3
-#display_treemap(top50_keywords_by_category)
+display_treemap(top50_keywords_by_category)

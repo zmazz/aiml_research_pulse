@@ -178,7 +178,29 @@ with Research:
                     st.text(' ')
 
 with Dashboard:
-    st.markdown('-- coming soon, stay tuned! --')
+        col1, col2= st.columns(2)
+        with col1 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png', caption='Numbers of Publications per Year', use_column_width=True)
+            # image1 = Image.open('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png')
+            # col1.image(image1, caption='Numbers of Publications per Year', width=700)
+        with col2 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png', caption='Numbers of Publications by year and by category', use_column_width=True)
+            # image2 = Image.open('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png')
+            # col2.image(image2, caption='Numbers of Publications by year and by category', width=700)
+
+        col3, col4= st.columns(2)
+        with col3 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/3-Citations-vs-Publications.png', caption='Citations vs Publications', use_column_width=True)
+        with col4 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/4-Publications-and-Citations-by-Category-and-Year.png', caption='Publications and Citaions by category and year', use_column_width=True)
+
+        col5, col6 = st.columns(2)
+        with col5 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/5-Top-cited-authors.png', caption='Top cited authors', use_column_width=True)
+        with col6 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/6-Top-cited-authors-by-category.png', caption='Top cited authors by category', use_column_width=True)
+
+        st.image('https://storage.googleapis.com/deepdipper_data/images/7-Treemap.png', caption='Treemap of keywords', use_column_width=True)
 
 with Tools:
     st.markdown('-- coming soon, stay tuned! --')

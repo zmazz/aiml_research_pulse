@@ -4,12 +4,12 @@ import numpy as np
 import plotly.express as px
 from google.cloud import storage
 
-#df = pd.read_csv("data_processed_aiml_arxiv_with_cit.csv")
+df = pd.read_csv("data_processed_aiml_arxiv_with_cit.csv")
 
 #Part 1 - Evolution of the number of publications during the years(by Global and Category)
 
 #1 - Preprocessing functions
-#df_sample = df.sample(n=3000, random_state=42)
+df_sample = df.sample(n=3000, random_state=42)
 
 #Global creteria - Preprocessing
 def get_publications_per_year(dataframe):
@@ -22,7 +22,7 @@ def get_publications_per_year(dataframe):
     # return dataframe
     return publications_per_year
 
-#get_publications_per_year(df)
+get_publications_per_year(df_sample)
 
 #Categorical creteria - Preprocessing
 def get_publications_per_year_and_category(dataframe):
@@ -36,7 +36,7 @@ def get_publications_per_year_and_category(dataframe):
     return publications_per_year_and_category
 
 #2 - Treatment functions
-#publications_per_year= get_publications_per_year(df)
+publications_per_year= get_publications_per_year(df_sample)
 
 #Global creteria - Treatment
 def get_publications_by_time_range(dataframe, start_year, end_year):
@@ -52,10 +52,10 @@ def get_publications_by_time_range(dataframe, start_year, end_year):
     # return dataframe
     return publications_by_year
 
-#get_publications_by_time_range(publications_per_year, 2010, 2019)
+get_publications_by_time_range(publications_per_year, 2010, 2019)
 
 #Categorical creteria - Treatment
-#publications_per_year_and_category= get_publications_per_year_and_category(df_sample)
+publications_per_year_and_category= get_publications_per_year_and_category(df_sample)
 
 def get_publications_by_category_and_time_range(dataframe, start_year, category, end_year):
     # filter dataframe by time range and category
@@ -65,13 +65,13 @@ def get_publications_by_category_and_time_range(dataframe, start_year, category,
     # return dataframe
     return publications_by_year
 
-#publications_by_category_and_time_range = get_publications_by_category_and_time_range(publications_per_year_and_category, 2010, 'math.NA', 2019)
-#publications_by_category_and_time_range
+publications_by_category_and_time_range = get_publications_by_category_and_time_range(publications_per_year_and_category, 2010, 'math.NA', 2019)
+publications_by_category_and_time_range
 
 #3 - Data Visualization
 
 #Global creteria - Data Visualization
-#publications_per_year_visualization = get_publications_by_time_range(publications_per_year, 2010, 2019)
+publications_per_year_visualization = get_publications_by_time_range(publications_per_year, 2010, 2019)
 
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -86,12 +86,12 @@ def plot_publications_per_year(dataframe):
     plt.show()
 
 #Graph 1
-#plot_publications_per_year(publications_per_year_visualization)
+plot_publications_per_year(publications_per_year_visualization)
 
 #Categorical creteria - Data Visualization
 
 #Let's stock the ouput of the corresponding treatment function in a variable called publications_per_year_visualization
-#publications_by_category_and_time_range = get_publications_by_category_and_time_range(publications_per_year_and_category, 2010, 'math.NA', 2019)
+publications_by_category_and_time_range = get_publications_by_category_and_time_range(publications_per_year_and_category, 2010, 'math.NA', 2019)
 
 def scatterplot_publications_by_category_and_size(dataframe):
      # set plot style
@@ -110,19 +110,19 @@ def scatterplot_publications_by_category_and_size(dataframe):
     plt.show()
 
 #Graph 2
-#scatterplot_publications_by_category_and_size(publications_by_category_and_time_range)
+scatterplot_publications_by_category_and_size(publications_by_category_and_time_range)
 
 #Part 2 - Count of publications and citations
 
 #Count of publications and citations
 #create me a sample of 3000 rows from df and call it df_sample_2
-#df_sample_2 = df.sample(n=3000, random_state=42)
+df_sample_2 = df.sample(n=3000, random_state=42)
 
 #1 - Global creteria - Preprocessing
 def get_publications_and_citations_per_year(dataframe):
     """
     Returns a new dataframe with the number of publications and citations per year.
-
+    
     :param dataframe: pandas dataframe with columns 'year' and 'num_cit'.
     :return: pandas dataframe with columns 'year', 'publications', and 'citations'.
     """
@@ -132,7 +132,7 @@ def get_publications_and_citations_per_year(dataframe):
     result.columns = ['year', 'publications', 'citations']
     return result
 
-#get_publications_and_citations_per_year(df_sample_2)
+get_publications_and_citations_per_year(df_sample_2)
 
 #2 - Categorical creteria - Preprocessing
 def get_publications_and_citations_by_year_and_category(dataframe):
@@ -141,12 +141,12 @@ def get_publications_and_citations_by_year_and_category(dataframe):
     pubs_cits_by_year_and_cat.columns = ['year', 'category', 'publications', 'citations']
     return pubs_cits_by_year_and_cat
 
-#get_publications_and_citations_by_year_and_category(df_sample_2)
+get_publications_and_citations_by_year_and_category(df_sample_2)
 
 #Part 3 - Treatment/Logic Functions
 
 #1 - Global creteria - Treatment
-#publications_and_citations_per_year = get_publications_and_citations_per_year(df_sample_2)
+publications_and_citations_per_year = get_publications_and_citations_per_year(df_sample_2)
 
 def get_publications_and_citations_by_time_range(dataframe, start_year, end_year):
     filtered_df = dataframe[(dataframe['year'] >= start_year) & (dataframe['year'] <= end_year)]
@@ -155,10 +155,10 @@ def get_publications_and_citations_by_time_range(dataframe, start_year, end_year
     result_df = pd.concat([publications_by_year, citations_by_year], axis=1).reset_index()
     return result_df
 
-#get_publications_and_citations_by_time_range(publications_and_citations_per_year,2010,2019)
+get_publications_and_citations_by_time_range(publications_and_citations_per_year,2010,2019)
 
 #2 - Categorical creteria - Treatment
-#publications_and_citations_per_year_and_category = get_publications_and_citations_by_year_and_category(df_sample_2)
+publications_and_citations_per_year_and_category = get_publications_and_citations_by_year_and_category(df_sample_2)
 
 def get_publications_and_citations_by_category_and_time_range(dataframe, start_year, end_year, category):
     mask = (dataframe['year'] >= start_year) & (dataframe['year'] <= end_year) & (dataframe['category'].str.contains(category))
@@ -166,12 +166,12 @@ def get_publications_and_citations_by_category_and_time_range(dataframe, start_y
     grouped_df = filtered_df.groupby(['category', 'year']).agg({'publications': 'sum', 'citations': 'sum'}).reset_index()
     return grouped_df
 
-#get_publications_and_citations_by_category_and_time_range(publications_and_citations_per_year_and_category, 2010, 2019, 'cs.AI')
+get_publications_and_citations_by_category_and_time_range(publications_and_citations_per_year_and_category, 2010, 2019, 'cs.AI')
 
 #Part 4 - Data Visualization
 
 #Global creteria - Data Visualization
-#publications_and_citations_by_year_time_range = get_publications_and_citations_by_time_range(publications_and_citations_per_year,2010,2019)
+publications_and_citations_by_year_time_range = get_publications_and_citations_by_time_range(publications_and_citations_per_year,2010,2019)
 
 import seaborn as sns
 
@@ -184,10 +184,10 @@ def scatterplot_citations_vs_publications(df):
     plt.show()
 
 #Graph 3
-#scatterplot_citations_vs_publications(publications_and_citations_by_year_time_range)
+scatterplot_citations_vs_publications(publications_and_citations_by_year_time_range)
 
 #Categorical creteria - Data Visualization
-#publications_and_citations_by_category_year_time_range = get_publications_and_citations_by_category_and_time_range(publications_and_citations_per_year_and_category, 2010, 2019, 'cs.AI')
+publications_and_citations_by_category_year_time_range = get_publications_and_citations_by_category_and_time_range(publications_and_citations_per_year_and_category, 2010, 2019, 'cs.AI')
 
 
 
@@ -199,7 +199,7 @@ def scatterplot_by_category_year_shape(publications_and_citations_by_category_ye
     color_map = plt.get_cmap("Set1")
     for i in range(num_categories):
         category_color_map[categories[i]] = color_map(i / num_categories)
-
+        
     # Create a dictionary to map year to shape marker
     year_marker_map = {}
     years = publications_and_citations_by_category_year["year"].unique()
@@ -207,10 +207,10 @@ def scatterplot_by_category_year_shape(publications_and_citations_by_category_ye
     marker_map = ["o", "s", "d", "^", "v", ">", "<", "P", "X", "H"]
     for i in range(num_years):
         year_marker_map[years[i]] = marker_map[i % len(marker_map)]
-
+        
     # Create a figure and axis
     fig, ax = plt.subplots(figsize=(10, 8))
-
+    
     # Iterate over each row of the dataframe and plot the point
     for index, row in publications_and_citations_by_category_year.iterrows():
         category = row["category"]
@@ -220,12 +220,12 @@ def scatterplot_by_category_year_shape(publications_and_citations_by_category_ye
         marker = year_marker_map[year]
         color = category_color_map[category]
         ax.scatter(x, y, s=150, marker=marker, color=color)
-
+        
     # Set the axis labels and title
     ax.set_xlabel("Citations")
     ax.set_ylabel("Publications")
     ax.set_title("Publications and Citations by Category and Year")
-
+    
     # Create a legend for category color and year marker mapping
     handles = []
     labels = []
@@ -238,9 +238,9 @@ def scatterplot_by_category_year_shape(publications_and_citations_by_category_ye
         handles.append(plt.Line2D([], [], linestyle="", marker=marker, color="black"))
         labels.append(year)
     ax.legend(handles, labels, loc="center left", bbox_to_anchor=(1, 0.5))
-
+    
     # Show the plot
     plt.show()
 
 #Graph 4
-#scatterplot_by_category_year_shape(publications_and_citations_by_category_year_time_range)
+scatterplot_by_category_year_shape(publications_and_citations_by_category_year_time_range)
