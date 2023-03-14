@@ -50,10 +50,10 @@ st.markdown(
 
 #st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ  Ｒｅｓｅａｒｃｈ Ｐｕｌｓｅ  ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ  Rᴇsᴇᴀʀcʜ Puʟsᴇ  ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
+#st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP tools to master your exploration of research paper</h5>", unsafe_allow_html=True)
 
-About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard","Tools"])
+About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard (soon)","Tools (soon)"])
 
 with About:
     st.markdown(' ')
@@ -70,11 +70,11 @@ with About:
     st.markdown("Look for an author by inputting his/her name.", unsafe_allow_html=True)
     st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
     st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: yellow'>--- tobedone: Analytics dashboard ---</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: yellow'>--- Analytics dashboard ---</h6>", unsafe_allow_html=True)
     st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
     st.markdown("Available for all papers, by category, by year filtrage, with key metrics dissected.", unsafe_allow_html=True)
     st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: yellow'>--- tobedone: NLP-based tools ---</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: yellow'>--- NLP-based tools ---</h6>", unsafe_allow_html=True)
     st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
     st.markdown("--tobedone: translation, summarization, bot alert tool...", unsafe_allow_html=True)
 
