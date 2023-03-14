@@ -53,7 +53,7 @@ st.markdown("<h3 style='text-align: center; color: #289c68'>ﮩ٨ـﮩﮩ٨ـ   
 #st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP-based tools to master the exploration of research papers</h5>", unsafe_allow_html=True)
 
-About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard","Tools (soon)"])
+About, Dashboard, Search, Research, Tools = st.tabs(["About","Dashboard","Search","Research","Tools (soon)"])
 
 with About:
     st.markdown(' ')
@@ -78,6 +78,30 @@ with About:
     st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
     st.markdown("--tobedone: translation, summarization, bot alert tool...", unsafe_allow_html=True)
 
+with Dashboard:
+        col1, col2= st.columns(2)
+        with col1 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png', caption='Numbers of Publications per Year', use_column_width=True)
+            # image1 = Image.open('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png')
+            # col1.image(image1, caption='Numbers of Publications per Year', width=700)
+        with col2 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png', caption='Numbers of Publications by year and by category', use_column_width=True)
+            # image2 = Image.open('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png')
+            # col2.image(image2, caption='Numbers of Publications by year and by category', width=700)
+
+        col3, col4= st.columns(2)
+        with col3 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/3-Citations-vs-Publications.png', caption='Citations vs Publications', use_column_width=True)
+        with col4 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/4-Publications-and-Citations-by-Category-and-Year.png', caption='Publications and Citaions by category and year', use_column_width=True)
+
+        col5, col6 = st.columns(2)
+        with col5 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/5-Top-cited-authors.png', caption='Top cited authors', use_column_width=True)
+        with col6 :
+            st.image('https://storage.googleapis.com/deepdipper_data/images/6-Top-cited-authors-by-category.png', caption='Top cited authors by category', use_column_width=True)
+
+        st.image('https://storage.googleapis.com/deepdipper_data/images/7-Treemap.png', caption='Treemap of keywords', use_column_width=True)
 
 with Search:
     st.markdown("<h6 style='text-align: center; color: #289c68'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
@@ -148,7 +172,7 @@ with Research:
     with Papers:
         with st.form(key='params_for_api_papers'):
 
-            input3 = st.text_input('\> input paper ID to get detailed info on it (e.g. 2023-12345)')
+            input3 = st.text_input('\> input paper ID to get detailed info on it (e.g. 1903-06236)')
 
             if st.form_submit_button('Research Paper!'):
 
@@ -177,30 +201,7 @@ with Research:
                     st.text(' ')
                     st.text(' ')
 
-with Dashboard:
-        col1, col2= st.columns(2)
-        with col1 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png', caption='Numbers of Publications per Year', use_column_width=True)
-            # image1 = Image.open('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png')
-            # col1.image(image1, caption='Numbers of Publications per Year', width=700)
-        with col2 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png', caption='Numbers of Publications by year and by category', use_column_width=True)
-            # image2 = Image.open('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png')
-            # col2.image(image2, caption='Numbers of Publications by year and by category', width=700)
 
-        col3, col4= st.columns(2)
-        with col3 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/3-Citations-vs-Publications.png', caption='Citations vs Publications', use_column_width=True)
-        with col4 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/4-Publications-and-Citations-by-Category-and-Year.png', caption='Publications and Citaions by category and year', use_column_width=True)
-
-        col5, col6 = st.columns(2)
-        with col5 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/5-Top-cited-authors.png', caption='Top cited authors', use_column_width=True)
-        with col6 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/6-Top-cited-authors-by-category.png', caption='Top cited authors by category', use_column_width=True)
-
-        st.image('https://storage.googleapis.com/deepdipper_data/images/7-Treemap.png', caption='Treemap of keywords', use_column_width=True)
 
 with Tools:
     st.markdown('-- coming soon, stay tuned! --')
