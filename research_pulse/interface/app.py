@@ -200,9 +200,9 @@ with Research:
 
                 for key in results3:
                     st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
-                    st.markdown('- Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
-                    st.markdown('- Authors :' + str(results3[key]['Authors']))
-                    st.markdown('- arXiv category : ' + str(results3[key]['Category']) + '-- Paper ID: ' + str(results3[key]['Id']))
+                    st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
+                    st.markdown('Authors:' + str(results3[key]['Authors']))
+                    st.markdown('arXiv category : ' + str(results3[key]['Category']) + '-- Paper ID: ' + str(results3[key]['Id']))
 
                     st.text(' ')
                     st.text(' ')
