@@ -49,7 +49,7 @@ st.markdown(
 )
 
 #st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ  Ｒｅｓｅａｒｃｈ Ｐｕｌｓｅ  ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
-st.markdown("<h3 style='text-align: center; color: #235c14'>ﮩ٨ـﮩﮩ٨ـ   Rᴇsᴇᴀʀcʜ Puʟsᴇ   ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #1b8585'>ﮩ٨ـﮩﮩ٨ـ   Rᴇsᴇᴀʀcʜ Puʟsᴇ   ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
 #st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP tools to master your exploration of research paper</h5>", unsafe_allow_html=True)
 
@@ -61,26 +61,26 @@ with About:
     st.markdown("Research Pulse is a tool that helps you to explore the research papers and their authors", unsafe_allow_html=True)
     st.markdown("It is a NLP tool that helps you to find the most relevant papers and authors in your research area", unsafe_allow_html=True)
     st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: #235c14'>--- Search engine ---</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: #1b8585'>--- Search engine ---</h6>", unsafe_allow_html=True)
     st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
     st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
     st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: #235c14'>--- Research papers & authors ---</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: #1b8585'>--- Research papers & authors ---</h6>", unsafe_allow_html=True)
     st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
     st.markdown("Look for an author by inputting his/her name.", unsafe_allow_html=True)
     st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
     st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: #235c14'>--- Analytics dashboard ---</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: #1b8585'>--- Analytics dashboard ---</h6>", unsafe_allow_html=True)
     st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
     st.markdown("Available for all papers, by category, by year filtrage, with key metrics dissected.", unsafe_allow_html=True)
     st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: #235c14'>--- NLP-based tools ---</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: #1b8585'>--- NLP-based tools ---</h6>", unsafe_allow_html=True)
     st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
     st.markdown("--tobedone: translation, summarization, bot alert tool...", unsafe_allow_html=True)
 
 
 with Search:
-    st.markdown("Search topics and notions to get top 20 most relevant papers :", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: #1b8585'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
     with st.form(key='params_for_api_search') as search_form:
         input1 = st.text_input('> input 1 to 5 keywords of interest separated by space')
         if st.form_submit_button('Search for papers!'):
@@ -117,7 +117,7 @@ with Search:
                 st.text(' ')
 
 with Research:
-    st.markdown("Research authors and papers to get info on them:", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: #1b8585'>Research authors and papers to get info on them:</h6>", unsafe_allow_html=True)
     Authors,Papers = Research.tabs(["Authors - by name","Papers - by ID"])
 
     with Authors:
