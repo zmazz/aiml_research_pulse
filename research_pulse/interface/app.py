@@ -223,9 +223,8 @@ with Research:
                     pdf_data = BytesIO(response_pdf.content)
                     # Generate the HTML code to display the PDF
                     base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
-                    pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
                     # Display the PDF
-                    st.markdown(pdf_display, unsafe_allow_html=True)
+                    st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">', unsafe_allow_html=True)
 
 
     with Author_details:
