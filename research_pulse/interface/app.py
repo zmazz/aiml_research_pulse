@@ -197,33 +197,32 @@ with Research:
                 #     st.text('ABSTRACT -- ' + results3[key]['Abstract'])
                 #     st.text('')
 
-                col7, col8= st.columns(2)
-                with col7 :
-                    for key in results3:
-                        st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
-                        st.markdown('- Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
-                        st.markdown('- Authors :' + str(results3[key]['Authors']))
-                        st.markdown('- arXiv category : ' + str(results3[key]['Category']) + '-- Paper ID: ' + str(results3[key]['Id']))
-                        st.text('ABSTRACT -- ' + str(results3[key]['Abstract']))
-                        st.text(' ')
-                        st.text(' ')
-                with col8 :
-                    for key in results3:
-                        pdf_url = results3[key]['Link']
-                        pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
-                        st.markdown(pdf_viewer, unsafe_allow_html=True)
 
-                        # response_pdf = requests.get(pdf_url)
-                        # if response_pdf.status_code == 200:
-                        #     # Read the downloaded binary data into a BytesIO object
-                        #     pdf_data = BytesIO(response_pdf.content)
-                        #     # Generate the HTML code to display the PDF
-                        #     base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
-                        #     pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
-                        #     # Display the PDF
-                        #     st.markdown(pdf_display, unsafe_allow_html=True)
-                        # else:
-                        #     st.error('Failed to download PDF')
+                for key in results3:
+                    st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
+                    st.markdown('- Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
+                    st.markdown('- Authors :' + str(results3[key]['Authors']))
+                    st.markdown('- arXiv category : ' + str(results3[key]['Category']) + '-- Paper ID: ' + str(results3[key]['Id']))
+
+                    st.text(' ')
+                    st.text(' ')
+
+                for key in results3:
+                    pdf_url = results3[key]['Link']
+                    pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
+                    st.markdown(pdf_viewer, unsafe_allow_html=True)
+
+                    # response_pdf = requests.get(pdf_url)
+                    # if response_pdf.status_code == 200:
+                    #     # Read the downloaded binary data into a BytesIO object
+                    #     pdf_data = BytesIO(response_pdf.content)
+                    #     # Generate the HTML code to display the PDF
+                    #     base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+                    #     pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+                    #     # Display the PDF
+                    #     st.markdown(pdf_display, unsafe_allow_html=True)
+                    # else:
+                    #     st.error('Failed to download PDF')
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
