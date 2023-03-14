@@ -213,7 +213,8 @@ with Research:
                         #pdf_viewer = components.html(f'<iframe src="{pdf_url}" width=600 height=800></iframe>')
                         # Display the PDF viewer
                         #st.write(pdf_viewer)
-                        st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
+                        #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
+                        st.markdown(f'<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={pdf_url}" width="600" height="800">', unsafe_allow_html=True)
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
