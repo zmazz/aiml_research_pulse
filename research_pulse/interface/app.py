@@ -9,7 +9,7 @@ import streamlit as st
 #import plotly.express as px
 #import research_pulse.logic.data_loader as ldl
 #import research_pulse.logic.analytics_agg as laa
-from streamlit.components.v1 import components
+from streamlit.components.v1 import html
 
 
 st.set_page_config(
@@ -210,7 +210,7 @@ with Research:
                     for key in results3:
                         pdf_url = results3[key]['Link']+"#toolbar=0"
                         # Use pdfjs to display the PDF
-                        pdf_viewer = components.html(f'<embed src="{pdf_url}" width="100%" height="800px" />', height=800)
+                        pdf_viewer = html.IFrame(src=pdf_url, width="100%", height=800)
                         # Display the PDF viewer
                         st.write(pdf_viewer)
                         #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
