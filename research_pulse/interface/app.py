@@ -9,7 +9,8 @@ import streamlit as st
 #import plotly.express as px
 #import research_pulse.logic.data_loader as ldl
 #import research_pulse.logic.analytics_agg as laa
-# from streamlit.components.v1 import iframe
+import streamlit.components.v1 as components
+
 
 st.set_page_config(
     page_title="ResPulse",
@@ -209,7 +210,7 @@ with Research:
                     for key in results3:
                         pdf_url = results3[key]['Link']
                         # Use pdfjs to display the PDF
-                        pdf_viewer = st.components.v1.html(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', width=600, height=800, scrolling=True)
+                        pdf_viewer = components.html(f'<iframe src="{pdf_url}" width=600 height=800></iframe>')
                         # Display the PDF viewer
                         st.write(pdf_viewer)
                         #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
