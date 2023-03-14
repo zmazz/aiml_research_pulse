@@ -53,7 +53,7 @@ st.markdown("<h3 style='text-align: center; color: #289c68'>ﮩ٨ـﮩﮩ٨ـ   
 #st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP-based tools to master the exploration of research papers</h5>", unsafe_allow_html=True)
 
-About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard (soon)","Tools (soon)"])
+About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard","Tools (soon)"])
 
 with About:
     st.markdown(' ')
