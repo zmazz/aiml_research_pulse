@@ -147,7 +147,7 @@ with Search:
     with Authors:
         with st.form(key='params_for_api_authors'):
 
-            input2 = st.text_input('\> input author name to get detailed info on them')
+            input2 = st.text_input('\> input name to get all papers from authors containing this name')
 
             if st.form_submit_button('Search for Authors !'):
 
@@ -176,7 +176,7 @@ with Research:
     with Paper_details:
         with st.form(key='params_for_api_papers'):
 
-            input3 = st.text_input('\> input paper ID to get detailed info on it (e.g. 1903-06236)')
+            input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1903-06236)')
 
             if st.form_submit_button('Research Paper !'):
 
@@ -208,7 +208,7 @@ with Research:
     with Author_details:
         with st.form(key='params_for_api_authors'):
 
-            input4 = st.text_input('\> input author name to get detailed info on them')
+            input4 = st.text_input('\> input exact author name to get detailed info on them (e.g. Chollet Francois)')
 
             if st.form_submit_button('Research Author !'):
 
