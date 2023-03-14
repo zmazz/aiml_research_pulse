@@ -11,6 +11,7 @@ import streamlit as st
 #import research_pulse.logic.analytics_agg as laa
 import streamlit.components.v1 as components
 from base64 import b64encode
+from io import BytesIO
 
 
 st.set_page_config(
@@ -217,11 +218,17 @@ with Research:
                         #st.write(pdf_viewer)
                         #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
                         #st.markdown(f'<embed src="https://drive.google.com/viewerng/viewer?embedded=true&url={pdf_url}" width="600" height="800">', unsafe_allow_html=True)
-                        with open(pdf_response,"rb") as f:
-                            base64_pdf = b64encode(f.read()).decode('utf-8')
-                        pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">'
-                        st.markdown(pdf_display, unsafe_allow_html=True)
-                        # Opening file from file path
+                        if pdf_response.status_code == 200:
+                            # Read the downloaded binary data into a BytesIO object
+                            pdf_data = BytesIO(pdf_response.content)
+                            # Generate the HTML code to display the PDF
+                            base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+                            pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+                            # Display the PDF
+                            st.markdown(pdf_display, unsafe_allow_html=True)
+                        else:
+                            st.error('Failed to download PDF')
+
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
