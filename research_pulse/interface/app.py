@@ -211,23 +211,22 @@ with Research:
                     pdf_url = results3[key]['Link']
                     # pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
                     # st.markdown(pdf_viewer, unsafe_allow_html=True)
-                    with open(pdf_url, 'rb') as f:
-                        base64_pdf = b64encode(f.read()).decode('utf-8')
+                    # with open(pdf_url, 'rb') as f:
+                    #     base64_pdf = b64encode(f.read()).decode('utf-8')
 
-                    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="900" height="1200" type="application/pdf"></iframe>'
+                    # pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="900" height="1200" type="application/pdf"></iframe>'
 
+                    # st.markdown(pdf_display, unsafe_allow_html=True)
+                    response_pdf = requests.get(pdf_url)
+
+                    # Read the downloaded binary data into a BytesIO object
+                    pdf_data = BytesIO(response_pdf.content)
+                    # Generate the HTML code to display the PDF
+                    base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+                    pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+                    # Display the PDF
                     st.markdown(pdf_display, unsafe_allow_html=True)
-                    # response_pdf = requests.get(pdf_url)
-                    # if response_pdf.status_code == 200:
-                    #     # Read the downloaded binary data into a BytesIO object
-                    #     pdf_data = BytesIO(response_pdf.content)
-                    #     # Generate the HTML code to display the PDF
-                    #     base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
-                    #     pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
-                    #     # Display the PDF
-                    #     st.markdown(pdf_display, unsafe_allow_html=True)
-                    # else:
-                    #     st.error('Failed to download PDF')
+
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
