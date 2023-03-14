@@ -210,10 +210,10 @@ with Research:
                     for key in results3:
                         pdf_url = results3[key]['Link']
                         # Use pdfjs to display the PDF
-                        pdf_viewer = components.html(f'<iframe src="{pdf_url}" width=600 height=800></iframe>')
+                        #pdf_viewer = components.html(f'<iframe src="{pdf_url}" width=600 height=800></iframe>')
                         # Display the PDF viewer
-                        st.write(pdf_viewer)
-                        #st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
+                        #st.write(pdf_viewer)
+                        st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
