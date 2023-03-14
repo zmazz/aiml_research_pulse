@@ -51,7 +51,7 @@ st.markdown(
 #st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ  Ｒｅｓｅａｒｃｈ Ｐｕｌｓｅ  ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #289c68'>ﮩ٨ـﮩﮩ٨ـ   Rᴇsᴇᴀʀcʜ Puʟsᴇ   ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
 #st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: center; color: grey;'>NLP tools to master your exploration of research paper</h5>", unsafe_allow_html=True)
+st.markdown("<h5 style='text-align: center; color: grey;'>NLP-based tools to master the exploration of research papers</h5>", unsafe_allow_html=True)
 
 About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard (soon)","Tools (soon)"])
 
