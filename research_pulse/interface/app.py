@@ -202,7 +202,7 @@ with Research:
                     st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
                     st.markdown('By : ' + str(results3[key]['Authors']))
                     st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
-                    st.markdown('arXiv category : ' + str(results3[key]['Category']) + '-- Paper ID: ' + str(results3[key]['Id']))
+                    st.markdown('arXiv category : ' + str(results3[key]['Category']) + ' -- Paper ID : ' + str(results3[key]['Id']))
 
                     st.text(' ')
                     st.text(' ')
@@ -224,7 +224,7 @@ with Research:
                     # Generate the HTML code to display the PDF
                     base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
                     # Display the PDF
-                    st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">', unsafe_allow_html=True)
+                    st.markdown(base64_pdf)
 
 
     with Author_details:
