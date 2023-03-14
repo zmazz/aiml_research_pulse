@@ -186,16 +186,9 @@ with Research:
                 #research_pulse_api_url3 = 'http://127.0.0.1:8000/papers?query='
                 research_pulse_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
 
-                #response3 = requests.get(research_pulse_api_url3+params3)
                 response3 = requests.get(research_pulse_api_url3, params=dict(query=params3))
 
                 results3 = response3.json()
-
-                # for key in results3.keys():
-                #     st.markdown('-- ' + results3[key]['Title'])
-                #     st.markdown(str(results3[key]['Year'])+ ', ' + str(results3[key]['Authors']) + ', ' + results3[key]['Link'])
-                #     st.text('ABSTRACT -- ' + results3[key]['Abstract'])
-                #     st.text('')
 
 
                 for key in results3:
@@ -209,13 +202,14 @@ with Research:
 
                 for key in results3:
                     pdf_url = results3[key]['Link']
-                    pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
-                    st.markdown(pdf_viewer, unsafe_allow_html=True)
-                    with open(pdf_url, 'rb') as f:
-                        base64_pdf = b64encode(f.read()).decode('utf-8')
+                    # pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
+                    # st.markdown(pdf_viewer, unsafe_allow_html=True)
+                    # with open(pdf_url, 'rb') as f:
+                    #     base64_pdf = b64encode(f.read()).decode('utf-8')
 
-                    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf"></iframe>'
+                    # pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf"></iframe>'
 
+                    st.markdown(f'<embed src={pdf_url} width="700" height="1000">', unsafe_allow_html=True)
                     # # st.markdown(pdf_display, unsafe_allow_html=True)
                     # response_pdf = requests.get(pdf_url)
 
