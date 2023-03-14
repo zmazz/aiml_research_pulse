@@ -109,7 +109,7 @@ with Search:
 
     with Papers:
         st.markdown("<h6 style='text-align: center; color: #289c68'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
-        with st.form(key='params_for_api_search') as search_form:
+        with st.form(key='params_for_api_search_papers') as search_form:
             input1 = st.text_input('\> input 1 to 5 keywords of interest separated by space')
             if st.form_submit_button('Search for Papers !'):
 
@@ -145,7 +145,7 @@ with Search:
                     st.text(' ')
 
     with Authors:
-        with st.form(key='params_for_api_authors'):
+        with st.form(key='params_for_api_search_authors'):
 
             input2 = st.text_input('\> input name to get all papers from authors containing this name')
 
@@ -174,7 +174,7 @@ with Research:
     Paper_details,Author_details = Research.tabs(["Papers' details by ID","Author's details by name"])
 
     with Paper_details:
-        with st.form(key='params_for_api_papers'):
+        with st.form(key='params_for_api_research_paper'):
 
             input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1903-06236)')
 
@@ -206,7 +206,7 @@ with Research:
                     st.text(' ')
 
     with Author_details:
-        with st.form(key='params_for_api_authors'):
+        with st.form(key='params_for_api_research_author'):
 
             input4 = st.text_input('\> input exact author name to get detailed info on them (e.g. Chollet Francois)')
 
