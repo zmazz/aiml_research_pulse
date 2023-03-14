@@ -210,15 +210,15 @@ with Research:
 
                 for key in results3:
                     pdf_url = results3[key]['Link']
-                    # pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
-                    # st.markdown(pdf_viewer, unsafe_allow_html=True)
-                    # with open(pdf_url, 'rb') as f:
-                    #     base64_pdf = b64encode(f.read()).decode('utf-8')
+                    pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
+                    st.markdown(pdf_viewer, unsafe_allow_html=True)
+                    with open(pdf_url, 'rb') as f:
+                        base64_pdf = b64encode(f.read()).decode('utf-8')
 
-                    # pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="900" height="1200" type="application/pdf"></iframe>'
+                    pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf"></iframe>'
 
-                    # st.markdown(pdf_display, unsafe_allow_html=True)
-                    response_pdf = requests.get(pdf_url)
+                    # # st.markdown(pdf_display, unsafe_allow_html=True)
+                    # response_pdf = requests.get(pdf_url)
 
                     # # Read the downloaded binary data into a BytesIO object
                     # pdf_data = BytesIO(response_pdf.content)
@@ -227,12 +227,6 @@ with Research:
                     # # Display the PDF
                     # st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">', unsafe_allow_html=True)
 
-                    # Check if response contains valid PDF data
-                    try:
-                        pdf_reader = PyPDF2.PdfFileReader(BytesIO(response_pdf.content))
-                        print(pdf_reader)
-                    except PyPDF2.utils.PdfReadError:
-                        print('Invalid PDF data in response')
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):
