@@ -53,7 +53,7 @@ st.markdown("<h3 style='text-align: center; color: #a2ff7e'>ﮩ٨ـﮩﮩ٨ـ   
 #st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP tools to master your exploration of research paper</h5>", unsafe_allow_html=True)
 
-About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard (soon)","Tools (soon)"], unsafe_allow_html=True)
+About, Search, Research, Dashboard, Tools = st.tabs(["About","Search","Research","Dashboard (soon)","Tools (soon)"])
 
 with About:
     st.markdown(' ')
@@ -118,7 +118,7 @@ with Search:
 
 with Research:
     st.markdown("Research authors and papers to get info on them:", unsafe_allow_html=True)
-    Authors,Papers = Research.tabs(["Authors - by name","Papers - by ID"], unsafe_allow_html=True)
+    Authors,Papers = Research.tabs(["Authors - by name","Papers - by ID"])
 
     with Authors:
         with st.form(key='params_for_api_authors'):
