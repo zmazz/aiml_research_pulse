@@ -11,7 +11,6 @@ import streamlit as st
 #import research_pulse.logic.analytics_agg as laa
 
 
-
 st.set_page_config(
     page_title="ResPulse",
     page_icon=":smiley:",
@@ -196,13 +195,20 @@ with Research:
                 #     st.text('ABSTRACT -- ' + results3[key]['Abstract'])
                 #     st.text('')
 
-                for key in results3:
-                    st.markdown('-- ' + str(results3[key]['Title']) + ', cited ' + str(results3[key]['Number_citations']) + ' times')
-                    st.markdown(str(results3[key]['Year'])+ ', ' + str(results3[key]['Authors']) + ', ' + str(results3[key]['Link']))
-                    st.markdown('Paper ID: ' + str(results3[key]['Id'])+ ' -- Category: ' + str(results3[key]['Category']))
-                    st.text('ABSTRACT -- ' + str(results3[key]['Abstract']))
-                    st.text(' ')
-                    st.text(' ')
+                col7, col8= st.columns(2)
+                with col7 :
+                    for key in results3:
+                        st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
+                        st.markdown('- Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
+                        st.markdown('- Authors :' + str(results3[key]['Authors']))
+                        st.markdown('- arXiv category : ' + str(results3[key]['Category']) + '-- Paper ID: ' + str(results3[key]['Id']))
+                        st.text('ABSTRACT -- ' + str(results3[key]['Abstract']))
+                        st.text(' ')
+                        st.text(' ')
+                with col8 :
+                    for key in results3:
+                        pdf_url = results3[key]['Link']+"#toolbar=0"
+                        st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
 
     with Author_details:
         with st.form(key='params_for_api_research_author'):

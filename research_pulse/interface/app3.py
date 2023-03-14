@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import plotly.express as px
 from PIL import Image
+import requests
 #import logic.analytics_general as ag
 #from logic.analytics_general import *
 
@@ -61,32 +62,38 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-Dashboard, Search, Research = st.tabs(["Dashboard", "Search","Research"])
+with st.form(key='params_for_api_research_author'):
 
-with Dashboard:
-        col1, col2= st.columns(2)
-        with col1 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png', caption='Numbers of Publications per Year', use_column_width=True)
-            # image1 = Image.open('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png')
-            # col1.image(image1, caption='Numbers of Publications per Year', width=700)
-        with col2 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png', caption='Numbers of Publications by year and by category', use_column_width=True)
-            # image2 = Image.open('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png')
-            # col2.image(image2, caption='Numbers of Publications by year and by category', width=700)
+            input4 = st.text_input('\> input exact author name to get detailed info on them (e.g. Chollet Francois)')
 
-        col3, col4= st.columns(2)
-        with col3 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/3-Citations-vs-Publications.png', caption='Citations vs Publications', use_column_width=True)
-        with col4 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/4-Publications-and-Citations-by-Category-and-Year.png', caption='Publications and Citaions by category and year', use_column_width=True)
+            if st.form_submit_button('Research Author !'):
 
-        col5, col6 = st.columns(2)
-        with col5 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/5-Top-cited-authors.png', caption='Top cited authors', use_column_width=True)
-        with col6 :
-            st.image('https://storage.googleapis.com/deepdipper_data/images/6-Top-cited-authors-by-category.png', caption='Top cited authors by category', use_column_width=True)
+                params4 = input4.replace(' ','-').lower()
 
-        st.image('https://storage.googleapis.com/deepdipper_data/images/7-Treemap.png', caption='Treemap of keywords', use_column_width=True)
+                #research_pulse_api_url4 = 'http://127.0.0.1:8000/authors?query='
+                research_pulse_api_url4 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
+
+                #response4 = requests.get(research_pulse_api_url4+params4)
+                response4 = requests.get(research_pulse_api_url4, params=dict(query=params4))
+
+                results4 = response4.json()
+
+                for key in results4:
+                    st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
+                    st.markdown(str(results4[key]['Year'])+ ', ' + str(results4[key]['Authors']) + ', ' + str(results4[key]['Link']))
+                    st.markdown('Paper ID: ' + str(results4[key]['Id'])+ ' -- Category: ' + str(results4[key]['Category']))
+                    st.text('ABSTRACT -- ' + str(results4[key]['Abstract']))
+                    st.text(' ')
+                    st.text(' ')
+
+col7, col8= st.columns(2)
+with col7 :
+        pdf_url = "https://arxiv.org/pdf/1606.04442.pdf#toolbar=0"
+        st.title("My PDF")
+# Use an iframe to display the PDF
+        st.markdown(f'<iframe src="{pdf_url}" width="600" height="800" frameborder="0"></iframe>', unsafe_allow_html=True)
+with col8 :
+        st.image('https://storage.googleapis.com/deepdipper_data/images/4-Publications-and-Citations-by-Category-and-Year.png', caption='Publications and Citaions by category and year', use_column_width=True)
 
         # col8, col9 = st.columns(2)
         # with col8 :
@@ -116,12 +123,12 @@ with Dashboard:
 
     #End of Dashboard view
 
-with Search:
-    with st.form(key='params_for_api1'):
-        query = st.text_input('Input topic or notion to get most relevent papers:')
-        st.form_submit_button('Browse the arXiv net!')
+# with Search:
+#     with st.form(key='params_for_api1'):
+#         query = st.text_input('Input topic or notion to get most relevent papers:')
+#         st.form_submit_button('Browse the arXiv net!')
 
-    import streamlit as st
+#     import streamlit as st
 
     # @st.cache_data(persist="disk")
     # def fetch_and_clean_data(url):
@@ -141,10 +148,10 @@ with Search:
     # This is a different URL, so the function executes.
 
 
-with Research:
-    with st.form(key='params_for_api2'):
-        query = st.text_input('Input topic or notion to get most relevent papers:')
-        st.form_submit_button('Browse the arXiv net!')
+# with Research:
+#     with st.form(key='params_for_api2'):
+#         query = st.text_input('Input topic or notion to get most relevent papers:')
+#         st.form_submit_button('Browse the arXiv net!')
 
     # @st.cache_data(persist="disk")
     # def fetch_and_clean_data(url):
