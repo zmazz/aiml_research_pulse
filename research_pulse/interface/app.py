@@ -7,7 +7,7 @@ import streamlit as st
 #import numpy as np
 #import matplotlib.pyplot as plt
 #import plotly.express as px
-import research_pulse.logic.data_loader as ldl
+#import research_pulse.logic.data_loader as ldl
 #import research_pulse.logic.analytics_agg as laa
 
 
