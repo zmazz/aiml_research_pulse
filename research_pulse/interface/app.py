@@ -105,12 +105,11 @@ with Dashboard:
 
 with Search:
     st.markdown("<h6 style='text-align: center; color: #289c68'>Search papers and authors to get most relevant content:</h6>", unsafe_allow_html=True)
-    Papers,Authors = Search.tabs(["Papers top20 by notion & topic","Author(s) papers by name"])
+    Papers,Authors = Search.tabs(["Papers top20 by notions & topics","Author(s) papers by name"])
 
     with Papers:
-        st.markdown("<h6 style='text-align: center; color: #289c68'>Search topics and notions to get top 20 most relevant papers :</h6>", unsafe_allow_html=True)
         with st.form(key='params_for_api_search_papers') as search_form:
-            input1 = st.text_input('\> input 1 to 5 keywords of interest separated by space')
+            input1 = st.text_input('\> input one to five keywords of interest separated by space')
             if st.form_submit_button('Search for Papers !'):
 
                 params1 = input1.replace(' ','-').lower()
