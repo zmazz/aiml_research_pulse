@@ -17,11 +17,6 @@ st.set_page_config(
     page_icon=":smiley:",
     layout="wide",
     initial_sidebar_state="expanded",
-    css=f"""
-        body {{
-            background-color: #000000;
-        }}
-    """,
     menu_items={
         'Get Help': 'https://github.com/zmazz/aiml_research_pulse',
         'Report a bug': "https://github.com/zmazz/aiml_research_pulse",
