@@ -838,12 +838,6 @@ with Search:
 
                 results2 = response2.json()
 
-                author_reprocessed = params2.replace("-", " ").title()
-
-                freq=author_mean_pub_freq(pd.DataFrame(results2),author_reprocessed)
-
-                st.markdown(freq)
-
                 for key in results2:
                     st.markdown('-- ' + str(results2[key]['Title']) + ', cited ' + str(results2[key]['Number_citations']) + ' times')
                     st.markdown(str(results2[key]['Year'])+ ', ' + str(results2[key]['Authors']) + ', ' + str(results2[key]['Link']))
@@ -923,6 +917,12 @@ with Research:
                 response4 = requests.get(research_pulse_api_url4, params=dict(query=params4))
 
                 results4 = response4.json()
+
+                author_reprocessed = params4.replace("-", " ").title()
+
+                freq4=author_mean_pub_freq(pd.DataFrame(results4),author_reprocessed)
+
+                st.markdown(freq4)
 
                 for key in results4:
                     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
