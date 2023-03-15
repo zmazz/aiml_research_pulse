@@ -53,36 +53,32 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-def author_mean_pub_freq(df, author):
+def author_mean_pub_freq(dic, author):
+    # conversion du dictionnaire en DataFrame
+    df = pd.DataFrame.from_dict(dic, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])
+    # conversion de la colonnée Year en format int
+    df['Year'] = df['Year'].astype(int)
     # Create a dictionary to store the publication counts for each author and year
     author_year_count = defaultdict(lambda: defaultdict(int))
-
     # Loop over each row in the dataframe and update the publication count for each author and year
     for _, row in df.iterrows():
         authors = row['Authors'].split(', ')
         year = row['Year']
         for auth in authors:
             author_year_count[auth][year] += 1
-
     # Create a new dataframe to store the results
     author_publication_freq = pd.DataFrame(columns=['author', 'year', 'num_publications'])
-
+    # Convert the column num_publications format from string to integer format
+    author_publication_freq['num_publications'] = author_publication_freq['num_publications'].astype(int)
     # Loop over the author-year counts and add them to the new dataframe
     for auth, year_counts in author_year_count.items():
         for year, count in year_counts.items():
             author_publication_freq = author_publication_freq.append({'author': auth, 'year': year, 'num_publications': count}, ignore_index=True)
-
-
-
     # Check if the author filled by the user is present on the dataframe author_df
     author_df = author_publication_freq[author_publication_freq['author'] == author]
-
     if author_df.empty:
-            return print(f"The author {author} could not be found.Could you please fill in the last name followed by the first name of the author?")
-
+            return(f"The author {author} could not be found. Please fill in the last name followed by the first name of the author.")
     # Check if the author filled by the user is present on the dataframe author_df
-
     first_year = author_df['year'].min()
     last_year = author_df['year'].max()
     num_years = last_year - first_year + 1
@@ -921,7 +917,7 @@ with Research:
 
                 author_reprocessed = params4.replace("-", " ").title()
 
-                freq4=author_mean_pub_freq(pd.DataFrame(results4),author_reprocessed)
+                freq4=author_mean_pub_freq(results4,author_reprocessed)
 
                 st.markdown(freq4)
 
