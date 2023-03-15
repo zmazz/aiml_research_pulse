@@ -40,7 +40,7 @@ html_temp = """
             <div style="background-color:{};padding:1px">
             </div>
             """
-text_input_style = 'margin-left: auto; margin-right: auto'
+
 st.markdown(
     f"""
     <style>
@@ -954,7 +954,7 @@ with Search:
 
     with Papers:
         with st.form(key='params_for_api_search_papers') as search_form:
-            input1 = st.text_input('\> input one to five keywords of interest separated by space', style=text_input_style)
+            input1 = st.text_input('\> input one to five keywords at least related by far to artifical intelligence and machine learning, separated by space')
             if st.form_submit_button('Search for Papers !'):
 
                 params1 = input1.replace(' ','-').lower()
@@ -991,7 +991,7 @@ with Search:
     with Authors:
         with st.form(key='params_for_api_search_authors'):
 
-            input2 = st.text_input('\> input name to get all papers from authors containing this name', style=text_input_style)
+            input2 = st.text_input('\> input name to get all papers from authors containing this name')
 
             if st.form_submit_button('Search for Authors !'):
 
@@ -1020,7 +1020,7 @@ with Research:
     with Paper_details:
         with st.form(key='params_for_api_research_paper'):
 
-            input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1903-06236)', style=text_input_style)
+            input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1903-06236)')
 
             if st.form_submit_button('Research Paper !'):
 
@@ -1081,7 +1081,7 @@ with Research:
     with Author_details:
         with st.form(key='params_for_api_research_author'):
 
-            input4 = st.text_input('\> input exact author name to get detailed info on them (e.g. Chollet Francois)', style=text_input_style)
+            input4 = st.text_input('\> input exact author name to get detailed info on them (e.g. Chollet Francois)')
 
             if st.form_submit_button('Research Author !'):
 
@@ -1135,7 +1135,7 @@ with Tools:
 
         with st.form(key='params_for_api_tools_translate'):
 
-            input5 = st.text_input('\> input exact paper ID to get its abstract translated (e.g. 1903-06236)', style=text_input_style)
+            input5 = st.text_input('\> input exact paper ID to get its abstract translated (e.g. 1903-06236)')
 
             if st.form_submit_button('Translate Abstract !'):
 
