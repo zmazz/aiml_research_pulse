@@ -112,7 +112,7 @@ def get_author_citation_frequency(dic, author):
     author_stats = author_stats[['author', 'year', 'num_publications', 'num_citations']]
 
     # Vérifier si l'auteur est présent dans le dataframe
-    if author_stats['author'].unique().str.contains(author).sum() == 0 :
+    if author_stats['author'].str.contains(author).sum() == 0 :
         return f"The author {author} could not be found. Please fill in the last name followed by the first name of the author."
 
     # Filtrer les publications de l'auteur
