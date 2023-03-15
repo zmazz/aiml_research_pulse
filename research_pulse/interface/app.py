@@ -921,13 +921,15 @@ with Research:
 
                 st.markdown(freq4)
 
-                for key in results4:
-                    st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
-                    st.markdown(str(results4[key]['Year'])+ ', ' + str(results4[key]['Authors']) + ', ' + str(results4[key]['Link']))
-                    st.markdown('Paper ID: ' + str(results4[key]['Id'])+ ' -- Category: ' + str(results4[key]['Category']))
-                    st.text('ABSTRACT -- ' + str(results4[key]['Abstract']))
-                    st.text(' ')
-                    st.text(' ')
+                st.write(pd.DataFrame(results4[['Id','Category','Year','Title','Number_citations']]))
+
+                # for key in results4:
+                #     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
+                #     st.markdown(str(results4[key]['Year'])+ ', ' + str(results4[key]['Authors']) + ', ' + str(results4[key]['Link']))
+                #     st.markdown('Paper ID: ' + str(results4[key]['Id'])+ ' -- Category: ' + str(results4[key]['Category']))
+                #     st.text('ABSTRACT -- ' + str(results4[key]['Abstract']))
+                #     st.text(' ')
+                #     st.text(' ')
 
 with Tools:
     st.text(' ')
