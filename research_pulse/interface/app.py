@@ -963,7 +963,7 @@ with Search:
                 #deepdipper_api_url1 = 'http://127.0.0.1:8000/search?query='
                 deepdipper_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
-                with st.spinner('Parsing through papers...'):
+                with st.spinner('Calculating cosine similarity between input and all available abstracts...'):
                     #response1 = requests.get(deepdipper_api_url1+params1)
                     response1 = requests.get(deepdipper_api_url1, params=dict(query=params1))
 
@@ -977,9 +977,10 @@ with Search:
                 #results = ls.search(query=query, data=data, vector=vector, matrix=matrix)
 
                 #st.header('Top result:')
-
-                st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 results:</h6>", unsafe_allow_html=True)
-
+                st.markdown(' ')
+                st.markdown("<h5 style='text-align: center; color: #289c68'>Top 20 ranked Papers</h5>", unsafe_allow_html=True)
+                st.markdown(' ')
+                st.markdown(' ')
                 for i in range(0,20):
                     k=f'{i}'
                     st.markdown(f"<h6 style='text-align: center; color: #289c68'>#{i+1} -- {str(results1[k]['Title'])}</h6>", unsafe_allow_html=True)
@@ -987,7 +988,7 @@ with Search:
                     st.markdown('Cited ' + str(results1[k]['Number_citations']) + ' times -- Paper ID: ' + str(results1[k]['Id'])+ ' -- Category: ' + str(results1[k]['Category']))
                     st.text('ABSTRACT -- ' + results1[k]['Abstract'])
                     st.text(' ')
-                    st.markdown("<h6 style='text-align: center; color: #289c68'> --- </h6>", unsafe_allow_html=True)
+                    st.markdown("---")
                     st.text(' ')
 
     with Authors:
@@ -1009,12 +1010,12 @@ with Search:
                 results2 = response2.json()
 
                 for key in results2:
-                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>--- + {str(results2[key]['Title'])} + ---</h6>", unsafe_allow_html=True)
+                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>---  {str(results2[key]['Title'])}  ---</h6>", unsafe_allow_html=True)
                     st.markdown(str(results2[key]['Year'])+ ', ' + str(results2[key]['Authors']) + ', ' + str(results2[key]['Link']))
                     st.markdown('Cited ' + str(results2[key]['Number_citations']) + ' times -- Paper ID: ' + str(results2[key]['Id'])+ ' -- Category: ' + str(results2[key]['Category']))
                     st.text('ABSTRACT -- ' + str(results2[key]['Abstract']))
                     st.text(' ')
-                    st.markdown("<h6 style='text-align: center; color: #289c68'> --- </h6>", unsafe_allow_html=True)
+                    st.markdown(' --- ')
                     st.text(' ')
 
 with Research:
@@ -1024,7 +1025,7 @@ with Research:
     with Paper_details:
         with st.form(key='params_for_api_research_paper'):
 
-            input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1903-06236)')
+            input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1606-01781, 1706-03059, 1903-06236...)')
 
             if st.form_submit_button('Research Paper !'):
 
@@ -1085,7 +1086,7 @@ with Research:
     with Author_details:
         with st.form(key='params_for_api_research_author'):
 
-            input4 = st.text_input('\> input exact author name to get detailed info on them (e.g. Chollet Francois)')
+            input4 = st.text_input('\> input exact author name to get detailed info on them (family then first name e.g. Chollet Francois..)')
 
             if st.form_submit_button('Research Author !'):
 
@@ -1106,6 +1107,7 @@ with Research:
                 freq5=get_author_citation_frequency(results4,author_reprocessed)
                 #chart6=get_collaboration_citation_frequency_stats_V2(results4,author_reprocessed)
 
+                st.markdown('  ')
                 st.markdown('  ')
                 st.markdown(freq4)
                 st.markdown(' --- ')
@@ -1139,7 +1141,7 @@ with Tools:
 
         with st.form(key='params_for_api_tools_translate'):
 
-            input5 = st.text_input('\> input exact paper ID to get its abstract translated (e.g. 1903-06236)')
+            input5 = st.text_input('\> input exact paper ID to get its abstract translated (e.g. 1606-01781, 1706-03059, 1903-06236...)')
 
             if st.form_submit_button('Translate Abstract !'):
 

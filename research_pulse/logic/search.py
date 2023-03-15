@@ -47,7 +47,7 @@ def search(query, data, vector, matrix):
     scores = cosine_similarity(query_tfidf, matrix).flatten()
     ranked_indices = scores.argsort()[::-1]
 
-    # Return the top 10 results
+    # Return the top 20 results
     top20=[]
     for i in range(0,20):
         paper = data.iloc[ranked_indices[i]]
