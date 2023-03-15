@@ -56,7 +56,7 @@ def displayPDF(file):
 
     # Embedding PDF in HTML
     pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" ' \
-                  F'width="100%" height="1000" type="application/pdf"></iframe>'
+                  F'width="600" height="900" type="application/pdf"></iframe>'
     # Displaying File
     return st.markdown(pdf_display, unsafe_allow_html=True)
 
@@ -687,18 +687,18 @@ with About:
     st.markdown("Research Pulse is a tool that helps in the exploration of research papers and their authors.", unsafe_allow_html=True)
     st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant insight in large and fast-evolving research areas.", unsafe_allow_html=True)
     st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: #289c68'>--- Search engine ---</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: #289c68'>--- Analytics dashboard ---</h6>", unsafe_allow_html=True)
+    st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
+    st.markdown("Available aggregate and ranking views, with key metrics dissected.", unsafe_allow_html=True)
+    st.markdown(' ')
+    st.markdown("<h6 style='text-align: center; color: #289c68'>--- Search papers or authors ---</h6>", unsafe_allow_html=True)
     st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
     st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
     st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: #289c68'>--- Research papers & authors ---</h6>", unsafe_allow_html=True)
+    st.markdown("<h6 style='text-align: center; color: #289c68'>--- Research a papers or an author ---</h6>", unsafe_allow_html=True)
     st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
     st.markdown("Look for an author by inputting his/her name.", unsafe_allow_html=True)
     st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
-    st.markdown(' ')
-    st.markdown("<h6 style='text-align: center; color: #289c68'>--- Analytics dashboard ---</h6>", unsafe_allow_html=True)
-    st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
-    st.markdown("Available for all papers, by category, by year filtrage, with key metrics dissected.", unsafe_allow_html=True)
     st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>--- NLP-based tools ---</h6>", unsafe_allow_html=True)
     st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
@@ -717,13 +717,12 @@ with Dashboard:
         st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>Aggregate number of papers & citations per year:</h6>", unsafe_allow_html=True)
         st.image('https://storage.googleapis.com/deepdipper_data/images/aggregate/agg_number_public_citations.png', caption='Number of papers and citations per year', use_column_width=True)
-        st.markdown("<h6 style='text-align: center; color: #289c68'>Categories overview", unsafe_allow_html=True)
         st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>All categories available:</h6>", unsafe_allow_html=True)
         st.write(pd.DataFrame(categories_list).set_index('group_name'))
         st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 categories with most papers:</h6>", unsafe_allow_html=True)
-        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Categories with most publications', use_column_width=True)
+        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Categories with most publications', use_column_width=False)
 
     with Rankings:
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 100 most cited papers:</h6>", unsafe_allow_html=True)
@@ -732,6 +731,8 @@ with Dashboard:
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 most cited authors:</h6>", unsafe_allow_html=True)
         st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_30_authors_cited.png', caption='Ranked authors by citations', use_column_width=True)
         st.markdown("  ")
+        st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 words in all papers:</h6>", unsafe_allow_html=True)
+        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top30_wordcloud.png', caption='Most frequent technical words', use_column_width=True)
 
     with Categories:
         st.text(' ')
