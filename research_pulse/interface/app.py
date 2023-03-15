@@ -518,7 +518,7 @@ with Dashboard:
         st.write(pd.DataFrame(top100_papers))
         st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 most cited authors:</h6>", unsafe_allow_html=True)
-        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_30_cited_authors.png', caption='Ranked authors by citations', use_column_width=True)
+        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_30_authors_cited.png', caption='Ranked authors by citations', use_column_width=True)
         st.markdown("  ")
 
     with Categories:
