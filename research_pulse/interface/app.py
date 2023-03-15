@@ -921,7 +921,7 @@ with Research:
 
                 st.markdown(freq4)
 
-                st.write(pd.DataFrame(results4[['Id','Category','Year','Title','Number_citations']]))
+                st.write(pd.DataFrame(results4)[['Id','Category','Year','Title','Number_citations']])
 
                 # for key in results4:
                 #     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
