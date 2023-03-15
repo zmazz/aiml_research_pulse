@@ -69,8 +69,8 @@ def author_mean_pub_freq(df, author):
 
     # Loop over each row in the dataframe and update the publication count for each author and year
     for _, row in df.iterrows():
-        authors = row['authors'].split(', ')
-        year = row['year']
+        authors = row['Authors'].split(', ')
+        year = row['Year']
         for auth in authors:
             author_year_count[auth][year] += 1
 
@@ -97,7 +97,7 @@ def author_mean_pub_freq(df, author):
     num_years = last_year - first_year + 1
     total_publications = author_df['num_publications'].sum()
     mean_freq = total_publications / num_years
-    return(f'Beetween his/her first year, {first_year}, and last year {last_year}, of publication, {author} has published an average of {round(mean_freq,1)} papers per year.')
+    return(f'Between his/her first year ({first_year}) and last year ({last_year}) of publication, {author} has published an average of {round(mean_freq,1)} papers per year.')
 
 top100_papers={'title': {'1004-3169': 'Factorizations of Cunningham numbers with bases 13 to 99',
   '1612-07324': 'Holographic quantum matter',
