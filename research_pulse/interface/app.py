@@ -15,6 +15,7 @@ from io import BytesIO
 import pandas as pd
 from collections import defaultdict
 import numpy as np
+from pdf2image import convert_from_path
 
 st.set_page_config(
     page_title="ResPulse",
@@ -52,16 +53,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-def displayPDF(file):
-    # Opening file from file path
-    # with open(file, "rb") as f:
-    base64_pdf = b64encode(file.encode('utf-8')).decode('utf-8')
-
-    # Embedding PDF in HTML
-    pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" ' \
-                  F'width="600" height="900" type="application/pdf"></iframe>'
-    # Displaying File
-    return st.markdown(pdf_display, unsafe_allow_html=True)
 
 def author_mean_pub_freq(df, author):
     # Create a dictionary to store the publication counts for each author and year
@@ -879,7 +870,11 @@ with Research:
 
                 for key in results3:
                     pdf_url = results3[key]['Link']
-                    displayPDF(pdf_url)
+
+                    base64_pdf = b64encode(pdf_url.encode('utf-8')).decode('utf-8')
+                    images = convert_from_path(base64_pdf)
+                    for i in range(len(images)):
+                        st.image(images[i], caption=f'pdf page {i}', use_column_width=True)
 
                     # pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
                     # st.markdown(pdf_viewer, unsafe_allow_html=True)

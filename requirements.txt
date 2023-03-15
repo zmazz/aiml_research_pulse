@@ -3,6 +3,7 @@ google-cloud-bigquery
 google-cloud-storage
 nltk
 pandas
+pdf2image
 plotly_express
 prefect
 PyPDF2
