@@ -12,6 +12,9 @@ import pandas as pd
 import streamlit.components.v1 as components
 from base64 import b64encode
 from io import BytesIO
+import pandas as pd
+from collections import defaultdict
+import numpy as np
 
 st.set_page_config(
     page_title="ResPulse",
@@ -59,6 +62,42 @@ def displayPDF(file):
                   F'width="600" height="900" type="application/pdf"></iframe>'
     # Displaying File
     return st.markdown(pdf_display, unsafe_allow_html=True)
+
+def author_mean_pub_freq(df, author):
+    # Create a dictionary to store the publication counts for each author and year
+    author_year_count = defaultdict(lambda: defaultdict(int))
+
+    # Loop over each row in the dataframe and update the publication count for each author and year
+    for _, row in df.iterrows():
+        authors = row['authors'].split(', ')
+        year = row['year']
+        for auth in authors:
+            author_year_count[auth][year] += 1
+
+    # Create a new dataframe to store the results
+    author_publication_freq = pd.DataFrame(columns=['author', 'year', 'num_publications'])
+
+    # Loop over the author-year counts and add them to the new dataframe
+    for auth, year_counts in author_year_count.items():
+        for year, count in year_counts.items():
+            author_publication_freq = author_publication_freq.append({'author': auth, 'year': year, 'num_publications': count}, ignore_index=True)
+
+
+
+    # Check if the author filled by the user is present on the dataframe author_df
+    author_df = author_publication_freq[author_publication_freq['author'] == author]
+
+    if author_df.empty:
+            return print(f"The author {author} could not be found.Could you please fill in the last name followed by the first name of the author?")
+
+    # Check if the author filled by the user is present on the dataframe author_df
+
+    first_year = author_df['year'].min()
+    last_year = author_df['year'].max()
+    num_years = last_year - first_year + 1
+    total_publications = author_df['num_publications'].sum()
+    mean_freq = total_publications / num_years
+    return(f'Beetween his/her first year, {first_year}, and last year {last_year}, of publication, {author} has published an average of {round(mean_freq,1)} papers per year.')
 
 top100_papers={'title': {'1004-3169': 'Factorizations of Cunningham numbers with bases 13 to 99',
   '1612-07324': 'Holographic quantum matter',
@@ -798,6 +837,12 @@ with Search:
                 response2 = requests.get(research_pulse_api_url2, params=dict(query=params2))
 
                 results2 = response2.json()
+
+                author_reprocessed = params2.replace("-", " ").title()
+
+                freq=author_mean_pub_freq(pd.DataFrame(results2),author_reprocessed)
+
+                st.markdown(freq)
 
                 for key in results2:
                     st.markdown('-- ' + str(results2[key]['Title']) + ', cited ' + str(results2[key]['Number_citations']) + ' times')
