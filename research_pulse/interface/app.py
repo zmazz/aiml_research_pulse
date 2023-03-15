@@ -53,6 +53,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
 def author_mean_pub_freq(dic, author):
     # conversion du dictionnaire en DataFrame
     df = pd.DataFrame.from_dict(dic, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])
@@ -962,8 +963,9 @@ with Search:
                 #deepdipper_api_url1 = 'http://127.0.0.1:8000/search?query='
                 deepdipper_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
-                #response1 = requests.get(deepdipper_api_url1+params1)
-                response1 = requests.get(deepdipper_api_url1, params=dict(query=params1))
+                with st.spinner('Parsing through papers...'):
+                    #response1 = requests.get(deepdipper_api_url1+params1)
+                    response1 = requests.get(deepdipper_api_url1, params=dict(query=params1))
 
                 results1 = response1.json()
 
@@ -976,16 +978,16 @@ with Search:
 
                 #st.header('Top result:')
 
-                '''
-                #### Top 20 results:
-                '''
+                st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 results:</h6>", unsafe_allow_html=True)
+
                 for i in range(0,20):
                     k=f'{i}'
-                    st.markdown(f'#{i+1} -- ' + results1[k]['Title'] + ', cited ' + str(results1[k]['Number_citations']) + ' times')
+                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>#{i+1} -- {str(results1[k]['Title'])}</h6>", unsafe_allow_html=True)
                     st.markdown(str(results1[k]['Year'])+ ', ' + str(results1[k]['Authors']) + ', ' + results1[k]['Link'])
-                    st.markdown('Paper ID: ' + str(results1[k]['Id'])+ ' -- Category: ' + str(results1[k]['Category']))
+                    st.markdown('Cited ' + str(results1[k]['Number_citations']) + ' times -- Paper ID: ' + str(results1[k]['Id'])+ ' -- Category: ' + str(results1[k]['Category']))
                     st.text('ABSTRACT -- ' + results1[k]['Abstract'])
                     st.text(' ')
+                    st.markdown("<h6 style='text-align: center; color: #289c68'> --- </h6>", unsafe_allow_html=True)
                     st.text(' ')
 
     with Authors:
@@ -1000,17 +1002,19 @@ with Search:
                 #deepdipper_api_url2 = 'http://127.0.0.1:8000/authors?query='
                 deepdipper_api_url2 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
 
-                #response2 = requests.get(deepdipper_api_url2+params2)
-                response2 = requests.get(deepdipper_api_url2, params=dict(query=params2))
+                with st.spinner('Finding papers...'):
+                    #response2 = requests.get(deepdipper_api_url2+params2)
+                    response2 = requests.get(deepdipper_api_url2, params=dict(query=params2))
 
                 results2 = response2.json()
 
                 for key in results2:
-                    st.markdown('-- ' + str(results2[key]['Title']) + ', cited ' + str(results2[key]['Number_citations']) + ' times')
+                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>--- + {str(results2[key]['Title'])} + ---</h6>", unsafe_allow_html=True)
                     st.markdown(str(results2[key]['Year'])+ ', ' + str(results2[key]['Authors']) + ', ' + str(results2[key]['Link']))
-                    st.markdown('Paper ID: ' + str(results2[key]['Id'])+ ' -- Category: ' + str(results2[key]['Category']))
+                    st.markdown('Cited ' + str(results2[key]['Number_citations']) + ' times -- Paper ID: ' + str(results2[key]['Id'])+ ' -- Category: ' + str(results2[key]['Category']))
                     st.text('ABSTRACT -- ' + str(results2[key]['Abstract']))
                     st.text(' ')
+                    st.markdown("<h6 style='text-align: center; color: #289c68'> --- </h6>", unsafe_allow_html=True)
                     st.text(' ')
 
 with Research:
@@ -1026,17 +1030,17 @@ with Research:
 
                 params3 = input3.replace(' ','-').lower()
 
-
                 #deepdipper_api_url3 = 'http://127.0.0.1:8000/papers?query='
                 deepdipper_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
 
-                response3 = requests.get(deepdipper_api_url3, params=dict(query=params3))
+                with st.spinner('Looking for paper details...'):
+                    response3 = requests.get(deepdipper_api_url3, params=dict(query=params3))
 
                 results3 = response3.json()
 
 
                 for key in results3:
-                    st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
+                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>--- + {str(results3[key]['Title'])} + ---</h6>", unsafe_allow_html=True)
                     st.markdown('By : ' + str(results3[key]['Authors']))
                     st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
                     st.markdown('arXiv category : ' + str(results3[key]['Category']) + ' -- Paper ID : ' + str(results3[key]['Id']))
@@ -1090,8 +1094,9 @@ with Research:
                 #deepdipper_api_url4 = 'http://127.0.0.1:8000/authors?query='
                 deepdipper_api_url4 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
 
-                #response4 = requests.get(deepdipper_api_url4+params4)
-                response4 = requests.get(deepdipper_api_url4, params=dict(query=params4))
+                with st.spinner('Looking for Author details...'):
+                    #response4 = requests.get(deepdipper_api_url4+params4)
+                    response4 = requests.get(deepdipper_api_url4, params=dict(query=params4))
 
                 results4 = response4.json()
 
@@ -1103,10 +1108,10 @@ with Research:
 
                 st.markdown('  ')
                 st.markdown(freq4)
-                st.markdown('  ')
+                st.markdown(' --- ')
                 st.markdown(freq5)
-                st.markdown('  ')
-                st.markdown(f"<h6 style='text-align: center; color: #289c68'>{author_reprocessed} contributed to the following papers:</h6>", unsafe_allow_html=True)
+                st.markdown(' --- ')
+                st.markdown(f"<h6 style='text-align: center; color: #289c68'> Papers by {author_reprocessed} :</h6>", unsafe_allow_html=True)
 
                 df4=pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations','Link']]
                 df4['Year'] = df4['Year'].astype(int)
@@ -1125,9 +1130,8 @@ with Research:
                 #     st.text(' ')
 
 with Tools:
-    st.text(' ')
 
-    Translate,Summarize,Alert = Tools.tabs(["Translator (fr/es/pt)","Summarizer of papers","Alerter on new papers"])
+    Translate,Summarize,Alert = Tools.tabs(["Translator","Summarizer of papers","Alerter on new papers"])
 
     with Translate:
 
@@ -1141,36 +1145,49 @@ with Tools:
 
                 params5 = input5.replace(' ','-').lower()
 
-                if language_option == "Português":
-                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatept?query='
-                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatept'
+                if language_option == "Français":
+                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatefr?query='
+                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatefr'
+                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>Traduction en Français:</h6>", unsafe_allow_html=True)
                 elif language_option == "Español":
                     deepdipper_api_url5 = 'http://127.0.0.1:8000/translatees?query='
                     #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatees'
-                elif language_option == "Français":
-                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatefr?query='
-                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatefr'
+                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>Traducción en Español:</h6>", unsafe_allow_html=True)
+                elif language_option == "Português":
+                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatept?query='
+                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatept'
+                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>Tradução em Português:</h6>", unsafe_allow_html=True)
                 else:
                     st.markdown("Please select a language !")
 
                 #response5 = requests.get(deepdipper_api_url5+params5)
-                response5 = requests.get(deepdipper_api_url5, params=dict(query=params5))
-                results5 = response5.json()
+                with st.spinner('Translating abstract...'):
+                    #response5 = requests.get(deepdipper_api_url5+params5)
+                    response5 = requests.get(deepdipper_api_url5, params=dict(query=params5))
+                    results5 = response5.json()
 
-                st.markdown('  ')
-                st.text(results5['translated_text'])
-                st.markdown('  ')
+                st.markdown(' ')
+                st.markdown(results5['translated_text'])
+                st.markdown(' ')
+                st.markdown(' ')
+                st.markdown(' --- ')
+                st.markdown(' ')
                 st.markdown('Original abstract :')
-                st.text(results5['original_text'])
+                st.markdown(' ')
+                st.markdown(results5['original_text'])
                 # for key in results5:
-                #     st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
-                #     st.markdown('By : ' + str(results3[key]['Authors']))
-                #     st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
-                #     st.markdown('arXiv category : ' + str(results3[key]['Category']) + ' -- Paper ID : ' + str(results3[key]['Id']))
+                #     value = results5[key]
+                #     st.text(' ')
+                #     st.markdown('  ')
+                #     st.text(value['translated_text'])
+                #     st.markdown('  ')
+                #     st.text(' ')
+                #     st.markdown('Original abstract :')
+                #     st.text(value['original_text'])
 
-                #     st.text(' ')
-                #     st.text(' ')
+
     with Summarize:
         st.markdown("coming soon, stay tuned !")
+
     with Alert:
         st.markdown("coming soon, stay tuned !")

@@ -26,7 +26,7 @@ def marian_model():
     return marian_tokenizer, marian_model
 
 def translate_fra(query_id,df,tokenizer, model):
-    text='Title: ' + df.loc[df['id']==query_id]['title'].values[0] + ' -- Abstract:' + df.loc[df['id']==query_id]['abstract'].values[0]
+    text='TITLE: ' + df.loc[df['id']==query_id]['title'].values[0] + ' \n -- AUTHORS:' + df.loc[df['id']==query_id]['authors'].values[0] + ' \n -- ABSTRACT:' + df.loc[df['id']==query_id]['abstract'].values[0]
     sub_texts=chunk_paragraph(text)
     sub_texts_translated=[]
     for sub_text in sub_texts:
@@ -34,11 +34,11 @@ def translate_fra(query_id,df,tokenizer, model):
         translated = model.generate(**tokenizer(src_text, return_tensors="pt", padding=True))
         sub_texts_translated.append([tokenizer.decode(t, skip_special_tokens=True) for t in translated][0])
     translation=' '.join(sub_texts_translated)
-    return {'original text': text,
-            'translated text': translation }
+    return {'original_text': text,
+            'translated_text': translation }
 
 def translate_esp(query_id,df,tokenizer, model):
-    text='Title: ' + df.loc[df['id']==query_id]['title'].values[0] + ' -- Abstract:' + df.loc[df['id']==query_id]['abstract'].values[0]
+    text='TITLE: ' + df.loc[df['id']==query_id]['title'].values[0] + ' \n -- AUTHORS:' + df.loc[df['id']==query_id]['authors'].values[0] + ' \n -- ABSTRACT:' + df.loc[df['id']==query_id]['abstract'].values[0]
     sub_texts=chunk_paragraph(text)
     sub_texts_translated=[]
     for sub_text in sub_texts:
@@ -46,11 +46,11 @@ def translate_esp(query_id,df,tokenizer, model):
         translated = model.generate(**tokenizer(src_text, return_tensors="pt", padding=True))
         sub_texts_translated.append([tokenizer.decode(t, skip_special_tokens=True) for t in translated][0])
     translation=' '.join(sub_texts_translated)
-    return {'original text': text,
-            'translated text': translation }
+    return {'original_text': text,
+            'translated_text': translation }
 
 def translate_por(query_id,df,tokenizer, model):
-    text='Title: ' + df.loc[df['id']==query_id]['title'].values[0] + ' -- Abstract:' + df.loc[df['id']==query_id]['abstract'].values[0]
+    text='TITLE: ' + df.loc[df['id']==query_id]['title'].values[0] + ' \n -- AUTHORS:' + df.loc[df['id']==query_id]['authors'].values[0] + ' \n -- ABSTRACT:' + df.loc[df['id']==query_id]['abstract'].values[0]
     sub_texts=chunk_paragraph(text)
     sub_texts_translated=[]
     for sub_text in sub_texts:
