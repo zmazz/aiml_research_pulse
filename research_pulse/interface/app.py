@@ -885,7 +885,7 @@ st.markdown("<h3 style='text-align: center; color: #289c68'>ﮩ٨ـﮩﮩ٨ـ   
 #st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP-based tools to master the exploration of research papers</h5>", unsafe_allow_html=True)
 
-About, Dashboard, Search, Research, Tools = st.tabs(["About","Dashboard","Search","Research","Tools (soon)"])
+About, Dashboard, Search, Research, Tools = st.tabs(["About","Dashboard","Search","Research","Tools"])
 
 with About:
     st.markdown(' ')
@@ -949,21 +949,21 @@ with Dashboard:
         st.markdown('-- coming soon, stay tuned! --')
 
 with Search:
-    st.markdown("<h6 style='text-align: center; color: #289c68'>Search papers and authors to get most relevant content:</h6>", unsafe_allow_html=True)
+
     Papers,Authors = Search.tabs(["Papers top20 by notions & topics","Author(s) papers by name"])
 
     with Papers:
         with st.form(key='params_for_api_search_papers') as search_form:
-            input1 = st.text_input('\> input one to five keywords at least related by far to artifical intelligence and machine learning, separated by space')
+            input1 = st.text_input('\> input one to five keywords separated by space, at least related by far to artifical intelligence and machine learning')
             if st.form_submit_button('Search for Papers !'):
 
                 params1 = input1.replace(' ','-').lower()
 
-                #research_pulse_api_url1 = 'http://127.0.0.1:8000/search?query='
-                research_pulse_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
+                #deepdipper_api_url1 = 'http://127.0.0.1:8000/search?query='
+                deepdipper_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
-                #response1 = requests.get(research_pulse_api_url1+params1)
-                response1 = requests.get(research_pulse_api_url1, params=dict(query=params1))
+                #response1 = requests.get(deepdipper_api_url1+params1)
+                response1 = requests.get(deepdipper_api_url1, params=dict(query=params1))
 
                 results1 = response1.json()
 
@@ -997,11 +997,11 @@ with Search:
 
                 params2 = input2.replace(' ','-').lower()
 
-                #research_pulse_api_url2 = 'http://127.0.0.1:8000/authors?query='
-                research_pulse_api_url2 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
+                #deepdipper_api_url2 = 'http://127.0.0.1:8000/authors?query='
+                deepdipper_api_url2 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
 
-                #response2 = requests.get(research_pulse_api_url2+params2)
-                response2 = requests.get(research_pulse_api_url2, params=dict(query=params2))
+                #response2 = requests.get(deepdipper_api_url2+params2)
+                response2 = requests.get(deepdipper_api_url2, params=dict(query=params2))
 
                 results2 = response2.json()
 
@@ -1014,7 +1014,7 @@ with Search:
                     st.text(' ')
 
 with Research:
-    st.markdown("<h6 style='text-align: center; color: #289c68'>Research authors and papers to get info on them:</h6>", unsafe_allow_html=True)
+
     Paper_details,Author_details = Research.tabs(["Papers' details by ID","Author's details by name"])
 
     with Paper_details:
@@ -1027,10 +1027,10 @@ with Research:
                 params3 = input3.replace(' ','-').lower()
 
 
-                #research_pulse_api_url3 = 'http://127.0.0.1:8000/papers?query='
-                research_pulse_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
+                #deepdipper_api_url3 = 'http://127.0.0.1:8000/papers?query='
+                deepdipper_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
 
-                response3 = requests.get(research_pulse_api_url3, params=dict(query=params3))
+                response3 = requests.get(deepdipper_api_url3, params=dict(query=params3))
 
                 results3 = response3.json()
 
@@ -1087,11 +1087,11 @@ with Research:
 
                 params4 = input4.replace(' ','-').lower()
 
-                #research_pulse_api_url4 = 'http://127.0.0.1:8000/authors?query='
-                research_pulse_api_url4 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
+                #deepdipper_api_url4 = 'http://127.0.0.1:8000/authors?query='
+                deepdipper_api_url4 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
 
-                #response4 = requests.get(research_pulse_api_url4+params4)
-                response4 = requests.get(research_pulse_api_url4, params=dict(query=params4))
+                #response4 = requests.get(deepdipper_api_url4+params4)
+                response4 = requests.get(deepdipper_api_url4, params=dict(query=params4))
 
                 results4 = response4.json()
 
@@ -1126,8 +1126,8 @@ with Research:
 
 with Tools:
     st.text(' ')
-    st.markdown("<h6 style='text-align: center; color: #289c68'>Research authors and papers to get info on them:</h6>", unsafe_allow_html=True)
-    Translate,Summarize,Alert = Research.tabs(["Translator","Summarizer","Alerter on new papers"])
+
+    Translate,Summarize,Alert = Tools.tabs(["Translator (fr/es/pt)","Summarizer of papers","Alerter on new papers"])
 
     with Translate:
 
@@ -1142,15 +1142,19 @@ with Tools:
                 params5 = input5.replace(' ','-').lower()
 
                 if language_option == "Português":
-                    research_pulse_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatept'
+                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatept?query='
+                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatept'
                 elif language_option == "Español":
-                    research_pulse_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatees'
+                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatees?query='
+                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatees'
                 elif language_option == "Français":
-                    research_pulse_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatefr'
+                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatefr?query='
+                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatefr'
                 else:
                     st.markdown("Please select a language !")
 
-                response5 = requests.get(research_pulse_api_url5, params=dict(query=params5))
+                #response5 = requests.get(deepdipper_api_url5+params5)
+                response5 = requests.get(deepdipper_api_url5, params=dict(query=params5))
                 results5 = response5.json()
 
                 st.markdown('  ')
