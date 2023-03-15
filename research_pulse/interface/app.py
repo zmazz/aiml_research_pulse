@@ -73,7 +73,7 @@ def author_mean_pub_freq(dic, author):
     # Loop over the author-year counts and add them to the new dataframe
     for auth, year_counts in author_year_count.items():
         for year, count in year_counts.items():
-            author_publication_freq = author_publication_freq.append({'author': auth, 'year': year, 'num_publications': count}, ignore_index=True)
+            author_publication_freq = pd.concat(author_publication_freq,pd.DataFrame({'author': auth, 'year': year, 'num_publications': count}),ignore_index=True, sort=False)
     # Check if the author filled by the user is present on the dataframe author_df
     author_df = author_publication_freq[author_publication_freq['author'] == author]
     if author_df.empty:
@@ -84,7 +84,7 @@ def author_mean_pub_freq(dic, author):
     num_years = last_year - first_year + 1
     total_publications = author_df['num_publications'].sum()
     mean_freq = total_publications / num_years
-    return(f'Between his/her first year ({first_year}) and last year ({last_year}) of publication, {author} has published an average of {round(mean_freq,1)} papers per year.')
+    return(f'Between his/her first year ({first_year}) and last year ({last_year}) of publication, {author} has published {total_publications} papers, on an average of {round(mean_freq,1)} papers per year.')
 
 top100_papers={'title': {'1004-3169': 'Factorizations of Cunningham numbers with bases 13 to 99',
   '1612-07324': 'Holographic quantum matter',
