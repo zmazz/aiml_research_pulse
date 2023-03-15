@@ -8,7 +8,7 @@ def load_data():
     """
     Load the dataset from the processed folder
     """
-    #data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
+    # data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
 
     import gcsfs
 

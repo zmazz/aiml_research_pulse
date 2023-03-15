@@ -8,10 +8,13 @@ plotly_express
 prefect
 scikit-learn
 seaborn
+sentencepiece
 spacy
 squarify
 streamlit
 streamlit-option-menu
+torch
+transformers
 unidecode
 utils
 wordcloud

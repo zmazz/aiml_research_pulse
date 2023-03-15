@@ -2,10 +2,10 @@ import pandas as pd
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import research_pulse.logic.search as ls
-import research_pulse.logic.data_loader as dl
+import research_pulse.logic.data_loader as ldl
 import research_pulse.logic.r_papers as lrp
 import research_pulse.logic.r_authors as lra
-import research_pulse.logic.data_loader as dl
+import research_pulse.logic.t_translate as ltt
 
 app = FastAPI()
 
@@ -18,8 +18,9 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-df=dl.load_data()
+df=ldl.load_data()
 vector, matrix = ls.vectorizer(df)
+marian_tokenizer, marian_model = ltt.marian_model()
 
 # http://deepdipper-rp6v7d7m4q-ew.a.run.app/search?query=bayesian-neural-networks
 @app.get("/search")
@@ -49,6 +50,14 @@ def get_author(query: str):
     """
     author_occ=lra.get_author(query, df)
     return author_occ
+
+@app.get("/translate")
+def translate_fr(query: str):
+    """
+    Get author appearances from the ArXiv dataset by name
+    """
+    text_translated=ltt.translate_fr(query, df, marian_tokenizer, marian_model)
+    return text_translated
 
 @app.get("/")
 def root():

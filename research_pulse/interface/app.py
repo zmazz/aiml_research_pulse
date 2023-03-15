@@ -4,6 +4,7 @@ import requests
 
 import streamlit as st
 import pandas as pd
+import seaborn as sns
 #import numpy as np
 #import matplotlib.pyplot as plt
 #import plotly.express as px
@@ -11,11 +12,10 @@ import pandas as pd
 #import research_pulse.logic.analytics_agg as laa
 import streamlit.components.v1 as components
 from base64 import b64encode
-from io import BytesIO
+# from io import BytesIO
 import pandas as pd
 from collections import defaultdict
 import numpy as np
-import pdf2image
 
 st.set_page_config(
     page_title="ResPulse",
@@ -85,6 +85,186 @@ def author_mean_pub_freq(dic, author):
     total_publications = author_df['num_publications'].sum()
     mean_freq = total_publications / num_years
     return(f'Between his/her first year ({first_year}) and last year ({last_year}) of publication, {author} has published {total_publications} papers, on an average of {round(mean_freq,1)} papers per year.')
+
+def get_author_citation_frequency(dic, author):
+
+    # conversion du dictionnaire en DataFrame
+    df = pd.DataFrame.from_dict(dic, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])
+
+    # conversion de la colonnée Year en format int
+    df['Year'] = df['Year'].astype(int)
+    df['Number_citations'] = df['Number_citations'].astype(int)
+
+
+
+    author_stats = pd.DataFrame(columns=['author', 'year', 'num_publications', 'num_citations'])
+    # Convert the column num_publications format from string to integer format
+    author_stats['num_publications'] = author_stats['num_publications'].astype(int)
+
+    for index, row in df.iterrows():
+        authors = row['Authors'].split(', ')
+        year = row['Year']
+        num_citations = row['Number_citations']
+        for aut in authors:
+            temp_df = pd.DataFrame({'author': [aut], 'year': [year], 'num_publications': [1], 'num_citations': [num_citations]})
+            author_stats = pd.concat([author_stats, temp_df], ignore_index=True)
+    author_stats = author_stats.groupby(['author', 'year']).agg({'num_publications': 'sum', 'num_citations': 'sum'}).reset_index()
+    author_stats = author_stats[['author', 'year', 'num_publications', 'num_citations']]
+
+    # Vérifier si l'auteur est présent dans le dataframe
+    if author not in author_stats['author'].unique():
+        return f"The author {author} could not be found.Could you please fill in the last name followed by the first name of the author?"
+
+    # Filtrer les publications de l'auteur
+    author_publications = author_stats[author_stats['author'] == author]
+    # Calculer la première et la dernière année de publication de l'auteur
+    first_year = author_publications['year'].min()
+    last_year = author_publications['year'].max()
+    # Créer un tableau de fréquences de citations pour chaque année de publication
+    citation_frequencies = np.zeros(last_year-first_year+1)
+    for year in range(first_year, last_year+1):
+        publications_in_year = author_publications[author_publications['year'] == year]
+        if not publications_in_year.empty:
+            citation_frequencies[year-first_year] = publications_in_year['num_citations'].sum() / publications_in_year['num_publications'].sum()
+    # Calculer la moyenne pondérée des fréquences de citation
+    weighted_sum = 0
+    total_weight = 0
+    for i, freq in enumerate(citation_frequencies):
+        weight = author_publications[author_publications['year'] == first_year+i]['num_publications'].sum()
+        weighted_sum += freq * weight
+        total_weight += weight
+    mean_weighted_frequency = weighted_sum / total_weight
+    # Créer un DataFrame avec les résultats
+    result = pd.DataFrame({'author': [author],
+                           'mean_weighted_citation_frequency': [mean_weighted_frequency]})
+    # Le DataFrame avec les résultats ne contient qu'une ligne, avec l'auteur et la fréquence associée
+    # On ne choisit d'afficher que la valeur ci-dessous
+
+    return f'Beetwen his/her first year ({first_year}) and last_year ({last_year}) of publication, {author} was cited {weighted_sum} times, on average {round(result["mean_weighted_citation_frequency"][0])} times per year.'
+
+def get_collaboration_citation_frequency_stats_V2(dic,author):
+
+
+    # conversion du dictionnaire en DataFrame
+    df = pd.DataFrame.from_dict(dic, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])
+
+    # conversion de la colonnée Year en format int
+    df['Year'] = df['Year'].astype(int)
+    df['Number_citations'] = df['Number_citations'].astype(int)
+
+    # Créer un dictionnaire pour stocker les statistiques de collaboration
+    collab_stats = {}
+
+    # Itérer sur chaque publication
+    for index, row in df.iterrows():
+        # Extraire les informations nécessaires pour chaque publication
+        authors = row['Authors'].split(", ")
+        year = row['Year']
+        num_publications = 1
+        num_citations = row['Number_citations']
+
+        # Ajouter les informations à l'entrée de chaque collaboration
+        if len(authors) >= 2:
+            for i in range(len(authors)):
+                for j in range(i+1, len(authors)):
+                    collab = tuple(sorted([authors[i], authors[j]]))
+                    if collab not in collab_stats:
+                        collab_stats[collab] = {'year': [], 'num_publications': [], 'num_citations': []}
+                    collab_stats[collab]['year'].append(year)
+                    collab_stats[collab]['num_publications'].append(num_publications)
+                    collab_stats[collab]['num_citations'].append(num_citations)
+
+    # Créer un dataframe à partir des statistiques de collaboration
+    result = pd.DataFrame(columns=['collaboration', 'year', 'num_publications', 'num_citations'])
+    for collab in collab_stats:
+        years = collab_stats[collab]['year']
+        num_pubs = collab_stats[collab]['num_publications']
+        num_cits = collab_stats[collab]['num_citations']
+        for i in range(len(years)):
+            temp_df = pd.DataFrame({'collaboration': [collab], 'year': [years[i]], 'num_publications': [num_pubs[i]], 'num_citations': [num_cits[i]]})
+            result = pd.concat([result, temp_df], ignore_index=True)
+
+
+    # Create a dictionary to store collaboration citation frequency
+    collab_citation_freq = {}
+
+    # Iterate over each collaboration
+    for index, row in result.iterrows():
+        # Extract information for each collaboration
+        collab = row['collaboration']
+        year = row['year']
+        num_pubs = row['num_publications']
+        num_cits = row['num_citations']
+
+        # Add information to the entry of each collaboration
+        if len(collab) > 1:
+            for i in range(len(collab)):
+                for j in range(i+1, len(collab)):
+                    authors = tuple(sorted([collab[i], collab[j]]))
+                    if authors not in collab_citation_freq:
+                        collab_citation_freq[authors] = {'num_pubs': [], 'num_cits': []}
+                    collab_citation_freq[authors]['num_pubs'].append(num_pubs)
+                    collab_citation_freq[authors]['num_cits'].append(num_cits)
+
+    # Calculate the mean weighted citation frequency for each collaboration
+    collab_mean_weighted_cit_freq = {}
+    for collab in collab_citation_freq:
+        num_pubs = collab_citation_freq[collab]['num_pubs']
+        num_cits = collab_citation_freq[collab]['num_cits']
+        total_weight = sum(num_pubs)
+        weighted_sum = sum([num_cits[i] * num_pubs[i] for i in range(len(num_pubs))])
+        if total_weight > 0:
+            mean_weighted_cit_freq = weighted_sum / total_weight
+        else:
+            mean_weighted_cit_freq = 0
+        collab_mean_weighted_cit_freq[collab] = mean_weighted_cit_freq
+
+    # Convert the dictionary to a dataframe and sort by mean weighted citation frequency
+    result_2 = pd.DataFrame({'collaboration': list(collab_mean_weighted_cit_freq.keys()),
+                           'mean_weighted_citation_frequency': list(collab_mean_weighted_cit_freq.values())})
+    result_2['mean_weighted_citation_frequency'].fillna(0, inplace=True)
+    result_2.sort_values(by='mean_weighted_citation_frequency', ascending=False, inplace=True)
+
+
+    # Check if the author filled by the user is present on the 'dataframe result_2'
+    if result_2[result_2['collaboration'].apply(lambda x: author in x)].shape[0] == 0:
+        return f"The author {author} is not part of any collaboration. "
+
+    # In the case she/he is part of collaboration, we display the results by displaying the dataframe result_2 with the author's name
+    # with a visualization output
+    else:
+
+        final_result = result_2[result_2['collaboration'].apply(lambda x: author in x)]
+        df_sorted = final_result.sort_values(by='mean_weighted_citation_frequency', ascending=False)
+        # Extract collaboration names and citation frequencies
+        collaborations = df_sorted['collaboration'].apply(lambda x: f'{x[0]} & {x[1]}')
+        citation_frequencies = df_sorted['mean_weighted_citation_frequency']
+
+        # Set seaborn style
+        sns.set_style("whitegrid")
+
+
+        # Create horizontal bar plot using seaborn
+        ax = sns.barplot(x=citation_frequencies, y=collaborations, color='steelblue')
+
+        # Add labels and titles
+        ax.set_xlabel('Annual Mean Citation Frequency', fontsize=14, fontweight='bold')
+        ax.set_ylabel('Collaborations', fontsize=14, fontweight='bold')
+        ax.set_title(f'Average annual frequency of citation for each collaboration involving {author}', fontsize=16, fontweight='bold')
+
+        # Customize tick labels
+        ax.set_xticklabels(ax.get_xticklabels(), fontsize=12)
+        ax.set_yticklabels(ax.get_yticklabels(), fontsize=12)
+
+        # Remove spines
+        sns.despine(left=True, bottom=True)
+
+        # Add annotations to the bars
+        for i, v in enumerate(citation_frequencies):
+            ax.text(v+0.05, i, f'{v:.2f}', fontsize=12, fontweight='bold')
+
+        # Show the plot
+        return ax
 
 top100_papers={'title': {'1004-3169': 'Factorizations of Cunningham numbers with bases 13 to 99',
   '1612-07324': 'Holographic quantum matter',
@@ -918,8 +1098,13 @@ with Research:
                 author_reprocessed = params4.replace("-", " ").title()
 
                 freq4=author_mean_pub_freq(results4,author_reprocessed)
+                freq5=get_author_citation_frequency(results4,author_reprocessed)
+                chart6=get_collaboration_citation_frequency_stats_V2(results4,author_reprocessed)
 
+                st.markdown('  ')
                 st.markdown(freq4)
+                st.markdown('  ')
+                st.markdown(freq5)
                 st.markdown('  ')
                 st.markdown(f"<h6 style='text-align: center; color: #289c68'>{author_reprocessed} contributed to the following papers:</h6>", unsafe_allow_html=True)
 
@@ -928,6 +1113,8 @@ with Research:
                 df4.sort_values(by=['Year'], inplace=True,ascending=False)
                 df4['Year'] = df4['Year'].astype(str)
                 st.write(df4.set_index('Id'))
+
+                st.pyplot(chart6)
 
                 # for key in results4:
                 #     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
@@ -940,116 +1127,3 @@ with Research:
 with Tools:
     st.text(' ')
     st.markdown('-- coming soon, stay tuned! --')
-
-# with Dashboard:
-#     #First row - overall and top50 view
-#     Overall, Top50 = Dashboard.tabs(["Overall", "Top50"])
-
-#     with Overall:
-#         col1, col2, col3= st.columns([5,5,5])
-#         Overall.subheader("Reserved for the overall view of the data")
-#         Overall.pyplot(laa.plot_publications_per_year(laa.get_publications_by_time_range(laa.get_publications_per_year(df), 2000, 2023)))
-#         col4, col5, col6= st.columns([5,5,5])
-#         Overall.subheader("Reserved for the overall view of the data")
-
-#         Overall.write(df)
-
-#         #Second row - interactive view
-#         Overall.header("Interactive View")
-
-#         # -- Get the user input
-#         year_col, category_col, log_x_col = Overall.columns([5, 5, 5])
-#         with year_col:
-#             year_choice = Overall.slider(
-#                 "What year would you like to examine?",
-#                 min_value=2000,
-#                 max_value=2023,
-#                 step=1,
-#                 value=2023,
-#             )
-#         with category_col:
-#             category_choice = Overall.selectbox(
-#                 "Which category would you like to look at?",
-#                 ("All", 'cond-mat.dis-nn','cond-mat.stat-mech','cond-mat.str-el','cs.AI',
-#                     'cs.CE','cs.CG','cs.CL','cs.CR','cs.CV','cs.CY','cs.DB','cs.DC',
-#                     'cs.DL','cs.DM','cs.DS','cs.ET','cs.FL','cs.GL','cs.GT','cs.HC',
-#                     'cs.IR','cs.IT','cs.LG','cs.LO','cs.MA','cs.MS','cs.NA','cs.NE',
-#                     'cs.NI','cs.RO','cs.SI','econ.EM','eess.AS','eess.IV','eess.SP',
-#                     'math.CA','math.CT','math.DS','math.FA','math.GN','math.NA',
-#                     'math.OC','math.PR','math.RT','math.ST','nlin.AO','nlin.CD',
-#                     'stat.AP','stat.CO','stat.ME','stat.ML','stat.OT','stat.TH'))
-
-#         with log_x_col:
-#             log_x_choice = Overall.checkbox("Log X Axis?")
-
-#         # -- Apply the year filter given by the user
-
-#         filtered_df = df.loc[(df['year'] >= int(year_choice))]
-#         # -- Apply the continent filter
-#         if category_choice != "All":
-#             filtered_df = filtered_df.loc[filtered_df['category'].str.contains(category_choice.str)]
-
-#         # -- Create the figure in Plotly
-#         fig = px.scatter(
-#             filtered_df,
-#             x="year",
-#             y="lifeExp",
-#             size="pop",
-#             color="continent",
-#             hover_name="country",
-#             log_x=log_x_choice,
-#             size_max=60)
-#         fig.update_layout(title="GDP per Capita vs. Life Expectancy")
-#         # -- Input the Plotly chart to the Streamlit interface
-#         Overall.plotly_chart(fig, use_container_width=True)
-#         #The end of the interactive view
-
-#         #Third row - Last 3 months view in global and category perspective
-#         Overall.header("Last 3 months view in global and category perspective")
-
-#         Global_view, Cat_view= Overall.tabs(["Global View", "Categorical View"])
-
-#         with Global_view:
-#             col1, col2, col3= Global_view.columns([5,5,5])
-#             Global_view.subheader("Reserved for the global view of the data")
-#             col4, col5, col6= Global_view.columns([5,5,5])
-#             Global_view.subheader("Reserved for the global view of the data")
-
-#         with Cat_view:
-#             col1, col2, col3= Cat_view.columns([5,5,5])
-#             Cat_view.subheader("Reserved for the categorical view of the data")
-#             col4, col5, col6= Cat_view.columns([5,5,5])
-#             Cat_view.subheader("Reserved for the categorical view of the data")
-
-
-
-#         #End of Overall view
-
-#     with Top50:
-#             col1, col2, col3= st.columns([5,5,5])
-#             Top50.subheader("Reserved for the top50 view of the data")
-#             col4, col5, col6= st.columns([5,5,5])
-#             Top50.subheader("Reserved for the top50 view of the data")
-
-#             Top50.write(df.head(50))
-
-
-
-
-
-    # @st.cache_data(persist="disk")
-    # def fetch_and_clean_data(url):
-    #     # Fetch data from URL here, and then clean it up.
-    #     return data
-
-    # fetch_and_clean_data.clear()
-    # d1 = fetch_and_clean_data(DATA_URL)
-    # # Actually executes the function, since this is the first time it was
-    # # encountered.
-
-    # d2 = fetch_and_clean_data(DATA_URL_1)
-    # # Does not execute the function. Instead, returns its previously computed
-    # # value. This means that now the data in d1 is the same as in d2.
-
-    # d3 = fetch_and_clean_data(DATA_URL_2)
-    # This is a different URL, so the function executes.
