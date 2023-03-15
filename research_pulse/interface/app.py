@@ -882,7 +882,7 @@ categories_list={'group_name': {0: 'Computer Science',
   154: 'stat.TH is an alias for math.ST. Asymptotics, Bayesian Inference, Decision Theory, Estimation, Foundations, Inference, Testing.'}}
 
 st.markdown("<h3 style='text-align: center; color: #289c68'>ﮩ٨ـﮩﮩ٨ـ   Rᴇsᴇᴀʀcʜ Puʟsᴇ   ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
-st.markdown("<h5 style='text-align: center; color: grey;'>NLP-based tools to master the exploration of research papers</h5>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: center; color: grey;'>NLP-based assistive exploration of research papers</h6>", unsafe_allow_html=True)
 
 About, Dashboard, Search, Research, Tools = st.tabs(["About","Dashboard","Search","Research","Tools"])
 
