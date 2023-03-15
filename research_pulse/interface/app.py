@@ -73,7 +73,7 @@ def author_mean_pub_freq(dic, author):
     # Loop over the author-year counts and add them to the new dataframe
     for auth, year_counts in author_year_count.items():
         for year, count in year_counts.items():
-            author_publication_freq = pd.concat(author_publication_freq,pd.DataFrame({'author': auth, 'year': year, 'num_publications': count}))
+            author_publication_freq = pd.concat([author_publication_freq, pd.DataFrame({'author': [auth], 'year': [year], 'num_publications': [count]})], ignore_index=True)
     # Check if the author filled by the user is present on the dataframe author_df
     author_df = author_publication_freq[author_publication_freq['author'] == author]
     if author_df.empty:
