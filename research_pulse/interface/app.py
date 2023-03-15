@@ -870,10 +870,11 @@ with Research:
 
                 for key in results3:
                     pdf_url = results3[key]['Link']
-                    with open(pdf_url, 'rb') as f:
-                        base64_pdf = b64encode(f.read()).decode('utf-8')
-                    #base64_pdf = b64encode(pdf_url.encode('utf-8')).decode('utf-8')
-                    images = pdf2image.convert_from_path(base64_pdf)
+                    response_pdf = requests.get(pdf_url)
+                    pdf_data = BytesIO(response_pdf.content)
+                    base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+
+                    images = pdf2image.convert_from_bytes(base64_pdf)
                     for i in range(len(images)):
                         st.image(images[i], caption=f'pdf page {i}', use_column_width=True)
 
