@@ -40,7 +40,7 @@ html_temp = """
             <div style="background-color:{};padding:1px">
             </div>
             """
-
+text_input_style = 'margin-left: auto; margin-right: auto'
 st.markdown(
     f"""
     <style>
@@ -140,7 +140,7 @@ def get_author_citation_frequency(dic, author):
     # Le DataFrame avec les résultats ne contient qu'une ligne, avec l'auteur et la fréquence associée
     # On ne choisit d'afficher que la valeur ci-dessous
 
-    return f'Beetwen his/her first year ({first_year}) and last_year ({last_year}) of publication, {author} was cited {weighted_sum} times, on average {round(result["mean_weighted_citation_frequency"][0])} times per year.'
+    return f'In that time, {author} was cited {weighted_sum} times, on average {round(result["mean_weighted_citation_frequency"][0])} times per year.'
 
 def get_collaboration_citation_frequency_stats_V2(dic,author):
 
@@ -954,7 +954,7 @@ with Search:
 
     with Papers:
         with st.form(key='params_for_api_search_papers') as search_form:
-            input1 = st.text_input('\> input one to five keywords of interest separated by space')
+            input1 = st.text_input('\> input one to five keywords of interest separated by space', style=text_input_style)
             if st.form_submit_button('Search for Papers !'):
 
                 params1 = input1.replace(' ','-').lower()
@@ -991,7 +991,7 @@ with Search:
     with Authors:
         with st.form(key='params_for_api_search_authors'):
 
-            input2 = st.text_input('\> input name to get all papers from authors containing this name')
+            input2 = st.text_input('\> input name to get all papers from authors containing this name', style=text_input_style)
 
             if st.form_submit_button('Search for Authors !'):
 
@@ -1020,7 +1020,7 @@ with Research:
     with Paper_details:
         with st.form(key='params_for_api_research_paper'):
 
-            input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1903-06236)')
+            input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1903-06236)', style=text_input_style)
 
             if st.form_submit_button('Research Paper !'):
 
@@ -1081,7 +1081,7 @@ with Research:
     with Author_details:
         with st.form(key='params_for_api_research_author'):
 
-            input4 = st.text_input('\> input exact author name to get detailed info on them (e.g. Chollet Francois)')
+            input4 = st.text_input('\> input exact author name to get detailed info on them (e.g. Chollet Francois)', style=text_input_style)
 
             if st.form_submit_button('Research Author !'):
 
@@ -1126,4 +1126,47 @@ with Research:
 
 with Tools:
     st.text(' ')
-    st.markdown('-- coming soon, stay tuned! --')
+    st.markdown("<h6 style='text-align: center; color: #289c68'>Research authors and papers to get info on them:</h6>", unsafe_allow_html=True)
+    Translate,Summarize,Alert = Research.tabs(["Translator","Summarizer","Alerter on new papers"])
+
+    with Translate:
+
+        language_option = st.radio("Select a language : ",("Français", "Español", "Português"),)
+
+        with st.form(key='params_for_api_tools_translate'):
+
+            input5 = st.text_input('\> input exact paper ID to get its abstract translated (e.g. 1903-06236)', style=text_input_style)
+
+            if st.form_submit_button('Translate Abstract !'):
+
+                params5 = input5.replace(' ','-').lower()
+
+                if language_option == "Português":
+                    research_pulse_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatept'
+                elif language_option == "Español":
+                    research_pulse_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatees'
+                elif language_option == "Français":
+                    research_pulse_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatefr'
+                else:
+                    st.markdown("Please select a language !")
+
+                response5 = requests.get(research_pulse_api_url5, params=dict(query=params5))
+                results5 = response5.json()
+
+                st.markdown('  ')
+                st.text(results5['translated_text'])
+                st.markdown('  ')
+                st.markdown('Original abstract :')
+                st.text(results5['original_text'])
+                # for key in results5:
+                #     st.markdown('--- ' + str(results3[key]['Title']) + ' ---')
+                #     st.markdown('By : ' + str(results3[key]['Authors']))
+                #     st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
+                #     st.markdown('arXiv category : ' + str(results3[key]['Category']) + ' -- Paper ID : ' + str(results3[key]['Id']))
+
+                #     st.text(' ')
+                #     st.text(' ')
+    with Summarize:
+        st.markdown("coming soon, stay tuned !")
+    with Alert:
+        st.markdown("coming soon, stay tuned !")

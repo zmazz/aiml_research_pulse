@@ -51,12 +51,29 @@ def get_author(query: str):
     author_occ=lra.get_author(query, df)
     return author_occ
 
-@app.get("/translate")
+# http://deepdipper-rp6v7d7m4q-ew.a.run.app/translatefr?query=704-0019
+@app.get("/translatefr")
 def translate_fr(query: str):
     """
     Get author appearances from the ArXiv dataset by name
     """
-    text_translated=ltt.translate_fr(query, df, marian_tokenizer, marian_model)
+    text_translated=ltt.translate_fra(query, df, marian_tokenizer, marian_model)
+    return text_translated
+
+@app.get("/translatees")
+def translate_es(query: str):
+    """
+    Get author appearances from the ArXiv dataset by name
+    """
+    text_translated=ltt.translate_esp(query, df, marian_tokenizer, marian_model)
+    return text_translated
+
+@app.get("/translatepo")
+def translate_po(query: str):
+    """
+    Get author appearances from the ArXiv dataset by name
+    """
+    text_translated=ltt.translate_por(query, df, marian_tokenizer, marian_model)
     return text_translated
 
 @app.get("/")
