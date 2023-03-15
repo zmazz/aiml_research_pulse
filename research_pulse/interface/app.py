@@ -290,10 +290,10 @@ with Dashboard:
         st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_30_cited_authors.png', caption='Ranked authors by citations', use_column_width=True)
         st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 most cited papers:</h6>", unsafe_allow_html=True)
-        #st.write(pd.DataFrame(top30_papers))
+        st.write(pd.DataFrame(top30_papers))
         st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 categories with most papers:</h6>", unsafe_allow_html=True)
-        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Ranked authors by citations', use_column_width=True)
+        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Ranked authors by citations', use_column_width=False)
 
     with Categories:
         st.text(' ')
@@ -397,7 +397,7 @@ with Research:
 
                 for key in results3:
                     pdf_url = results3[key]['Link']
-                    #displayPDF(pdf_url)
+                    displayPDF(pdf_url)
 
                     # pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
                     # st.markdown(pdf_viewer, unsafe_allow_html=True)
