@@ -1099,7 +1099,7 @@ with Research:
 
                 freq4=author_mean_pub_freq(results4,author_reprocessed)
                 freq5=get_author_citation_frequency(results4,author_reprocessed)
-                chart6=get_collaboration_citation_frequency_stats_V2(results4,author_reprocessed)
+                #chart6=get_collaboration_citation_frequency_stats_V2(results4,author_reprocessed)
 
                 st.markdown('  ')
                 st.markdown(freq4)
@@ -1114,7 +1114,7 @@ with Research:
                 df4['Year'] = df4['Year'].astype(str)
                 st.write(df4.set_index('Id'))
 
-                st.pyplot(chart6)
+                #st.pyplot(chart6)
 
                 # for key in results4:
                 #     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
