@@ -718,13 +718,12 @@ with Dashboard:
         st.markdown("<h6 style='text-align: center; color: #289c68'>Aggregate number of papers & citations per year:</h6>", unsafe_allow_html=True)
         st.image('https://storage.googleapis.com/deepdipper_data/images/aggregate/agg_number_public_citations.png', caption='Number of papers and citations per year', use_column_width=True)
         st.markdown("<h6 style='text-align: center; color: #289c68'>Categories overview", unsafe_allow_html=True)
-        col1, col2=st.columns(2)
-        with col1:
-            st.markdown("<h6 style='text-align: center; color: #289c68'>All categories available:</h6>", unsafe_allow_html=True)
-            st.write(pd.DataFrame(categories_list).set_index('group_name'))
-        with col2:
-            st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 categories with most papers:</h6>", unsafe_allow_html=True)
-            st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Categories with most publications', use_column_width=True)
+        st.markdown("  ")
+        st.markdown("<h6 style='text-align: center; color: #289c68'>All categories available:</h6>", unsafe_allow_html=True)
+        st.write(pd.DataFrame(categories_list).set_index('group_name'))
+        st.markdown("  ")
+        st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 categories with most papers:</h6>", unsafe_allow_html=True)
+        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Categories with most publications', use_column_width=True)
 
     with Rankings:
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 100 most cited papers:</h6>", unsafe_allow_html=True)
