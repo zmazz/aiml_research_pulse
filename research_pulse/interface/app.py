@@ -15,7 +15,7 @@ from io import BytesIO
 import pandas as pd
 from collections import defaultdict
 import numpy as np
-from pdf2image import convert_from_path
+import pdf2image
 
 st.set_page_config(
     page_title="ResPulse",
@@ -872,7 +872,7 @@ with Research:
                     pdf_url = results3[key]['Link']
 
                     base64_pdf = b64encode(pdf_url.encode('utf-8')).decode('utf-8')
-                    images = convert_from_path(base64_pdf)
+                    images = pdf2image.convert_from_path(base64_pdf)
                     for i in range(len(images)):
                         st.image(images[i], caption=f'pdf page {i}', use_column_width=True)
 
