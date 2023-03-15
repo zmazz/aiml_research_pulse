@@ -961,7 +961,7 @@ with Search:
                 #deepdipper_api_url1 = 'http://127.0.0.1:8000/search?query='
                 deepdipper_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
-                with st.spinner('Calculating cosine similarity between input and all available abstracts...'):
+                with st.spinner("Calculating cosine similarity between your input and all available papers' abstracts..."):
                     #response1 = requests.get(deepdipper_api_url1+params1)
                     response1 = requests.get(deepdipper_api_url1, params=dict(query=params1))
 
@@ -1132,7 +1132,7 @@ with Research:
 
 with Tools:
 
-    Translate,Summarize,Alert = Tools.tabs(["Translator","Summarizer of papers","Alerter on new papers"])
+    Translate,Summarize,Alert = Tools.tabs(["Translator","Summarizer of papers (soon)","New papers interestingness (soon)"])
 
     with Translate:
 
