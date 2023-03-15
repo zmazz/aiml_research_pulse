@@ -75,7 +75,7 @@ def author_mean_pub_freq(dic, author):
         for year, count in year_counts.items():
             author_publication_freq = pd.concat([author_publication_freq, pd.DataFrame({'author': [auth], 'year': [year], 'num_publications': [count]})], ignore_index=True)
     # Check if the author filled by the user is present on the dataframe author_df
-    author_df = author_publication_freq[author_publication_freq['author'] == author]
+    author_df = author_publication_freq.loc[author_publication_freq['author'].str.contains(author)]
     if author_df.empty:
             return(f"The author {author} could not be found. Please fill in the last name followed by the first name of the author.")
     # Check if the author filled by the user is present on the dataframe author_df
@@ -116,7 +116,7 @@ def get_author_citation_frequency(dic, author):
         return f"The author {author} could not be found.Could you please fill in the last name followed by the first name of the author?"
 
     # Filtrer les publications de l'auteur
-    author_publications = author_stats[author_stats['author'] == author]
+    author_publications = author_stats.loc[author_stats['author'].str.contains(author)]
     # Calculer la première et la dernière année de publication de l'auteur
     first_year = author_publications['year'].min()
     last_year = author_publications['year'].max()
