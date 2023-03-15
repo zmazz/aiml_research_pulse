@@ -1155,8 +1155,8 @@ with Tools:
                     deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatees'
                     st.markdown(f"<h6 style='text-align: center; color: #289c68'>Traducción en Español:</h6>", unsafe_allow_html=True)
                 elif language_option == "Português":
-                    #deepdipper_api_url5 = 'http://127.0.0.1:8000/translatept?query='
-                    deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatept'
+                    #deepdipper_api_url5 = 'http://127.0.0.1:8000/translatepo?query='
+                    deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatepo'
                     st.markdown(f"<h6 style='text-align: center; color: #289c68'>Tradução em Português:</h6>", unsafe_allow_html=True)
                 else:
                     st.markdown("Please select a language !")
