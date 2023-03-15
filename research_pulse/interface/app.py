@@ -920,6 +920,9 @@ with Research:
                 freq4=author_mean_pub_freq(results4,author_reprocessed)
 
                 st.markdown(freq4)
+                st.markdown('  ')
+                st.markdown(f"<h6 style='text-align: center; color: #289c68'>{author_reprocessed} contributed to the following papers:</h6>", unsafe_allow_html=True)
+
                 df4=pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations','Link']]
                 df4['Year'] = df4['Year'].astype(int)
                 df4.sort_values(by=['Year'], inplace=True,ascending=False)
