@@ -920,8 +920,9 @@ with Research:
                 freq4=author_mean_pub_freq(results4,author_reprocessed)
 
                 st.markdown(freq4)
-
-                st.write(pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations']])
+                df4=pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations','Link']]
+                df4['Year'] = df4['Year'].astype(int)
+                st.write(df4.sort_values(by=['Year'], ascending=False))
 
                 # for key in results4:
                 #     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
