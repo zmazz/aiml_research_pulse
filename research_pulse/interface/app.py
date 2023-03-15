@@ -1,13 +1,14 @@
-#import datetime
-import requests
-# import research_pulse.logic.search as ls
 
+import requests
+
+#import datetime
 import streamlit as st
 import pandas as pd
 import seaborn as sns
 #import numpy as np
 #import matplotlib.pyplot as plt
 #import plotly.express as px
+#import research_pulse.logic.search as ls
 #import research_pulse.logic.data_loader as ldl
 #import research_pulse.logic.analytics_agg as laa
 import streamlit.components.v1 as components
@@ -52,7 +53,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
 
 def author_mean_pub_freq(dic, author):
     # conversion du dictionnaire en DataFrame
@@ -881,9 +881,7 @@ categories_list={'group_name': {0: 'Computer Science',
   153: 'Work in statistics that does not fit into the other stat classifications',
   154: 'stat.TH is an alias for math.ST. Asymptotics, Bayesian Inference, Decision Theory, Estimation, Foundations, Inference, Testing.'}}
 
-#st.markdown("<h3 style='text-align: center; color: yellow'>ﮩ٨ـﮩﮩ٨ـ  Ｒｅｓｅａｒｃｈ Ｐｕｌｓｅ  ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: #289c68'>ﮩ٨ـﮩﮩ٨ـ   Rᴇsᴇᴀʀcʜ Puʟsᴇ   ﮩ٨ـﮩﮩ٨ـ</h3>", unsafe_allow_html=True)
-#st.markdown("<h3 style='text-align: center; color: yellow;'> Research Pulse </h3>", unsafe_allow_html=True)
 st.markdown("<h5 style='text-align: center; color: grey;'>NLP-based tools to master the exploration of research papers</h5>", unsafe_allow_html=True)
 
 About, Dashboard, Search, Research, Tools = st.tabs(["About","Dashboard","Search","Research","Tools"])
@@ -1049,6 +1047,7 @@ with Research:
                     st.text(' ')
                     st.text(' ')
 
+                st.text('below not rendering yet on major browsers... :(')
                 for key in results3:
                     pdf_url = results3[key]['Link']
                     pdf_display = F'<iframe src="{pdf_url}" width="700" height="900" type="application/pdf"></iframe>'
@@ -1148,16 +1147,16 @@ with Tools:
                 params5 = input5.replace(' ','-').lower()
 
                 if language_option == "Français":
-                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatefr?query='
-                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatefr'
+                    #deepdipper_api_url5 = 'http://127.0.0.1:8000/translatefr?query='
+                    deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatefr'
                     st.markdown(f"<h6 style='text-align: center; color: #289c68'>Traduction en Français:</h6>", unsafe_allow_html=True)
                 elif language_option == "Español":
-                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatees?query='
-                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatees'
+                    #deepdipper_api_url5 = 'http://127.0.0.1:8000/translatees?query='
+                    deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatees'
                     st.markdown(f"<h6 style='text-align: center; color: #289c68'>Traducción en Español:</h6>", unsafe_allow_html=True)
                 elif language_option == "Português":
-                    deepdipper_api_url5 = 'http://127.0.0.1:8000/translatept?query='
-                    #deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatept'
+                    #deepdipper_api_url5 = 'http://127.0.0.1:8000/translatept?query='
+                    deepdipper_api_url5 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/translatept'
                     st.markdown(f"<h6 style='text-align: center; color: #289c68'>Tradução em Português:</h6>", unsafe_allow_html=True)
                 else:
                     st.markdown("Please select a language !")
