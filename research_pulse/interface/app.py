@@ -712,17 +712,16 @@ with Dashboard:
         #     st.image('https://storage.googleapis.com/deepdipper_data/images/1-Numbers-of-Publications-per-Year.png', caption='Numbers of Publications per Year', use_column_width=True)
         # with col2 :
         #     st.image('https://storage.googleapis.com/deepdipper_data/images/2-Number-of-Publications-by-Year-and-Categ.png', caption='Numbers of Publications by year and by category', use_column_width=True)
+        st.markdown("<h6 style='text-align: center; color: #289c68'>All categories available:</h6>", unsafe_allow_html=True)
+        st.write(pd.DataFrame(categories_list).set_index('group_name'))
+        st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>Aggregate number of papers per year:</h6>", unsafe_allow_html=True)
         st.image('https://storage.googleapis.com/deepdipper_data/images/aggregate/agg_number_papers_year.png', caption='Number of papers per year', use_column_width=True)
         st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>Aggregate number of papers & citations per year:</h6>", unsafe_allow_html=True)
         st.image('https://storage.googleapis.com/deepdipper_data/images/aggregate/agg_number_public_citations.png', caption='Number of papers and citations per year', use_column_width=True)
         st.markdown("  ")
-        st.markdown("<h6 style='text-align: center; color: #289c68'>All categories available:</h6>", unsafe_allow_html=True)
-        st.write(pd.DataFrame(categories_list).set_index('group_name'))
-        st.markdown("  ")
-        st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 categories with most papers:</h6>", unsafe_allow_html=True)
-        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Categories with most publications', use_column_width=False)
+
 
     with Rankings:
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 100 most cited papers:</h6>", unsafe_allow_html=True)
@@ -731,8 +730,13 @@ with Dashboard:
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 most cited authors:</h6>", unsafe_allow_html=True)
         st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_30_authors_cited.png', caption='Ranked authors by citations', use_column_width=True)
         st.markdown("  ")
-        st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 words in all papers:</h6>", unsafe_allow_html=True)
-        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top30_wordcloud.png', caption='Most frequent technical words', use_column_width=True)
+        col1, col2= st.columns(2)
+        with col1:
+            st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 categories with most papers:</h6>", unsafe_allow_html=True)
+            st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Categories with most publications', use_column_width=True)
+        with col2:
+            st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 words in all papers:</h6>", unsafe_allow_html=True)
+            st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top30_wordcloud.png', caption='Most frequent technical words', use_column_width=True)
 
     with Categories:
         st.text(' ')
