@@ -922,7 +922,9 @@ with Research:
                 st.markdown(freq4)
                 df4=pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations','Link']]
                 df4['Year'] = df4['Year'].astype(int)
-                st.write(df4.sort_values(by=['Year'], ascending=False).set_index('Id'))
+                df4.sort_values(by=['Year'], inplace=True,ascending=False)
+                df4['Year'] = df4['Year'].astype(str)
+                st.write(df4.set_index('Id'))
 
                 # for key in results4:
                 #     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
