@@ -892,7 +892,6 @@ with About:
     st.markdown("AI, ML and related fields related or fed by them are evolving at a rapid pace.", unsafe_allow_html=True)
     st.markdown("Research Pulse is a tool that helps in the exploration of research papers and their authors.", unsafe_allow_html=True)
     st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant content in a rapidly-evolving and abundant environment.", unsafe_allow_html=True)
-    st.markdown('  ')
     st.markdown('---')
     st.markdown('  ')
     col1, col2, col3, col4= st.columns(4)
