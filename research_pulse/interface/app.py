@@ -888,26 +888,29 @@ About, Dashboard, Search, Research, Tools = st.tabs(["About","Dashboard","Search
 
 with About:
     st.markdown(' ')
-    st.markdown("AI, ML and related research areas are evolving at a rapid pace.", unsafe_allow_html=True)
+    st.markdown("AI, ML and related fields related or fed by them are evolving at a rapid pace.", unsafe_allow_html=True)
     st.markdown("Research Pulse is a tool that helps in the exploration of research papers and their authors.", unsafe_allow_html=True)
-    st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant insight in large and fast-evolving research areas.", unsafe_allow_html=True)
-    st.markdown("---")
-    st.markdown("<h6 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h6>", unsafe_allow_html=True)
-    st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
-    st.markdown("Available aggregate and ranking views, with key metrics dissected.", unsafe_allow_html=True)
-    st.markdown("---")
-    st.markdown("<h6 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h6>", unsafe_allow_html=True)
-    st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
-    st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
-    st.markdown("---")
-    st.markdown("<h6 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h6>", unsafe_allow_html=True)
-    st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
-    st.markdown("Look for an author by inputting his/her name.", unsafe_allow_html=True)
-    st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
-    st.markdown("---")
-    st.markdown("<h6 style='text-align: center; color: #289c68'>🤖  NLP-based tools  🤖</h6>", unsafe_allow_html=True)
-    st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
-    st.markdown("--tobedone: translation, summarization, bot alert tool...", unsafe_allow_html=True)
+    st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant content in a rapidly-evolving area.", unsafe_allow_html=True)
+    st.markdown('  ')
+    col1, col2, col3, col4= st.columns(4)
+    with col1:
+        st.markdown("<h6 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h6>", unsafe_allow_html=True)
+        st.markdown("Set of analytics views on the referenced database of papers.", unsafe_allow_html=True)
+        st.markdown("Available aggregate and ranking views, with some key metrics dissected.", unsafe_allow_html=True)
+    with col2:
+        st.markdown("<h6 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h6>", unsafe_allow_html=True)
+        st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
+        st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
+    with col3:
+        st.markdown("<h6 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h6>", unsafe_allow_html=True)
+        st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
+        st.markdown("Look for an author by inputting his/her full name starting with family.", unsafe_allow_html=True)
+        st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
+    with col4:
+        st.markdown("<h6 style='text-align: center; color: #289c68'>🤖  NLP-based tools  🤖</h6>", unsafe_allow_html=True)
+        st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
+        st.markdown("Translater of abstracts available.", unsafe_allow_html=True)
+        st.markdown("--tobedone: summarizer of pdf, bot alert tool...", unsafe_allow_html=True)
 
 with Dashboard:
     Aggregates, Rankings, Categories = Dashboard.tabs(["Aggregates","Rankings","by Category (soon)"])
