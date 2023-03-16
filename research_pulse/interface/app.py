@@ -19,8 +19,8 @@ from collections import defaultdict
 import numpy as np
 
 st.set_page_config(
-    page_title="ResPulse",
-    page_icon=":smiley:",
+    page_title="Research Pulse",
+    page_icon="🔬",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
