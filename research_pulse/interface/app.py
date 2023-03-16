@@ -899,12 +899,12 @@ with About:
         st.markdown("<h5 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h5>", unsafe_allow_html=True)
         st.markdown("Set of analytics views on the referenced database of papers.", unsafe_allow_html=True)
         st.markdown("Available aggregate and ranking views, with some key metrics dissected.", unsafe_allow_html=True)
-        st.markdown("--tobedone: query by year, views by category, views of most recents...", unsafe_allow_html=True)
+        st.markdown("--tobedone: views by most recents, by categories, views of citations graph, pioneer papers identification, interactive queries...", unsafe_allow_html=True)
     with col2:
         st.markdown("<h5 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h5>", unsafe_allow_html=True)
         st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
         st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
-        st.markdown("Search for papers by keywords.", unsafe_allow_html=True)
+        st.markdown("Search for papers by keyword(s).", unsafe_allow_html=True)
         st.markdown("Search for authors by name(s).", unsafe_allow_html=True)
     with col3:
         st.markdown("<h5 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h5>", unsafe_allow_html=True)
