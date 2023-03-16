@@ -883,7 +883,7 @@ categories_list={'group_name': {0: 'Computer Science',
 
 st.markdown("<h3 style='text-align: center; color: #289c68'> Rᴇsᴇᴀʀcʜ Puʟsᴇ </h3>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center; color: #289c68'> ﮩ٨ـﮩﮩ٨ـﮩ٨ـﮩﮩ٨ـ</h4>", unsafe_allow_html=True)
-st.markdown("<h6 style='text-align: center; color: grey;'>NLP-based assistive exploration of research papers</h6>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: center; color: grey;'>NLP-powered assistive exploration of research papers</h6>", unsafe_allow_html=True)
 
 About, Dashboard, Search, Research, Tools = st.tabs(["About","Dashboard","Search","Research","Tools"])
 
@@ -912,10 +912,10 @@ with About:
         st.markdown("Look for specific author by inputting his/her full name (family-first).", unsafe_allow_html=True)
         st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
     with col4:
-        st.markdown("<h5 style='text-align: center; color: #289c68'>🤖  NLP-based tools  🤖</h5>", unsafe_allow_html=True)
-        st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🤖  NLP-based toolbox  🤖</h5>", unsafe_allow_html=True)
+        st.markdown("Set of tools to help in the exploration and accessibility of research areas.", unsafe_allow_html=True)
         st.markdown("Translater of abstracts (fr/es/pt) available.", unsafe_allow_html=True)
-        st.markdown("--tobedone: summarizer of papers, bot alert tool...", unsafe_allow_html=True)
+        st.markdown("--tobedone: summarizer of full papers, recent papers interestingness scorer...", unsafe_allow_html=True)
 
 with Dashboard:
     Aggregates, Rankings, Categories = Dashboard.tabs(["Aggregates","Rankings","by Category (soon)"])
