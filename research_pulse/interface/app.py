@@ -891,28 +891,20 @@ with About:
     st.markdown("AI, ML and related research areas are evolving at a rapid pace.", unsafe_allow_html=True)
     st.markdown("Research Pulse is a tool that helps in the exploration of research papers and their authors.", unsafe_allow_html=True)
     st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant insight in large and fast-evolving research areas.", unsafe_allow_html=True)
-    st.markdown(' ')
     st.markdown("---")
-    st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h6>", unsafe_allow_html=True)
     st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
     st.markdown("Available aggregate and ranking views, with key metrics dissected.", unsafe_allow_html=True)
-    st.markdown(' ')
     st.markdown("---")
-    st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h6>", unsafe_allow_html=True)
     st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
     st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
-    st.markdown(' ')
     st.markdown("---")
-    st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h6>", unsafe_allow_html=True)
     st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
     st.markdown("Look for an author by inputting his/her name.", unsafe_allow_html=True)
     st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
-    st.markdown(' ')
     st.markdown("---")
-    st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>🤖  NLP-based tools  🤖</h6>", unsafe_allow_html=True)
     st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
     st.markdown("--tobedone: translation, summarization, bot alert tool...", unsafe_allow_html=True)
@@ -1041,14 +1033,14 @@ with Research:
                 #deepdipper_api_url3 = 'http://127.0.0.1:8000/papers?query='
                 deepdipper_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
 
-                with st.spinner('Looking for paper details...'):
+                with st.spinner('Looking for Paper details...'):
                     response3 = requests.get(deepdipper_api_url3, params=dict(query=params3))
 
                 results3 = response3.json()
 
 
                 for key in results3:
-                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>--- + {str(results3[key]['Title'])} + ---</h6>", unsafe_allow_html=True)
+                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>--- {str(results3[key]['Title'])} ---</h6>", unsafe_allow_html=True)
                     st.markdown('By : ' + str(results3[key]['Authors']))
                     st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
                     st.markdown('arXiv category : ' + str(results3[key]['Category']) + ' -- Paper ID : ' + str(results3[key]['Id']))
