@@ -894,20 +894,20 @@ with About:
     st.markdown('  ')
     col1, col2, col3, col4= st.columns(4)
     with col1:
-        st.markdown("<h6 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h6>", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h5>", unsafe_allow_html=True)
         st.markdown("Set of analytics views on the referenced database of papers.", unsafe_allow_html=True)
         st.markdown("Available aggregate and ranking views, with some key metrics dissected.", unsafe_allow_html=True)
     with col2:
-        st.markdown("<h6 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h6>", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h5>", unsafe_allow_html=True)
         st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
         st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
     with col3:
-        st.markdown("<h6 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h6>", unsafe_allow_html=True)
-        st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h5>", unsafe_allow_html=True)
+        st.markdown("Look for a paper by inputting its ID (ctrl-c+v'ed from Search).", unsafe_allow_html=True)
         st.markdown("Look for an author by inputting his/her full name starting with family.", unsafe_allow_html=True)
         st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
     with col4:
-        st.markdown("<h6 style='text-align: center; color: #289c68'>🤖  NLP-based tools  🤖</h6>", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🤖  NLP-based tools  🤖</h5>", unsafe_allow_html=True)
         st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
         st.markdown("Translater of abstracts available.", unsafe_allow_html=True)
         st.markdown("--tobedone: summarizer of pdf, bot alert tool...", unsafe_allow_html=True)
