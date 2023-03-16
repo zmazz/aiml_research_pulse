@@ -141,7 +141,7 @@ def get_author_citation_frequency(dic, author):
     # Le DataFrame avec les résultats ne contient qu'une ligne, avec l'auteur et la fréquence associée
     # On ne choisit d'afficher que la valeur ci-dessous
 
-    return f'In that time, {author} was cited {weighted_sum} times, on average {round(result["mean_weighted_citation_frequency"][0])} times per year.'
+    return f'In that time, he/she was cited {weighted_sum} times, on average {round(result["mean_weighted_citation_frequency"][0])} times per year.'
 
 def get_collaboration_citation_frequency_stats_V2(dic,author):
 
@@ -892,18 +892,26 @@ with About:
     st.markdown("Research Pulse is a tool that helps in the exploration of research papers and their authors.", unsafe_allow_html=True)
     st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant insight in large and fast-evolving research areas.", unsafe_allow_html=True)
     st.markdown(' ')
+    st.markdown("---")
+    st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h6>", unsafe_allow_html=True)
     st.markdown("Set of analytics views on the database.", unsafe_allow_html=True)
     st.markdown("Available aggregate and ranking views, with key metrics dissected.", unsafe_allow_html=True)
+    st.markdown(' ')
+    st.markdown("---")
     st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h6>", unsafe_allow_html=True)
     st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
     st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
     st.markdown(' ')
+    st.markdown("---")
+    st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h6>", unsafe_allow_html=True)
     st.markdown("Look for a paper by inputting its ID.", unsafe_allow_html=True)
     st.markdown("Look for an author by inputting his/her name.", unsafe_allow_html=True)
     st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
+    st.markdown(' ')
+    st.markdown("---")
     st.markdown(' ')
     st.markdown("<h6 style='text-align: center; color: #289c68'>🤖  NLP-based tools  🤖</h6>", unsafe_allow_html=True)
     st.markdown("Set of tools to help in the exploration of research areas.", unsafe_allow_html=True)
@@ -913,15 +921,15 @@ with Dashboard:
     Aggregates, Rankings, Categories = Dashboard.tabs(["Aggregates","Rankings","by Category (soon)"])
     with Aggregates:
         st.markdown("  ")
-        st.markdown("<h6 style='text-align: center; color: #289c68'>All categories available:</h6>", unsafe_allow_html=True)
+        st.markdown("<h6 style='text-align: center; color: #289c68'>All categories available</h6>", unsafe_allow_html=True)
         st.write(pd.DataFrame(categories_list).set_index('group_name'))
         st.markdown("---")
         st.markdown("  ")
-        st.markdown("<h6 style='text-align: center; color: #289c68'>Aggregate number of papers per year:</h6>", unsafe_allow_html=True)
+        st.markdown("<h6 style='text-align: center; color: #289c68'>Aggregate number of papers per year</h6>", unsafe_allow_html=True)
         st.image('https://storage.googleapis.com/deepdipper_data/images/aggregate/agg_number_papers_year.png', caption='Number of papers per year', use_column_width=True)
         st.markdown("---")
         st.markdown("  ")
-        st.markdown("<h6 style='text-align: center; color: #289c68'>Aggregate number of papers & citations per year:</h6>", unsafe_allow_html=True)
+        st.markdown("<h6 style='text-align: center; color: #289c68'>Aggregate number of papers & citations per year</h6>", unsafe_allow_html=True)
         st.image('https://storage.googleapis.com/deepdipper_data/images/aggregate/agg_number_public_citations.png', caption='Number of papers and citations per year', use_column_width=True)
         st.markdown("  ")
 
@@ -932,17 +940,17 @@ with Dashboard:
         st.write(pd.DataFrame(top100_papers))
         st.markdown("---")
         st.markdown("  ")
-        st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 most cited authors:</h6>", unsafe_allow_html=True)
-        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_30_authors_cited.png', caption='Ranked authors by citations', use_column_width=True)
-        st.markdown("---")
-        st.markdown("  ")
         col1, col2= st.columns(2)
         with col1:
-            st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 categories with most papers:</h6>", unsafe_allow_html=True)
+            st.markdown("<h6 style='text-align: center; color: #289c68'>Top 20 categories with most papers</h6>", unsafe_allow_html=True)
             st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_20_categories.png', caption='Categories with most publications', use_column_width=True)
         with col2:
-            st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 words in all papers:</h6>", unsafe_allow_html=True)
+            st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 words in all papers</h6>", unsafe_allow_html=True)
             st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top30_wordcloud.png', caption='Most frequent technical words', use_column_width=True)
+        st.markdown("---")
+        st.markdown("  ")
+        st.markdown("<h6 style='text-align: center; color: #289c68'>Top 30 most cited authors</h6>", unsafe_allow_html=True)
+        st.image('https://storage.googleapis.com/deepdipper_data/images/ranking/top_30_authors_cited.png', caption='Ranked authors by citations', use_column_width=True)
 
     with Categories:
         st.text(' ')
@@ -1110,10 +1118,9 @@ with Research:
                 st.markdown('  ')
                 st.markdown('  ')
                 st.markdown(freq4)
-                st.markdown(' --- ')
                 st.markdown(freq5)
                 st.markdown(' --- ')
-                st.markdown(f"<h6 style='text-align: center; color: #289c68'> Papers by {author_reprocessed} :</h6>", unsafe_allow_html=True)
+                st.markdown(f"<h6 style='text-align: center; color: #289c68'> All referenced papers by {author_reprocessed} :</h6>", unsafe_allow_html=True)
 
                 df4=pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations','Link']]
                 df4['Year'] = df4['Year'].astype(int)
