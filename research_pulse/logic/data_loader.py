@@ -8,13 +8,13 @@ def load_data():
     """
     Load the dataset from the processed folder
     """
-    # data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
+    data = pd.read_csv('~/deepdipper/data/processed/aiml_arxiv_with_cit.csv', low_memory=False)
 
-    import gcsfs
+    # import gcsfs
 
-    fs = gcsfs.GCSFileSystem(project='deepdipper')
-    with fs.open('deepdipper_data/data/processed/aiml_arxiv_with_cit.csv') as f:
-        data = pd.read_csv(f)
+    # fs = gcsfs.GCSFileSystem(project='deepdipper')
+    # with fs.open('deepdipper_data/data/processed/aiml_arxiv_with_cit.csv') as f:
+    #     data = pd.read_csv(f)
 
     return data
 

@@ -6,6 +6,7 @@ import research_pulse.logic.data_loader as ldl
 import research_pulse.logic.r_papers as lrp
 import research_pulse.logic.r_authors as lra
 import research_pulse.logic.t_translate as ltt
+import research_pulse.logic.t_summarize as lts
 
 app = FastAPI()
 
@@ -21,6 +22,8 @@ app.add_middleware(
 df=ldl.load_data()
 vector, matrix = ls.vectorizer(df)
 marian_tokenizer, marian_model = ltt.marian_model()
+#bart_tokenizer,bart_model=lts.bart_model()
+
 
 # http://deepdipper-rp6v7d7m4q-ew.a.run.app/search?query=bayesian-neural-networks
 @app.get("/search")
@@ -75,6 +78,14 @@ def translate_po(query: str):
     """
     text_translated=ltt.translate_por(query, df, marian_tokenizer, marian_model)
     return text_translated
+
+# @app.get("/summarize")
+# def summarize(query: str):
+#     """
+#     Get author appearances from the ArXiv dataset by name
+#     """
+#     text_translated=lts.summarizer(query, df, bart_tokenizer, bart_model)
+#     return text_translated
 
 @app.get("/")
 def root():
