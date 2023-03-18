@@ -19,7 +19,7 @@ app.add_middleware(
     allow_headers=["*"],  # Allows all headers
 )
 
-df=ldl.load_data()
+df,df_cit=ldl.load_data()
 vector, matrix = ls.vectorizer(df)
 marian_tokenizer, marian_model = ltt.marian_model()
 #bart_tokenizer,bart_model=lts.bart_model()
@@ -44,6 +44,15 @@ def get_paper(query: str):
     """
     paper_details = lrp.get_paper(query, df)
     return paper_details
+
+# http://deepdipper-rp6v7d7m4q-ew.a.run.app/authors?query=theran-louis
+@app.get("/citations")
+def get_citations(query: str):
+    """
+    Get author appearances from the ArXiv dataset by name
+    """
+    citing_papers=lrp.get_citations(query, df_cit, df)
+    return citing_papers
 
 # http://deepdipper-rp6v7d7m4q-ew.a.run.app/authors?query=theran-louis
 @app.get("/authors")

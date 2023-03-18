@@ -379,7 +379,7 @@ top100_papers={'title': {'1004-3169': 'Factorizations of Cunningham numbers with
   '1301-198': 'Quivers as Calculators: Counting, Correlators and Riemann Surfaces',
   '1809-00736': '3d Mirror Symmetry from S-duality',
   '1202-6062': 'Schrodinger Holography with and without Hyperscaling Violation'},
- 'authors': {'1004-3169': 'Brent Richard P., Montgomery Peter L., Riele Herman J. J. te',
+ 'author(s)': {'1004-3169': 'Brent Richard P., Montgomery Peter L., Riele Herman J. J. te',
   '1612-07324': 'Hartnoll Sean A., Lucas Andrew, Sachdev Subir',
   '1101-0618': 'Casalderrey-Solana Jorge, Liu Hong, Mateos David, Rajagopal Krishna, Wiedemann Urs Achim',
   '1712-03107': 'Bahamonde Sebastian, Boehmer Christian G., Carloni Sante, Copeland Edmund J., Fang Wei, Tamanini Nicola',
@@ -579,7 +579,7 @@ top100_papers={'title': {'1004-3169': 'Factorizations of Cunningham numbers with
   '1301-198': 2013,
   '1809-00736': 2018,
   '1202-6062': 2012},
- 'num_cit': {'1004-3169': 1266,
+ '# citations': {'1004-3169': 1266,
   '1612-07324': 626,
   '1101-0618': 568,
   '1712-03107': 534,
@@ -1024,7 +1024,7 @@ with Papers:
 
             results3 = response3.json()
 
-
+            st.text(' ')
             for key in results3:
                 st.markdown(f"<h6 style='text-align: center; color: #289c68'>--- {str(results3[key]['Title'])} ---</h6>", unsafe_allow_html=True)
                 st.markdown('By : ' + str(results3[key]['Authors']))
@@ -1032,12 +1032,35 @@ with Papers:
                 st.markdown('arXiv category : ' + str(results3[key]['Category']) + ' -- Paper ID : ' + str(results3[key]['Id']))
 
                 st.text(' ')
-                st.text(' ')
+
+
+            #deepdipper_api_url6 = 'http://127.0.0.1:8000/citations?query='
+            deepdipper_api_url6 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/citations'
+
+            with st.spinner('Looking for papers citing this one...'):
+                response6 = requests.get(deepdipper_api_url6, params=dict(query=params3))
+
+            results6 = response6.json()
+
+            df6 = pd.DataFrame.from_dict(results6, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id', 'Category', 'Year', 'Title', 'Number_citations', 'Authors']]
+            df6['Year'] = df6['Year'].astype(int)
+            df6.sort_values(by=['Year'], inplace=True,ascending=False)
+            df6['Year'] = df6['Year'].astype(str)
+            st.markdown(' --- ')
+            st.markdown(f"<h6 style='text-align: center; color: #289c68'> All papers citing paper_id {params3} :</h6>", unsafe_allow_html=True)
+
+            st.write(df6.set_index('Id'))
+
+            st.text(' ')
+            st.markdown('---')
+            st.text(' ')
 
             st.text('below not rendering yet on major browsers... :(')
+
             for key in results3:
-                #pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
                 arxiv_url=results3[key]['Link']
+                pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
+                st.markdown(pdf_url, unsafe_allow_html=True)
                 http = urllib3.PoolManager()
                 response = http.request('GET', arxiv_url)
                 remoteFile = response.data
@@ -1086,7 +1109,6 @@ with Papers:
                 # # Display the PDF
                 # st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">', unsafe_allow_html=True)
 
-
 with Authors:
     with st.form(key='params_for_api_research_author'):
 
@@ -1114,7 +1136,6 @@ with Authors:
             st.markdown(freq5)
             st.markdown(' --- ')
             st.markdown(f"<h6 style='text-align: center; color: #289c68'> All referenced papers by {author_reprocessed} :</h6>", unsafe_allow_html=True)
-
             df4=pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations','Link']]
             df4['Year'] = df4['Year'].astype(int)
             df4.sort_values(by=['Year'], inplace=True,ascending=False)
@@ -1256,4 +1277,4 @@ with About:
         st.markdown("--tobedone: summarizer of full papers, recent papers interestingness scorer...", unsafe_allow_html=True)
     st.markdown('---')
     st.markdown('  ')
-    st.markdown("<h5 style='text-align: center; color: #289c68'>a website by DeepDipper team</h5>", unsafe_allow_html=True)
+    st.markdown("<h5 style='text-align: center; color: #289c68'>website developed by team DeepDipper</h5>", unsafe_allow_html=True)
