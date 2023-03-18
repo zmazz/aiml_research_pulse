@@ -2,8 +2,8 @@ import subprocess
 
 try:
     # Attempt to install poppler-utils
-    subprocess.call(['apt-get', 'update'])
-    subprocess.call(['apt-get', 'install', '-y', 'poppler-utils'])
+    subprocess.call(['sudo', 'apt-get', 'update'])
+    subprocess.call(['sudo', 'apt-get', 'install', '-y', 'poppler-utils'])
 except Exception as e:
     print(f"Error installing poppler-utils: {e}")
 
