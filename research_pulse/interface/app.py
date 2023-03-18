@@ -1213,32 +1213,31 @@ with Tools:
 
 
     with Summarize:
-        st.markdown("coming soon, stay tuned !")
-        # with st.form(key='params_for_api_tools_summarize'):
 
-        #     input6 = st.text_input('\> input exact paper ID to get its abstract summarized into 2-3 bullet points (e.g. 1606-01781, 1706-03059, 1903-06236...)')
+        with st.form(key='params_for_api_tools_summarize'):
 
-        #     if st.form_submit_button('Summarize Abstract !'):
-        #         params6 = input6.replace(' ','-').lower()
+            input7 = st.text_input('\> input exact paper ID to get its abstract summarized into 2 to 4 sentences (e.g. 1606-01781, 1706-03059, 1903-06236...)')
 
-        #         deepdipper_api_url6 = 'http://127.0.0.1:8000/summarize?query='
-        #         #deepdipper_api_url6 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/summarize'
+            if st.form_submit_button('Summarize Abstract !'):
+                params7 = input7.replace('.','-').lower()
 
-        #         #response6 = requests.get(deepdipper_api_url6+params6)
-        #         with st.spinner('Summarizing abstract...'):
-        #             #response6 = requests.get(deepdipper_api_url6+params6)
-        #             response6 = requests.get(deepdipper_api_url6, params=dict(query=params6))
-        #             results6 = response6.json()
+                #deepdipper_api_url7 = 'http://127.0.0.1:8000/summarize?query='
+                deepdipper_api_url7 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/summarize'
 
-        #         st.markdown(' ')
-        #         st.markdown(results6['summarized_text'])
-        #         st.markdown(' ')
-        #         st.markdown(' ')
-        #         st.markdown(' --- ')
-        #         st.markdown(' ')
-        #         st.markdown('Original abstract :')
-        #         st.markdown(' ')
-        #         st.markdown(results6['original_text'])
+                with st.spinner('Summarizing abstract...'):
+                    #response7 = requests.get(deepdipper_api_url7+params7)
+                    response7 = requests.get(deepdipper_api_url7, params=dict(query=params7))
+                    results7 = response7.json()
+
+                st.markdown(' ')
+                st.markdown(results7['summary'])
+                st.markdown(' ')
+                st.markdown(' ')
+                st.markdown(' --- ')
+                st.markdown(' ')
+                st.markdown('Original abstract :')
+                st.markdown(' ')
+                st.markdown(results7['original'])
 
 
 

@@ -22,7 +22,7 @@ app.add_middleware(
 df,df_cit=ldl.load_data()
 vector, matrix = ls.vectorizer(df)
 marian_tokenizer, marian_model = ltt.marian_model()
-#bart_tokenizer,bart_model=lts.bart_model()
+bart_tokenizer,bart_model,bart_config=lts.bart_model()
 
 
 # http://deepdipper-rp6v7d7m4q-ew.a.run.app/search?query=bayesian-neural-networks
@@ -88,13 +88,14 @@ def translate_po(query: str):
     text_translated=ltt.translate_por(query, df, marian_tokenizer, marian_model)
     return text_translated
 
-# @app.get("/summarize")
-# def summarize(query: str):
-#     """
-#     Get author appearances from the ArXiv dataset by name
-#     """
-#     text_translated=lts.summarizer(query, df, bart_tokenizer, bart_model)
-#     return text_translated
+# http://deepdipper-rp6v7d7m4q-ew.a.run.app/summarize?query=704-0019
+@app.get("/summarize")
+def summarize(query: str):
+    """
+    Get abstract summary from the ArXiv dataset by ID
+    """
+    text_translated=lts.summarizer(query, df, bart_tokenizer, bart_model,bart_config)
+    return text_translated
 
 @app.get("/")
 def root():

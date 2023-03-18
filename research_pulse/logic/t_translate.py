@@ -19,9 +19,19 @@ def marian_model():
     """
     Import MarianMTModel and MarianTokenizer
     """
-    model_name = "Helsinki-NLP/opus-mt-en-roa"
-    marian_tokenizer = MarianTokenizer.from_pretrained(model_name)
-    marian_model = MarianMTModel.from_pretrained(model_name)
+    # model_name = "Helsinki-NLP/opus-mt-en-roa"
+    # marian_tokenizer = MarianTokenizer.from_pretrained(model_name)
+    # marian_model = MarianMTModel.from_pretrained(model_name)
+
+    # marian_model = MarianMTModel.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_model")
+    # marian_tokenizer = MarianTokenizer.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_tokenizer")
+
+    import gcsfs
+    fs = gcsfs.GCSFileSystem(project='deepdipper')
+    with fs.open('deepdipper_data/training_outputs/marian_tokenizer') as g:
+        marian_tokenizer = MarianMTModel.from_pretrained(g)
+    with fs.open('deepdipper_data/training_outputs/marian_model') as f:
+        marian_model = MarianMTModel.from_pretrained(f)
 
     return marian_tokenizer, marian_model
 
