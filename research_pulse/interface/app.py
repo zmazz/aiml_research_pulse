@@ -1066,7 +1066,7 @@ with Research:
                 for key in results3:
                     arxiv_url=results3[key]['Link']
                     pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
-                    with open(pdf_url,"rb") as f:
+                    with open(arxiv_url,"rb") as f:
                         base64_pdf = b64encode(f.read()).decode('utf-8')
                     pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
                     st.markdown(pdf_display, unsafe_allow_html=True)
