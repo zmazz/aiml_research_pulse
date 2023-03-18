@@ -6,7 +6,7 @@ import streamlit as st
 import pandas as pd
 import seaborn as sns
 #import numpy as np
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 #import plotly.express as px
 #import research_pulse.logic.search as ls
 #import research_pulse.logic.data_loader as ldl
@@ -246,7 +246,8 @@ def get_collaboration_citation_frequency_stats_V2(dic,author):
 
 
         # Create horizontal bar plot using seaborn
-        ax = sns.barplot(x=citation_frequencies, y=collaborations, color='steelblue')
+        fig, ax = plt.subplots(figsize=(10, 6))
+        ax = sns.barplot(x=citation_frequencies, y=collaborations, color='steelblue', ax=ax)
 
         # Add labels and titles
         ax.set_xlabel('Annual Mean Citation Frequency', fontsize=14, fontweight='bold')
@@ -265,7 +266,12 @@ def get_collaboration_citation_frequency_stats_V2(dic,author):
             ax.text(v+0.05, i, f'{v:.2f}', fontsize=12, fontweight='bold')
 
         # Show the plot
-        return ax
+        plt.tight_layout()
+        plt.close(fig)
+
+        # Retournez l'objet figure à la fin de la fonction
+        return fig
+
 
 top100_papers={'title': {'1004-3169': 'Factorizations of Cunningham numbers with bases 13 to 99',
   '1612-07324': 'Holographic quantum matter',
@@ -1058,7 +1064,8 @@ with Research:
 
                 st.text('below not rendering yet on major browsers... :(')
                 for key in results3:
-                    pdf_url = results3[key]['Link']
+                    arxiv_url=results3[key]['Link']
+                    pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
                     pdf_display = F'<iframe src="{pdf_url}" width="700" height="900" type="application/pdf"></iframe>'
                     st.markdown(pdf_display, unsafe_allow_html=True)
 
@@ -1110,7 +1117,7 @@ with Research:
                     author_reprocessed = params4.replace("-", " ").title()
                     freq4=author_mean_pub_freq(results4,author_reprocessed)
                     freq5=get_author_citation_frequency(results4,author_reprocessed)
-                    #chart6=get_collaboration_citation_frequency_stats_V2(results4,author_reprocessed)
+                    # fig6=get_collaboration_citation_frequency_stats_V2(results4,author_reprocessed)
 
                 st.markdown('  ')
                 st.markdown('  ')
@@ -1124,6 +1131,9 @@ with Research:
                 df4.sort_values(by=['Year'], inplace=True,ascending=False)
                 df4['Year'] = df4['Year'].astype(str)
                 st.write(df4.set_index('Id'))
+
+                # st.markdown(' --- ')
+                # st.pyplot(fig6)
 
                 #st.pyplot(chart6)
 
