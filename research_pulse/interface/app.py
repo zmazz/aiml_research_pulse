@@ -1,12 +1,3 @@
-import subprocess
-
-try:
-    # Attempt to install poppler-utils
-    subprocess.call(['sudo', 'apt-get', 'update'])
-    subprocess.call(['sudo', 'apt-get', 'install', '-y', 'poppler-utils'])
-except Exception as e:
-    print(f"Error installing poppler-utils: {e}")
-
 import requests
 
 #import datetime
@@ -906,37 +897,7 @@ st.markdown("<h3 style='text-align: center; color: #289c68'> Rᴇsᴇᴀʀcʜ Pu
 st.markdown("<h4 style='text-align: center; color: #a62c19'> ﮩ٨ـﮩﮩ٨ـﮩ٨ـﮩـ</h4>", unsafe_allow_html=True)
 st.markdown("<h6 style='text-align: center; color: grey;'>NLP-powered assistive exploration of research papers</h6>", unsafe_allow_html=True)
 
-About, Dashboard, Search, Research, Tools = st.tabs(["About","Dashboard","Search","Research","Tools"])
-
-with About:
-    st.markdown(' ')
-    st.markdown("AI, ML and related fields related or fed by them are evolving at a rapid pace.", unsafe_allow_html=True)
-    st.markdown("Research Pulse is a tool that helps in the exploration of research papers and their authors.", unsafe_allow_html=True)
-    st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant content in a rapidly-evolving and abundant environment.", unsafe_allow_html=True)
-    st.markdown('---')
-    st.markdown('  ')
-    col1, col2, col3, col4= st.columns(4)
-    with col1:
-        st.markdown("<h5 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h5>", unsafe_allow_html=True)
-        st.markdown("Set of analytics views on the referenced database of papers.", unsafe_allow_html=True)
-        st.markdown("Available aggregate and ranking views, with some key metrics dissected.", unsafe_allow_html=True)
-        st.markdown("--tobedone: views by most recents, by categories, views of citations graph, pioneer papers identification, interactive queries...", unsafe_allow_html=True)
-    with col2:
-        st.markdown("<h5 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h5>", unsafe_allow_html=True)
-        st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
-        st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
-        st.markdown("Search for papers by keyword(s).", unsafe_allow_html=True)
-        st.markdown("Search for authors by name(s).", unsafe_allow_html=True)
-    with col3:
-        st.markdown("<h5 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h5>", unsafe_allow_html=True)
-        st.markdown("Look for paper details by inputting its ID (e.g. ctrl-c+v'ed from Search).", unsafe_allow_html=True)
-        st.markdown("Look for specific author by inputting his/her full name (family-first).", unsafe_allow_html=True)
-        st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
-    with col4:
-        st.markdown("<h5 style='text-align: center; color: #289c68'>🤖  NLP-based toolbox  🤖</h5>", unsafe_allow_html=True)
-        st.markdown("Set of tools to help in the exploration and accessibility of research areas.", unsafe_allow_html=True)
-        st.markdown("Translater of abstracts (fr/es/pt) available.", unsafe_allow_html=True)
-        st.markdown("--tobedone: summarizer of full papers, recent papers interestingness scorer...", unsafe_allow_html=True)
+Dashboard, Search, Papers, Authors, Tools, About = st.tabs(["Dashboard","Search","Papers","Authors","Tools","About"])
 
 with Dashboard:
     Aggregates, Rankings, Categories = Dashboard.tabs(["Aggregates","Rankings","by Category (soon)"])
@@ -979,9 +940,9 @@ with Dashboard:
 
 with Search:
 
-    Papers,Authors = Search.tabs(["Papers top20 by notions & topics","Author(s) papers by name"])
+    Search_Papers_Keywords,Search_Papers_Authors,Search_Authors = Search.tabs(["Papers by keyword(s)","Papers by author name","Authors by name (soon)"])
 
-    with Papers:
+    with Search_Papers_Keywords:
         with st.form(key='params_for_api_search_papers') as search_form:
             input1 = st.text_input('\> input one to five keywords separated by space, at least related by far to artifical intelligence and machine learning')
             if st.form_submit_button('Search for Papers !'):
@@ -1019,7 +980,7 @@ with Search:
                     st.markdown("---")
                     st.text(' ')
 
-    with Authors:
+    with Search_Papers_Authors:
         with st.form(key='params_for_api_search_authors'):
 
             input2 = st.text_input('\> input name to get all papers from authors containing this name')
@@ -1046,138 +1007,132 @@ with Search:
                     st.markdown(' --- ')
                     st.text(' ')
 
-with Research:
+with Papers:
+    with st.form(key='params_for_api_research_paper'):
 
-    Paper_details,Author_details = Research.tabs(["Papers' details by ID","Author's details by name"])
+        input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1606-01781, 1706-03059, 1903-06236...)')
 
-    with Paper_details:
-        with st.form(key='params_for_api_research_paper'):
+        if st.form_submit_button('Research Paper !'):
 
-            input3 = st.text_input('\> input exact paper ID to get detailed info on it (e.g. 1606-01781, 1706-03059, 1903-06236...)')
+            params3 = input3.replace(' ','-').lower()
 
-            if st.form_submit_button('Research Paper !'):
+            #deepdipper_api_url3 = 'http://127.0.0.1:8000/papers?query='
+            deepdipper_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
 
-                params3 = input3.replace(' ','-').lower()
+            with st.spinner('Looking for Paper details...'):
+                response3 = requests.get(deepdipper_api_url3, params=dict(query=params3))
 
-                #deepdipper_api_url3 = 'http://127.0.0.1:8000/papers?query='
-                deepdipper_api_url3 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/papers'
-
-                with st.spinner('Looking for Paper details...'):
-                    response3 = requests.get(deepdipper_api_url3, params=dict(query=params3))
-
-                results3 = response3.json()
+            results3 = response3.json()
 
 
-                for key in results3:
-                    st.markdown(f"<h6 style='text-align: center; color: #289c68'>--- {str(results3[key]['Title'])} ---</h6>", unsafe_allow_html=True)
-                    st.markdown('By : ' + str(results3[key]['Authors']))
-                    st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
-                    st.markdown('arXiv category : ' + str(results3[key]['Category']) + ' -- Paper ID : ' + str(results3[key]['Id']))
+            for key in results3:
+                st.markdown(f"<h6 style='text-align: center; color: #289c68'>--- {str(results3[key]['Title'])} ---</h6>", unsafe_allow_html=True)
+                st.markdown('By : ' + str(results3[key]['Authors']))
+                st.markdown('Cited ' + str(results3[key]['Number_citations']) + ' times -- Published in ' + str(results3[key]['Year']))
+                st.markdown('arXiv category : ' + str(results3[key]['Category']) + ' -- Paper ID : ' + str(results3[key]['Id']))
 
-                    st.text(' ')
-                    st.text(' ')
+                st.text(' ')
+                st.text(' ')
 
-                st.text('below not rendering yet on major browsers... :(')
-                for key in results3:
-                    #pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
-                    arxiv_url=results3[key]['Link']
-                    http = urllib3.PoolManager()
-                    response = http.request('GET', arxiv_url)
+            st.text('below not rendering yet on major browsers... :(')
+            for key in results3:
+                #pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
+                arxiv_url=results3[key]['Link']
+                http = urllib3.PoolManager()
+                response = http.request('GET', arxiv_url)
+                remoteFile = response.data
 
-                    remoteFile = response.data
+                # # Convert the PDF data to an image
+                # pdf_pages = convert_from_bytes(remoteFile, dpi=200)
+                # pdf_image = pdf_pages[0]  # Select the first page of the PDF
 
+                # # Render the PDF image in Streamlit
+                # st.image(pdf_image)
 
-                    # Convert the PDF data to an image
-                    pdf_pages = convert_from_bytes(remoteFile, dpi=200)
-                    pdf_image = pdf_pages[0]  # Select the first page of the PDF
+                # Convert the PDF data to base64 format
+                pdf_data = BytesIO(remoteFile)
+                b64_pdf = b64encode(pdf_data.read()).decode('utf-8')
 
-                    # Render the PDF image in Streamlit
-                    st.image(pdf_image)
-
-                    # # Convert the PDF data to base64 format
-                    # pdf_data = BytesIO(remoteFile)
-                    # b64_pdf = b64encode(pdf_data.read()).decode('utf-8')
-
-                    # # Render the PDF in Streamlit
-                    # pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
-                    # st.markdown(pdf_display, unsafe_allow_html=True)
+                # Render the PDF in Streamlit
+                pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
+                st.markdown(pdf_display, unsafe_allow_html=True)
 
 
 
-                    # response_pdf = requests.get(pdf_url)
-                    # pdf_data = BytesIO(response_pdf.content)
-                    # base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+                # response_pdf = requests.get(pdf_url)
+                # pdf_data = BytesIO(response_pdf.content)
+                # base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
 
-                    # images = pdf2image.convert_from_bytes(pdf_data.read())
-                    # for i in range(len(images)):
-                    #     st.image(images[i], caption=f'pdf page {i}', use_column_width=True)
+                # images = pdf2image.convert_from_bytes(pdf_data.read())
+                # for i in range(len(images)):
+                #     st.image(images[i], caption=f'pdf page {i}', use_column_width=True)
 
-                    # pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
-                    # st.markdown(pdf_viewer, unsafe_allow_html=True)
-                    # with open(pdf_url, 'rb') as f:
-                    #     base64_pdf = b64encode(f.read()).decode('utf-8')
+                # pdf_viewer = f'<iframe src="{pdf_url}" width="600" height="800"></iframe>'
+                # st.markdown(pdf_viewer, unsafe_allow_html=True)
+                # with open(pdf_url, 'rb') as f:
+                #     base64_pdf = b64encode(f.read()).decode('utf-8')
 
-                    # pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf"></iframe>'
+                # pdf_display = f'<iframe src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf"></iframe>'
 
-                    # pdf_display = F'<iframe src="{pdf_url}" width="700" height="900" type="application/pdf"></iframe>'
-                    # st.markdown(pdf_display, unsafe_allow_html=True)
-                    # # st.markdown(pdf_display, unsafe_allow_html=True)
-                    # response_pdf = requests.get(pdf_url)
+                # pdf_display = F'<iframe src="{pdf_url}" width="700" height="900" type="application/pdf"></iframe>'
+                # st.markdown(pdf_display, unsafe_allow_html=True)
+                # # st.markdown(pdf_display, unsafe_allow_html=True)
+                # response_pdf = requests.get(pdf_url)
 
-                    # # Read the downloaded binary data into a BytesIO object
-                    # pdf_data = BytesIO(response_pdf.content)
-                    # # Generate the HTML code to display the PDF
-                    # base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
-                    # # Display the PDF
-                    # st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">', unsafe_allow_html=True)
+                # # Read the downloaded binary data into a BytesIO object
+                # pdf_data = BytesIO(response_pdf.content)
+                # # Generate the HTML code to display the PDF
+                # base64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+                # # Display the PDF
+                # st.markdown(f'<embed src="data:application/pdf;base64,{base64_pdf}" width="600" height="800" type="application/pdf">', unsafe_allow_html=True)
 
 
-    with Author_details:
-        with st.form(key='params_for_api_research_author'):
+with Authors:
+    with st.form(key='params_for_api_research_author'):
 
-            input4 = st.text_input('\> input exact author name to get detailed info on them (family then first name e.g. Chollet Francois..)')
+        input4 = st.text_input('\> input exact author name to get detailed info on them (family then first name e.g. Chollet Francois..)')
 
-            if st.form_submit_button('Research Author !'):
+        if st.form_submit_button('Research Author !'):
 
-                params4 = input4.replace(' ','-').lower()
+            params4 = input4.replace(' ','-').lower()
 
-                #deepdipper_api_url4 = 'http://127.0.0.1:8000/authors?query='
-                deepdipper_api_url4 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
+            #deepdipper_api_url4 = 'http://127.0.0.1:8000/authors?query='
+            deepdipper_api_url4 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/authors'
 
-                with st.spinner('Looking for Author details...'):
-                    #response4 = requests.get(deepdipper_api_url4+params4)
-                    response4 = requests.get(deepdipper_api_url4, params=dict(query=params4))
-                    results4 = response4.json()
-                    author_reprocessed = params4.replace("-", " ").title()
-                    freq4=author_mean_pub_freq(results4,author_reprocessed)
-                    freq5=get_author_citation_frequency(results4,author_reprocessed)
-                    # fig6=get_collaboration_citation_frequency_stats_V2(results4,author_reprocessed)
+            with st.spinner('Looking for Author details...'):
+                #response4 = requests.get(deepdipper_api_url4+params4)
+                response4 = requests.get(deepdipper_api_url4, params=dict(query=params4))
+                results4 = response4.json()
+                author_reprocessed = params4.replace("-", " ").title()
+                freq4=author_mean_pub_freq(results4,author_reprocessed)
+                freq5=get_author_citation_frequency(results4,author_reprocessed)
+                # fig6=get_collaboration_citation_frequency_stats_V2(results4,author_reprocessed)
 
-                st.markdown('  ')
-                st.markdown('  ')
-                st.markdown(freq4)
-                st.markdown(freq5)
-                st.markdown(' --- ')
-                st.markdown(f"<h6 style='text-align: center; color: #289c68'> All referenced papers by {author_reprocessed} :</h6>", unsafe_allow_html=True)
+            st.markdown('  ')
+            st.markdown('  ')
+            st.markdown(freq4)
+            st.markdown(freq5)
+            st.markdown(' --- ')
+            st.markdown(f"<h6 style='text-align: center; color: #289c68'> All referenced papers by {author_reprocessed} :</h6>", unsafe_allow_html=True)
 
-                df4=pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations','Link']]
-                df4['Year'] = df4['Year'].astype(int)
-                df4.sort_values(by=['Year'], inplace=True,ascending=False)
-                df4['Year'] = df4['Year'].astype(str)
-                st.write(df4.set_index('Id'))
+            df4=pd.DataFrame.from_dict(results4, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])[['Id','Category','Year','Title','Number_citations','Link']]
+            df4['Year'] = df4['Year'].astype(int)
+            df4.sort_values(by=['Year'], inplace=True,ascending=False)
+            df4['Year'] = df4['Year'].astype(str)
+            st.write(df4.set_index('Id'))
 
-                # st.markdown(' --- ')
-                # st.pyplot(fig6)
+            # st.markdown(' --- ')
+            # st.pyplot(fig6)
 
-                #st.pyplot(chart6)
+            #st.pyplot(chart6)
 
-                # for key in results4:
-                #     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
-                #     st.markdown(str(results4[key]['Year'])+ ', ' + str(results4[key]['Authors']) + ', ' + str(results4[key]['Link']))
-                #     st.markdown('Paper ID: ' + str(results4[key]['Id'])+ ' -- Category: ' + str(results4[key]['Category']))
-                #     st.text('ABSTRACT -- ' + str(results4[key]['Abstract']))
-                #     st.text(' ')
-                #     st.text(' ')
+            # for key in results4:
+            #     st.markdown('-- ' + str(results4[key]['Title']) + ', cited ' + str(results4[key]['Number_citations']) + ' times')
+            #     st.markdown(str(results4[key]['Year'])+ ', ' + str(results4[key]['Authors']) + ', ' + str(results4[key]['Link']))
+            #     st.markdown('Paper ID: ' + str(results4[key]['Id'])+ ' -- Category: ' + str(results4[key]['Category']))
+            #     st.text('ABSTRACT -- ' + str(results4[key]['Abstract']))
+            #     st.text(' ')
+            #     st.text(' ')
 
 with Tools:
 
@@ -1269,3 +1224,33 @@ with Tools:
     with Alert:
 
         st.markdown("coming soon, stay tuned !")
+
+with About:
+    st.markdown(' ')
+    st.markdown("AI, ML and related fields related or fed by them are evolving at a rapid pace.", unsafe_allow_html=True)
+    st.markdown("Research Pulse is a tool that helps in the exploration of research papers and their authors.", unsafe_allow_html=True)
+    st.markdown("It is an all-in-one NLP toolkit that helps in finding most relevant content in a rapidly-evolving and abundant environment.", unsafe_allow_html=True)
+    st.markdown('---')
+    st.markdown('  ')
+    col1, col2, col3, col4= st.columns(4)
+    with col1:
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🧩 Analytics dashboard  🧩</h5>", unsafe_allow_html=True)
+        st.markdown("Set of analytics views on the referenced database of papers.", unsafe_allow_html=True)
+        st.markdown("Available aggregate and ranking views, with some key metrics dissected.", unsafe_allow_html=True)
+        st.markdown("--tobedone: views by most recents, by categories, views of citations graph, pioneer papers identification, interactive queries...", unsafe_allow_html=True)
+    with col2:
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🗄️  Search papers or authors  🗄️</h5>", unsafe_allow_html=True)
+        st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
+        st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
+        st.markdown("Search for papers by keyword(s).", unsafe_allow_html=True)
+        st.markdown("Search for authors by name(s).", unsafe_allow_html=True)
+    with col3:
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🔎</h5>", unsafe_allow_html=True)
+        st.markdown("Look for paper details by inputting its ID (e.g. ctrl-c+v'ed from Search).", unsafe_allow_html=True)
+        st.markdown("Look for specific author by inputting his/her full name (family-first).", unsafe_allow_html=True)
+        st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
+    with col4:
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🤖  NLP-based toolbox  🤖</h5>", unsafe_allow_html=True)
+        st.markdown("Set of tools to help in the exploration and accessibility of research areas.", unsafe_allow_html=True)
+        st.markdown("Translater of abstracts (fr/es/pt) available.", unsafe_allow_html=True)
+        st.markdown("--tobedone: summarizer of full papers, recent papers interestingness scorer...", unsafe_allow_html=True)
