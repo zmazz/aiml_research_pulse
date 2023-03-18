@@ -1075,7 +1075,7 @@ with Research:
                     response = http.request('GET', arxiv_url)
 
                     remoteFile = response.data
-
+                    print(remoteFile)
                     # Convert the PDF data to base64 format
                     pdf_data = BytesIO(remoteFile)
                     b64_pdf = b64encode(pdf_data.read()).decode('utf-8')
