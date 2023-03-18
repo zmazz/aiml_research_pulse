@@ -12,11 +12,16 @@ import matplotlib.pyplot as plt
 #import research_pulse.logic.data_loader as ldl
 #import research_pulse.logic.analytics_agg as laa
 import streamlit.components.v1 as components
-from base64 import b64encode
-# from io import BytesIO
+
 import pandas as pd
 from collections import defaultdict
 import numpy as np
+# PDF display imports
+from base64 import b64encode
+from io import BytesIO
+from PyPDF2 import PdfFileReader
+import urllib3
+#from io import StringIO
 
 st.set_page_config(
     page_title="Research Pulse",
@@ -54,6 +59,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+# 3 research_authors functions
 def author_mean_pub_freq(dic, author):
     # conversion du dictionnaire en DataFrame
     df = pd.DataFrame.from_dict(dic, orient='index', columns=['Title', 'Authors', 'Id', 'Year', 'Link', 'Category', 'Number_citations', 'Abstract'])
@@ -272,7 +278,7 @@ def get_collaboration_citation_frequency_stats_V2(dic,author):
         # Retournez l'objet figure à la fin de la fonction
         return fig
 
-
+# 2 dashboard data below
 top100_papers={'title': {'1004-3169': 'Factorizations of Cunningham numbers with bases 13 to 99',
   '1612-07324': 'Holographic quantum matter',
   '1101-0618': 'Gauge/String Duality, Hot QCD and Heavy Ion Collisions',
@@ -1064,12 +1070,21 @@ with Research:
 
                 st.text('below not rendering yet on major browsers... :(')
                 for key in results3:
+                    #pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
                     arxiv_url=results3[key]['Link']
-                    pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
-                    with open(arxiv_url,"rb") as f:
-                        base64_pdf = b64encode(f.read()).decode('utf-8')
-                    pdf_display = f'<embed src="data:application/pdf;base64,{base64_pdf}" width="700" height="1000" type="application/pdf">'
+                    http = urllib3.PoolManager()
+                    response = http.request('GET', arxiv_url)
+
+                    remoteFile = response.data
+
+                    # Convert the PDF data to base64 format
+                    pdf_data = BytesIO(remoteFile)
+                    b64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+
+                    # Render the PDF in Streamlit
+                    pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
                     st.markdown(pdf_display, unsafe_allow_html=True)
+
 
 
                     # response_pdf = requests.get(pdf_url)
