@@ -20,6 +20,8 @@ import numpy as np
 from base64 import b64encode
 from io import BytesIO
 import urllib3
+from pdf2image import convert_from_bytes
+#from PIL import Image
 #from io import StringIO
 
 st.set_page_config(
@@ -1075,14 +1077,22 @@ with Research:
                     response = http.request('GET', arxiv_url)
 
                     remoteFile = response.data
-                    print(remoteFile)
-                    # Convert the PDF data to base64 format
-                    pdf_data = BytesIO(remoteFile)
-                    b64_pdf = b64encode(pdf_data.read()).decode('utf-8')
-                    print(b64_pdf)
-                    # Render the PDF in Streamlit
-                    pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
-                    st.markdown(pdf_display, unsafe_allow_html=True)
+
+
+                    # Convert the PDF data to an image
+                    pdf_pages = convert_from_bytes(remoteFile, dpi=200)
+                    pdf_image = pdf_pages[0]  # Select the first page of the PDF
+
+                    # Render the PDF image in Streamlit
+                    st.image(pdf_image)
+
+                    # # Convert the PDF data to base64 format
+                    # pdf_data = BytesIO(remoteFile)
+                    # b64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+
+                    # # Render the PDF in Streamlit
+                    # pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
+                    # st.markdown(pdf_display, unsafe_allow_html=True)
 
 
 

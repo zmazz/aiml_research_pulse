@@ -3,7 +3,7 @@ google-cloud-bigquery
 google-cloud-storage
 nltk
 pandas
-pdf2image
+
 plotly_express
 prefect
 scikit-learn
@@ -21,6 +21,9 @@ wordcloud
 
 # pdf rendering
 urllib3
+pdf2image
+Pillow
+poppler-utils
 PyPDF2
 
 # Trick to install the version of Tensorflow depending on your processor: darwin == Mac, ARM == M1
