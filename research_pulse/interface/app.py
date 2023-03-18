@@ -1090,7 +1090,7 @@ with Papers:
 with Authors:
     with st.form(key='params_for_api_research_author'):
 
-        input4 = st.text_input('\> input exact author name to get detailed info on them (family then first name e.g. Chollet Francois..)')
+        input4 = st.text_input('\> input exact author name to get detailed info on them (family then first name e.g. Chollet Francois, Lecun Yann..)')
 
         if st.form_submit_button('Research Author !'):
 
@@ -1254,3 +1254,6 @@ with About:
         st.markdown("Set of tools to help in the exploration and accessibility of research areas.", unsafe_allow_html=True)
         st.markdown("Translater of abstracts (fr/es/pt) available.", unsafe_allow_html=True)
         st.markdown("--tobedone: summarizer of full papers, recent papers interestingness scorer...", unsafe_allow_html=True)
+    st.markdown('---')
+    st.markdown('  ')
+    st.markdown("<h5 style='text-align: center; color: #289c68'>a website by DeepDipper team</h5>", unsafe_allow_html=True)
