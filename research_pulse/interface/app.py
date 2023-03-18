@@ -1157,7 +1157,7 @@ with Authors:
 
 with Tools:
 
-    Translate,Summarize,Alert = Tools.tabs(["Translator","Summarizer of papers (soon)","New papers interestingness (soon)"])
+    Translate,Summarize,Alert = Tools.tabs(["Translator","Summarizer of papers","New papers interestingness (soon)"])
 
     with Translate:
 
