@@ -19,7 +19,6 @@ import numpy as np
 # PDF display imports
 from base64 import b64encode
 from io import BytesIO
-from PyPDF2 import PdfFileReader
 import urllib3
 #from io import StringIO
 
