@@ -155,3 +155,10 @@ mlruns
 *.sqlite
 # IDE #
 *.vscode
+
+# Loaded models
+research_pulse/logic/bart_config/
+research_pulse/logic/bart_model/
+research_pulse/logic/bart_tokenizer/
+research_pulse/logic/marian_model/
+research_pulse/logic/marian_tokenizer/

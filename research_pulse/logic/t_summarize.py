@@ -4,6 +4,9 @@ from transformers import BartForConditionalGeneration, BartTokenizer, BartConfig
 import torch
 import json
 import sentencepiece as spm
+import research_pulse.logic.data_loader as dl
+import os
+import sys
 
 # def chunk_paragraph(paragraph):
 #     sub_paragraphs = []
@@ -21,18 +24,21 @@ import sentencepiece as spm
 
 # Loading the model and tokenizer for bart-large-cnn
 
-def bart_model():
-    # #Code BartConfig
-    bart_config = BartConfig.from_pretrained('facebook/bart-large-cnn', output_hidden_states=True)
-    # #Code BARTConfig and set vocab size to 50265
-    bart_config.vocab_size = 50265
-    bart_tokenizer=BartTokenizer.from_pretrained('facebook/bart-large-cnn')
-    bart_model=BartForConditionalGeneration.from_pretrained('facebook/bart-large-cnn')
+def load_bart_model():
+    # # #Code BartConfig
+    # bart_config = BartConfig.from_pretrained('facebook/bart-large-cnn', output_hidden_states=True)
+    # # #Code BARTConfig and set vocab size to 50265
+    # bart_config.vocab_size = 50265
+    # bart_tokenizer=BartTokenizer.from_pretrained('facebook/bart-large-cnn')
+    # bart_model=BartForConditionalGeneration.from_pretrained('facebook/bart-large-cnn')
 
     # bart_tokenizer= BartTokenizer.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_tokenizer')
     # bart_model = BartForConditionalGeneration.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_model')
     # bart_config = BartConfig.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_config')
 
+    bart_tokenizer= BartTokenizer.from_pretrained(os.path.join(sys.path[0], 'bart_tokenizer'))
+    bart_model = BartForConditionalGeneration.from_pretrained(os.path.join(sys.path[0], 'bart_model'))
+    bart_config = BartConfig.from_pretrained(os.path.join(sys.path[0], "bart_config"))
 
     # from gcsfs import GCSFileSystem
     # gcs = GCSFileSystem(token=None)
@@ -87,14 +93,16 @@ def summarizer(query_id, df, bart_tokenizer, bart_model,bart_config):
     text=df.loc[df['id']==query_id]['abstract'].values[0]
     input_ids = bart_tokenizer.encode(text, return_tensors='pt')
 
-    # Generate a 2-sentence summary
+    # Generate a 2-3 sentence summary
     summary_ids = bart_model.generate(input_ids, num_beams=4, max_length=120, early_stopping=True)
     summary = bart_tokenizer.decode(summary_ids[0], skip_special_tokens=True, clean_up_tokenization_spaces=False)
-
-    # Print the summary
-    print(summary)
 
     # summary_ids = bart_model.generate(inputs['input_ids'], early_stopping=True)
     # bart_summary = bart_tokenizer.decode(summary_ids[0], skip_special_tokens=True, max_length=130, min_length=30)
     return {'original': text,
             'summary': summary}
+
+if __name__ =='__main__':
+    data,cit=dl.load_data()
+    bart_tokenizer,bart_model,bart_config = load_bart_model()
+    summarizer(query_id=input('Enter your query: '), df=data, bart_tokenizer=bart_tokenizer, bart_model=bart_model,bart_config=bart_config)

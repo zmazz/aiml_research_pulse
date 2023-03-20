@@ -21,8 +21,8 @@ app.add_middleware(
 
 df,df_cit=ldl.load_data()
 vector, matrix = ls.vectorizer(df)
-marian_tokenizer, marian_model = ltt.marian_model()
-bart_tokenizer,bart_model,bart_config=lts.bart_model()
+marian_tokenizer, marian_model = ltt.load_marian_model()
+bart_tokenizer,bart_model,bart_config=lts.load_bart_model()
 
 
 # http://deepdipper-rp6v7d7m4q-ew.a.run.app/search?query=bayesian-neural-networks

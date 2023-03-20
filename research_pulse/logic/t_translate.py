@@ -1,6 +1,8 @@
 from transformers import MarianMTModel, MarianTokenizer
 import json
 import torch
+import os
+import sys
 
 def chunk_paragraph(paragraph):
     sub_paragraphs = []
@@ -16,17 +18,21 @@ def chunk_paragraph(paragraph):
         sub_paragraphs.append(current_sub_paragraph)
     return sub_paragraphs
 
-def marian_model():
+def load_marian_model():
     """
     Import MarianMTModel and MarianTokenizer
     """
-    model_name = "Helsinki-NLP/opus-mt-en-roa"
-    marian_tokenizer = MarianTokenizer.from_pretrained(model_name)
-    marian_model = MarianMTModel.from_pretrained(model_name)
+    # model_name = "Helsinki-NLP/opus-mt-en-roa"
+    # marian_tokenizer = MarianTokenizer.from_pretrained(model_name)
+    # marian_model = MarianMTModel.from_pretrained(model_name)
 
 
     # marian_model = MarianMTModel.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_model")
     # marian_tokenizer = MarianTokenizer.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_tokenizer")
+
+
+    marian_model = MarianMTModel.from_pretrained(os.path.join(sys.path[0], "marian_model"))
+    marian_tokenizer = MarianTokenizer.from_pretrained(os.path.join(sys.path[0], "marian_tokenizer"))
 
 
     # from gcsfs import GCSFileSystem
