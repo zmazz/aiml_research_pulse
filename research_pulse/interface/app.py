@@ -1072,7 +1072,7 @@ with Papers:
                     # If the request is successful, encode the PDF content as base64 data
                     pdf_data = b64encode(response2.content).decode('utf-8')
                     # Display the PDF using an iframe
-                    st.write(f'<iframe src="data:application/pdf;base64,{pdf_data}" width="700" height="1000"></iframe>', unsafe_allow_html=True)
+                    st.write(f'<embed src="data:application/pdf;base64,{pdf_data}" width="700" height="1000" type="application/pdf">', unsafe_allow_html=True)
                 else:
                     st.write("Error loading PDF")
 
