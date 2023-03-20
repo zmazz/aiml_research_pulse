@@ -8,5 +8,6 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 RUN python -m nltk.downloader all -d /usr/local/nltk_data
 
+
 CMD uvicorn research_pulse.api.fast:app --host 0.0.0.0 --port $PORT
 #CMD streamlit run --server.port 8080 --server.enableCORS false research_pulse.interface.app.py

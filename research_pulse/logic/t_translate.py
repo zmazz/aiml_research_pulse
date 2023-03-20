@@ -1,5 +1,6 @@
-import pickle
 from transformers import MarianMTModel, MarianTokenizer
+import json
+import torch
 
 def chunk_paragraph(paragraph):
     sub_paragraphs = []
@@ -19,20 +20,59 @@ def marian_model():
     """
     Import MarianMTModel and MarianTokenizer
     """
-    # model_name = "Helsinki-NLP/opus-mt-en-roa"
-    # marian_tokenizer = MarianTokenizer.from_pretrained(model_name)
-    # marian_model = MarianMTModel.from_pretrained(model_name)
+    model_name = "Helsinki-NLP/opus-mt-en-roa"
+    marian_tokenizer = MarianTokenizer.from_pretrained(model_name)
+    marian_model = MarianMTModel.from_pretrained(model_name)
+
 
     # marian_model = MarianMTModel.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_model")
     # marian_tokenizer = MarianTokenizer.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_tokenizer")
 
-    import gcsfs
-    fs = gcsfs.GCSFileSystem(project='deepdipper')
-    with fs.open('deepdipper_data/training_outputs/marian_tokenizer') as g:
-        marian_tokenizer = MarianMTModel.from_pretrained(g)
-    with fs.open('deepdipper_data/training_outputs/marian_model') as f:
-        marian_model = MarianMTModel.from_pretrained(f)
 
+    # import gcsfs
+    # fs = gcsfs.GCSFileSystem(project='deepdipper')
+
+    # # Load tokenizer
+    # with fs.open('deepdipper_data/training_outputs/marian_tokenizer/tokenizer_config.json', 'r') as f:
+    #     tokenizer_config = f.read()
+    # with fs.open('deepdipper_data/training_outputs/marian_tokenizer/vocab.json', 'r') as f:
+    #     vocab = f.read()
+    # with fs.open('deepdipper_data/training_outputs/marian_tokenizer/source.spm', 'rb') as f:
+    #     source_model = f.read()
+    # with fs.open('deepdipper_data/training_outputs/marian_tokenizer/target.spm', 'rb') as f:
+    #     target_model = f.read()
+    # with fs.open('deepdipper_data/training_outputs/marian_tokenizer/special_tokens_map.json', 'r') as f:
+    #     special_tokens_map = json.load(f)
+
+    # tokenizer = MarianTokenizer.from_pretrained(pretrained_model_name_or_path=None,
+    #                                             tokenizer_file=None,
+    #                                             tokenizer_config=tokenizer_config,
+    #                                             vocab_files={'source': vocab, 'target': vocab},
+    #                                             source_vocab=None,
+    #                                             target_vocab=None,
+    #                                             special_tokens_map=special_tokens_map)
+
+    # tokenizer.source_spm.LoadFromSerializedProto(source_model)
+    # tokenizer.target_spm.LoadFromSerializedProto(target_model)
+
+    # # Load model
+    # with fs.open('deepdipper_data/training_outputs/marian_model/config.json', 'r') as f:
+    #     config = f.read()
+    # with fs.open('deepdipper_data/training_outputs/marian_model/pytorch_model.bin', 'rb') as f:
+    #     model_state_dict = torch.load(f)
+
+    # model = MarianMTModel.from_pretrained(pretrained_model_name_or_path=None,
+    #                                     config=config,
+    #                                     state_dict=model_state_dict,
+    #                                     tokenizer=tokenizer)
+
+    # # Set model and tokenizer to device
+    # device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    # model.to(device)
+    # tokenizer.model_max_length = model.config.max_length
+
+    # marian_tokenizer=tokenizer
+    # marian_model=model
     return marian_tokenizer, marian_model
 
 def translate_fra(query_id,df,tokenizer, model):

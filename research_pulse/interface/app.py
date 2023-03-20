@@ -895,7 +895,7 @@ categories_list={'group_name': {0: 'Computer Science',
 
 st.markdown("<h3 style='text-align: center; color: #289c68'> Rᴇsᴇᴀʀcʜ Puʟsᴇ </h3>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center; color: #a62c19'> ﮩ٨ـﮩﮩ٨ـﮩ٨ـﮩـ</h4>", unsafe_allow_html=True)
-st.markdown("<h6 style='text-align: center; color: grey;'>NLP-powered assistive exploration of research papers</h6>", unsafe_allow_html=True)
+st.markdown("<h6 style='text-align: center; color: grey;'>NLP-powered assistive exploration of research papers in AI / ML related fields</h6>", unsafe_allow_html=True)
 
 Dashboard, Search, Papers, Authors, Tools, About = st.tabs(["Dashboard","Search","Papers","Authors","Tools","About"])
 

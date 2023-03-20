@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 from transformers import BartForConditionalGeneration, BartTokenizer, BartConfig
+import torch
+import json
+import sentencepiece as spm
 
 # def chunk_paragraph(paragraph):
 #     sub_paragraphs = []
@@ -20,24 +23,48 @@ from transformers import BartForConditionalGeneration, BartTokenizer, BartConfig
 
 def bart_model():
     # #Code BartConfig
-    # config = BartConfig.from_pretrained('facebook/bart-large-cnn', output_hidden_states=True)
-    # # #Code BARTConfig and set vocab size to 50265
-    # config.vocab_size = 50265
-    # bart_tokenizer=BartTokenizer.from_pretrained('facebook/bart-large-cnn')
-    # bart_model=BartForConditionalGeneration.from_pretrained('facebook/bart-large-cnn')
+    bart_config = BartConfig.from_pretrained('facebook/bart-large-cnn', output_hidden_states=True)
+    # #Code BARTConfig and set vocab size to 50265
+    bart_config.vocab_size = 50265
+    bart_tokenizer=BartTokenizer.from_pretrained('facebook/bart-large-cnn')
+    bart_model=BartForConditionalGeneration.from_pretrained('facebook/bart-large-cnn')
 
     # bart_tokenizer= BartTokenizer.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_tokenizer')
     # bart_model = BartForConditionalGeneration.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_model')
     # bart_config = BartConfig.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_config')
 
-    import gcsfs
-    fs = gcsfs.GCSFileSystem(project='deepdipper')
-    with fs.open('deepdipper_data/training_outputs/bart_tokenizer') as g:
-        bart_tokenizer = BartTokenizer.from_pretrained(g)
-    with fs.open('deepdipper_data/training_outputs/bart_model') as f:
-        bart_model = BartForConditionalGeneration.from_pretrained(f)
-    with fs.open('deepdipper_data/training_outputs/bart_config') as h:
-        bart_config = BartConfig.from_pretrained(h)
+    # import gcsfs
+
+    # fs = gcsfs.GCSFileSystem(project='deepdipper')
+    # with fs.open('deepdipper_data/training_outputs/bart_model/config.json', 'rb') as f:
+    #     config = json.load(f)
+    # with fs.open('deepdipper_data/training_outputs/bart_model/pytorch_model.bin', 'rb') as f:
+    #     model_state_dict = torch.load(f)
+    # bart_model = BartForConditionalGeneration.from_pretrained(pretrained_model_name_or_path=None,
+    #                                                         config=config,
+    #                                                         state_dict=model_state_dict)
+
+    # with fs.open('deepdipper_data/training_outputs/bart_tokenizer/tokenizer_config.json', 'rb') as f:
+    #     tokenizer_config = json.load(f)
+    # with fs.open('deepdipper_data/training_outputs/bart_tokenizer/vocab.json', 'r') as f:
+    #     vocab = json.load(f)
+    # with fs.open('deepdipper_data/training_outputs/bart_tokenizer/source.spm', 'rb') as f:
+    #     source_model = f.read()
+    # with fs.open('deepdipper_data/training_outputs/bart_tokenizer/special_tokens_map.json', 'r') as f:
+    #     special_tokens_map = json.load(f)
+
+    # source_spm = spm.SentencePieceProcessor()
+    # source_spm.LoadFromSerializedProto(source_model)
+
+    # bart_tokenizer = BartTokenizer.from_pretrained(pretrained_model_name_or_path=None,
+    #                                         tokenizer_file=None,
+    #                                         tokenizer_config=tokenizer_config,
+    #                                         vocab_files={'input_ids': vocab, 'attention_mask': vocab, 'decoder_input_ids': vocab, 'decoder_attention_mask': vocab},
+    #                                         merges_file=None,
+    #                                         add_prefix_space=False,
+    #                                         source_vocab=source_spm,
+    #                                         target_vocab=None,
+    #                                         special_tokens_map=special_tokens_map)
 
     return bart_tokenizer,bart_model,bart_config
 
