@@ -1073,10 +1073,10 @@ with Papers:
                     pdf_data = b64encode(response2.content).decode('utf-8')
                     print("PDF content retrieved successfully.")
                     # Display the PDF using an iframe
-                    st.write(f'<iframe src="data:application/pdf;base64,{pdf_data}" width="700" height="1000"></iframe>', unsafe_allow_html=True)
+                    st.markdown(f'<iframe src="data:application/pdf;base64,{pdf_data}" width="700" height="1000"></iframe>', unsafe_allow_html=True)
                     print("PDF displayed successfully.")
                 else:
-                    st.write("Error loading PDF")
+                    st.markdown("Error loading PDF")
 
                 # # Convert the PDF data to an image
                 # pdf_pages = convert_from_bytes(remoteFile, dpi=200)
