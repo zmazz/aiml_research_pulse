@@ -1065,6 +1065,17 @@ with Papers:
                 response = http.request('GET', arxiv_url)
                 remoteFile = response.data
 
+
+                response2 = requests.get(arxiv_url)
+
+                if response2.status_code == 200:
+                    # If the request is successful, encode the PDF content as base64 data
+                    pdf_data = b64encode(response2.content).decode('utf-8')
+                    # Display the PDF using an iframe
+                    st.write(f'<iframe src="data:application/pdf;base64,{pdf_data}" width="700" height="1000"></iframe>', unsafe_allow_html=True)
+                else:
+                    st.write("Error loading PDF")
+
                 # # Convert the PDF data to an image
                 # pdf_pages = convert_from_bytes(remoteFile, dpi=200)
                 # pdf_image = pdf_pages[0]  # Select the first page of the PDF
@@ -1079,9 +1090,6 @@ with Papers:
                 # Render the PDF in Streamlit
                 pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
                 st.markdown(pdf_display, unsafe_allow_html=True)
-
-                pdf_display2=f'<embed src="{arxiv_url}" width="600" height="400" type="application/pdf">'
-                st.markdown(pdf_display2, unsafe_allow_html=True)
 
                 # response_pdf = requests.get(pdf_url)
                 # pdf_data = BytesIO(response_pdf.content)

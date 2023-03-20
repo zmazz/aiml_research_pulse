@@ -51,8 +51,8 @@ def search(query, result_type, data, vector, matrix):
     for i in range(0,500):
         paper = data.iloc[ranked_indices[i]]
         top500_cosine=top500_cosine+[{'Title': paper["title"],'Authors': paper["authors"],'Id': paper["id"],
-                        'Year': str(paper["year"]),'Link': paper["url"],'Category':paper['category'],
-                        'Number_citations':str(paper['num_cit']),'Abstract': paper["abstract"]}]
+                        'Year': int(paper["year"]),'Link': paper["url"],'Category':paper['category'],
+                        'Number_citations':int(paper['num_cit']),'Abstract': paper["abstract"]}]
     top50_cit=sorted(top500_cosine, key=lambda x: x['Number_citations'], reverse=True)[:50]
     top50_recent=sorted(top500_cosine, key=lambda x: x['Year'], reverse=True)[:50]
     if result_type=='most_cited':
