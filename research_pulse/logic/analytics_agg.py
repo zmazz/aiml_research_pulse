@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import plotly.express as px
-from google.cloud import storage
+
 
 df = pd.read_csv("data_processed_aiml_arxiv_with_cit.csv")
 
@@ -122,7 +122,7 @@ df_sample_2 = df.sample(n=3000, random_state=42)
 def get_publications_and_citations_per_year(dataframe):
     """
     Returns a new dataframe with the number of publications and citations per year.
-    
+
     :param dataframe: pandas dataframe with columns 'year' and 'num_cit'.
     :return: pandas dataframe with columns 'year', 'publications', and 'citations'.
     """
@@ -199,7 +199,7 @@ def scatterplot_by_category_year_shape(publications_and_citations_by_category_ye
     color_map = plt.get_cmap("Set1")
     for i in range(num_categories):
         category_color_map[categories[i]] = color_map(i / num_categories)
-        
+
     # Create a dictionary to map year to shape marker
     year_marker_map = {}
     years = publications_and_citations_by_category_year["year"].unique()
@@ -207,10 +207,10 @@ def scatterplot_by_category_year_shape(publications_and_citations_by_category_ye
     marker_map = ["o", "s", "d", "^", "v", ">", "<", "P", "X", "H"]
     for i in range(num_years):
         year_marker_map[years[i]] = marker_map[i % len(marker_map)]
-        
+
     # Create a figure and axis
     fig, ax = plt.subplots(figsize=(10, 8))
-    
+
     # Iterate over each row of the dataframe and plot the point
     for index, row in publications_and_citations_by_category_year.iterrows():
         category = row["category"]
@@ -220,12 +220,12 @@ def scatterplot_by_category_year_shape(publications_and_citations_by_category_ye
         marker = year_marker_map[year]
         color = category_color_map[category]
         ax.scatter(x, y, s=150, marker=marker, color=color)
-        
+
     # Set the axis labels and title
     ax.set_xlabel("Citations")
     ax.set_ylabel("Publications")
     ax.set_title("Publications and Citations by Category and Year")
-    
+
     # Create a legend for category color and year marker mapping
     handles = []
     labels = []
@@ -238,7 +238,7 @@ def scatterplot_by_category_year_shape(publications_and_citations_by_category_ye
         handles.append(plt.Line2D([], [], linestyle="", marker=marker, color="black"))
         labels.append(year)
     ax.legend(handles, labels, loc="center left", bbox_to_anchor=(1, 0.5))
-    
+
     # Show the plot
     plt.show()
 

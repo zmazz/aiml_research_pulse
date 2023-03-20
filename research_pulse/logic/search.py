@@ -30,7 +30,7 @@ def vectorizer(df):
     return tfidf_vectorizer,tfidf_matrix
 
 # Define the search function
-def search(query, data, vector, matrix):
+def search(query, result_type, data, vector, matrix):
     """
     Compare query to vectorized abstracts, and return top 20 results based on scoring.
     """
@@ -46,15 +46,22 @@ def search(query, data, vector, matrix):
     scores = cosine_similarity(query_tfidf, matrix).flatten()
     ranked_indices = scores.argsort()[::-1]
 
-    # Return the top 20 results
-    top20=[]
-    for i in range(0,20):
+    # Return the top 50 results
+    top500_cosine=[]
+    for i in range(0,500):
         paper = data.iloc[ranked_indices[i]]
-        top20=top20+[{'Title': paper["title"],'Authors': paper["authors"],'Id': paper["id"],
+        top500_cosine=top500_cosine+[{'Title': paper["title"],'Authors': paper["authors"],'Id': paper["id"],
                         'Year': str(paper["year"]),'Link': paper["url"],'Category':paper['category'],
                         'Number_citations':str(paper['num_cit']),'Abstract': paper["abstract"]}]
-
-    return {f'{i}': d for i, d in enumerate(top20)}
+    top50_cit=sorted(top500_cosine, key=lambda x: x['Number_citations'], reverse=True)[:50]
+    top50_recent=sorted(top500_cosine, key=lambda x: x['Year'], reverse=True)[:50]
+    if result_type=='most_cited':
+        top50=top50_cit
+    elif result_type=='most_recent':
+        top50=top50_recent
+    else:
+        top50=top500_cosine[:50]
+    return {f'{i}': d for i, d in enumerate(top50)}
 
     # Return the top 5 resultsgit add .
     #for i in range(5):

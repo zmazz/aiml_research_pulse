@@ -33,6 +33,17 @@ def bart_model():
     # bart_model = BartForConditionalGeneration.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_model')
     # bart_config = BartConfig.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_config')
 
+
+    # from gcsfs import GCSFileSystem
+    # gcs = GCSFileSystem(token=None)
+    # path_tokenizer = 'gs://deepdipper_data/training_outputs/bart_tokenizer'
+    # bart_tokenizer = BartTokenizer.from_pretrained(path_tokenizer, fs=gcs)
+    # path_model = 'gs://deepdipper_data/training_outputs/bart_model'
+    # bart_model=BartForConditionalGeneration.from_pretrained(path_model, fs=gcs)
+    # path_config='gs://deepdipper_data/training_outputs/bart_config'
+    # bart_config = BartConfig.from_pretrained(path_config, fs=gcs)
+#
+
     # import gcsfs
 
     # fs = gcsfs.GCSFileSystem(project='deepdipper')

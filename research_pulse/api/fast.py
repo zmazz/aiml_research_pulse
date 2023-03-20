@@ -27,14 +27,14 @@ bart_tokenizer,bart_model,bart_config=lts.bart_model()
 
 # http://deepdipper-rp6v7d7m4q-ew.a.run.app/search?query=bayesian-neural-networks
 @app.get("/search")
-def search(query: str):  # "bayesian neural networks" / "adam optimizers" / ...
+def search(query: str,result_type: str):  # "bayesian neural networks" / "adam optimizers" / ...
     """
-    Calls search function from logic/search.py and returns the top 20 results in list of str format.
+    Calls search function from logic/search.py and returns the top 50 results in list of str format.
     """
     # Search for the query
-    top20=ls.search(query.lower(), df, vector, matrix)
-    # Return the top 20 results
-    return top20
+    top50=ls.search(query.lower(), result_type, df, vector, matrix)
+    # Return the top 50 results
+    return top50
 
 # http://deepdipper-rp6v7d7m4q-ew.a.run.app/papers?query=704-0019
 @app.get("/papers")

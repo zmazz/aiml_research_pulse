@@ -943,34 +943,34 @@ with Search:
     Search_Papers_Keywords,Search_Papers_Authors,Search_Authors = Search.tabs(["Papers by keyword(s)","Papers by author name","Authors by name (soon)"])
 
     with Search_Papers_Keywords:
+        result_type1 = st.radio("Type of search : ",("Similarity (default)", "Most recent", "Most cited"),)
         with st.form(key='params_for_api_search_papers') as search_form:
             input1 = st.text_input('\> input one to five keywords separated by space, at least related by far to artifical intelligence and machine learning')
             if st.form_submit_button('Search for Papers !'):
-
+                if result_type1 == "Most recent":
+                    result_type1 = 'most_recent'
+                elif result_type1 == "Most cited":
+                    result_type1 = 'most_cited'
+                else:
+                    result_type1 = 'default'
                 params1 = input1.replace(' ','-').lower()
 
-                #deepdipper_api_url1 = 'http://127.0.0.1:8000/search?query='
+                # deepdipper_api_url1 = 'http://127.0.0.1:8000/search'
                 deepdipper_api_url1 = 'https://deepdipper-rp6v7d7m4q-ew.a.run.app/search'
 
                 with st.spinner("Calculating cosine similarity between your input and all available papers' abstracts..."):
                     #response1 = requests.get(deepdipper_api_url1+params1)
-                    response1 = requests.get(deepdipper_api_url1, params=dict(query=params1))
+                    response1 = requests.get(deepdipper_api_url1, params=dict(query=params1,result_type=result_type1))
 
                 results1 = response1.json()
-
-                #print(results)
-
-                #data=ls.load_data()
-                #vector, matrix = ls.vectorizer(data)
-
-                #results = ls.search(query=query, data=data, vector=vector, matrix=matrix)
+                st.markdown(' ')
 
                 #st.header('Top result:')
                 st.markdown(' ')
-                st.markdown("<h5 style='text-align: center; color: #289c68'>Top 20 ranked Papers</h5>", unsafe_allow_html=True)
+                st.markdown(f"<h5 style='text-align: center; color: #289c68'>Top 50 papers ({result_type1.replace('_',' ')})</h5>", unsafe_allow_html=True)
                 st.markdown(' ')
                 st.markdown(' ')
-                for i in range(0,20):
+                for i in range(0,50):
                     k=f'{i}'
                     st.markdown(f"<h6 style='text-align: center; color: #289c68'>#{i+1} -- {str(results1[k]['Title'])}</h6>", unsafe_allow_html=True)
                     st.markdown(str(results1[k]['Year'])+ ', ' + str(results1[k]['Authors']) + ', ' + results1[k]['Link'])

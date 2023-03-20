@@ -29,6 +29,14 @@ def marian_model():
     # marian_tokenizer = MarianTokenizer.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_tokenizer")
 
 
+    # from gcsfs import GCSFileSystem
+    # gcs = GCSFileSystem(token=None)
+    # path_tokenizer = 'gs://deepdipper_data/training_outputs/marian_tokenizer'
+    # marian_tokenizer = MarianTokenizer.from_pretrained(path_tokenizer, fs=gcs)
+    # path_model = 'gs://deepdipper_data/training_outputs/marian_model'
+    # marian_model = MarianMTModel.from_pretrained(path_model, fs=gcs)
+
+
     # import gcsfs
     # fs = gcsfs.GCSFileSystem(project='deepdipper')
 

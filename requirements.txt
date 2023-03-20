@@ -3,7 +3,6 @@ google-cloud-bigquery
 google-cloud-storage
 nltk
 pandas
-
 plotly_express
 prefect
 scikit-learn
