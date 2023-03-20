@@ -25,20 +25,22 @@ import sys
 # Loading the model and tokenizer for bart-large-cnn
 
 def load_bart_model():
-    # # #Code BartConfig
-    # bart_config = BartConfig.from_pretrained('facebook/bart-large-cnn', output_hidden_states=True)
-    # # #Code BARTConfig and set vocab size to 50265
-    # bart_config.vocab_size = 50265
-    # bart_tokenizer=BartTokenizer.from_pretrained('facebook/bart-large-cnn')
-    # bart_model=BartForConditionalGeneration.from_pretrained('facebook/bart-large-cnn')
+    # #Code BartConfig
+    bart_config = BartConfig.from_pretrained('facebook/bart-large-cnn', output_hidden_states=True)
+    # #Code BARTConfig and set vocab size to 50265
+    bart_config.vocab_size = 50265
+    bart_tokenizer=BartTokenizer.from_pretrained('facebook/bart-large-cnn')
+    bart_model=BartForConditionalGeneration.from_pretrained('facebook/bart-large-cnn')
 
     # bart_tokenizer= BartTokenizer.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_tokenizer')
     # bart_model = BartForConditionalGeneration.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_model')
     # bart_config = BartConfig.from_pretrained('/Users/ziadmazzawi/deepdipper/training_outputs/bart_config')
 
-    bart_tokenizer= BartTokenizer.from_pretrained(os.path.join(sys.path[0], 'bart_tokenizer'))
-    bart_model = BartForConditionalGeneration.from_pretrained(os.path.join(sys.path[0], 'bart_model'))
-    bart_config = BartConfig.from_pretrained(os.path.join(sys.path[0], "bart_config"))
+
+    # bart_tokenizer= BartTokenizer.from_pretrained(os.path.join(sys.path[0], 'bart_tokenizer'))
+    # bart_model = BartForConditionalGeneration.from_pretrained(os.path.join(sys.path[0], 'bart_model'))
+    # bart_config = BartConfig.from_pretrained(os.path.join(sys.path[0], "bart_config"))
+
 
     # from gcsfs import GCSFileSystem
     # gcs = GCSFileSystem(token=None)

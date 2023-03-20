@@ -897,7 +897,7 @@ st.markdown("<h3 style='text-align: center; color: #289c68'> Rᴇsᴇᴀʀcʜ Pu
 st.markdown("<h4 style='text-align: center; color: #a62c19'> ﮩ٨ـﮩﮩ٨ـﮩ٨ـﮩـ</h4>", unsafe_allow_html=True)
 st.markdown("<h6 style='text-align: center; color: grey;'>NLP-powered assistive exploration of research papers in AI / ML related fields</h6>", unsafe_allow_html=True)
 
-Dashboard, Search, Papers, Authors, Tools, About = st.tabs(["Dashboard","Search","Papers","Authors","Tools","About"])
+Dashboard, Search, Papers, Authors, Tools, About = st.tabs(["- Dashboard -","- Search -","- Research Papers -","- Research Authors -","- Tools -","- About -"])
 
 with Dashboard:
     Aggregates, Rankings, Categories = Dashboard.tabs(["Aggregates","Rankings","by Category (soon)"])
@@ -1080,7 +1080,8 @@ with Papers:
                 pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
                 st.markdown(pdf_display, unsafe_allow_html=True)
 
-
+                pdf_display2=f'<embed src="{arxiv_url}" width="600" height="400" type="application/pdf">'
+                st.markdown(pdf_display2, unsafe_allow_html=True)
 
                 # response_pdf = requests.get(pdf_url)
                 # pdf_data = BytesIO(response_pdf.content)

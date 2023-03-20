@@ -22,17 +22,17 @@ def load_marian_model():
     """
     Import MarianMTModel and MarianTokenizer
     """
-    # model_name = "Helsinki-NLP/opus-mt-en-roa"
-    # marian_tokenizer = MarianTokenizer.from_pretrained(model_name)
-    # marian_model = MarianMTModel.from_pretrained(model_name)
+    model_name = "Helsinki-NLP/opus-mt-en-roa"
+    marian_tokenizer = MarianTokenizer.from_pretrained(model_name)
+    marian_model = MarianMTModel.from_pretrained(model_name)
 
 
     # marian_model = MarianMTModel.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_model")
     # marian_tokenizer = MarianTokenizer.from_pretrained("/Users/ziadmazzawi/deepdipper/training_outputs/marian_tokenizer")
 
 
-    marian_model = MarianMTModel.from_pretrained(os.path.join(sys.path[0], "marian_model"))
-    marian_tokenizer = MarianTokenizer.from_pretrained(os.path.join(sys.path[0], "marian_tokenizer"))
+    # marian_model = MarianMTModel.from_pretrained(os.path.join(sys.path[0], "marian_model"))
+    # marian_tokenizer = MarianTokenizer.from_pretrained(os.path.join(sys.path[0], "marian_tokenizer"))
 
 
     # from gcsfs import GCSFileSystem
