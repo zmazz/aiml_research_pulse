@@ -1062,16 +1062,21 @@ with Papers:
                 pdf_url = F'http://docs.google.com/gview?url={arxiv_url}&embedded=true'
                 st.markdown(pdf_url, unsafe_allow_html=True)
                 http = urllib3.PoolManager()
-                response = http.request('GET', pdf_url)
+                response = http.request('GET', arxiv_url)
                 remoteFile = response.data
 
-                # Convert the PDF data to base64 format
-                pdf_data = BytesIO(remoteFile)
-                b64_pdf = b64encode(pdf_data.read()).decode('utf-8')
 
-                # Render the PDF in Streamlit
-                pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
-                st.markdown(pdf_display, unsafe_allow_html=True)
+                response2 = requests.get(arxiv_url)
+
+                if response2.status_code == 200:
+                    # If the request is successful, encode the PDF content as base64 data
+                    pdf_data = b64encode(response2.content).decode('utf-8')
+
+                    # Display the PDF using an iframe
+                    st.markdown(f'<iframe src="data:application/pdf;base64,{pdf_data}" width="700" height="1000"></iframe>', unsafe_allow_html=True)
+
+                else:
+                    st.markdown("Error loading PDF")
 
                 # # Convert the PDF data to an image
                 # pdf_pages = convert_from_bytes(remoteFile, dpi=200)
@@ -1080,6 +1085,13 @@ with Papers:
                 # # Render the PDF image in Streamlit
                 # st.image(pdf_image)
 
+                # Convert the PDF data to base64 format
+                pdf_data = BytesIO(remoteFile)
+                b64_pdf = b64encode(pdf_data.read()).decode('utf-8')
+
+                # Render the PDF in Streamlit
+                pdf_display = f'<embed src="data:application/pdf;base64,{b64_pdf}" width="700" height="1000" type="application/pdf">'
+                st.markdown(pdf_display, unsafe_allow_html=True)
 
                 # response_pdf = requests.get(pdf_url)
                 # pdf_data = BytesIO(response_pdf.content)
