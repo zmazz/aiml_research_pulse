@@ -1278,20 +1278,21 @@ with About:
         st.markdown("--tobedone: views by most recents, by categories, views of citations graph, pioneer papers identification, interactive queries...", unsafe_allow_html=True)
     with col2:
         st.markdown("<h5 style='text-align: center; color: #289c68'>🕵️  Search papers or authors  🗄️</h5>", unsafe_allow_html=True)
-        st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
-        st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
         st.markdown("Search for papers by keyword(s).", unsafe_allow_html=True)
         st.markdown("Search for authors by name(s).", unsafe_allow_html=True)
+        st.markdown("Curated dataset of 774k research papers in areas related by close or by far to AI/ML.", unsafe_allow_html=True)
+        st.markdown("Corpus of research papers published after 2000 and openly available on arXiv.org", unsafe_allow_html=True)
+
     with col3:
-        st.markdown("<h5 style='text-align: center; color: #289c68'>🧑🏽‍🔬  Research a paper or an author  🔎</h5>", unsafe_allow_html=True)
-        st.markdown("Look for paper details by inputting its ID (e.g. ctrl-c+v'ed from Search).", unsafe_allow_html=True)
-        st.markdown("Look for specific author by inputting his/her full name (family-first).", unsafe_allow_html=True)
+        st.markdown("<h5 style='text-align: center; color: #289c68'>🔎  Research a paper or an author  🧑🏽‍🔬</h5>", unsafe_allow_html=True)
+        st.markdown("Look for paper details and pdf by inputting its ID (typically ctrl-c+v'ed from Search).", unsafe_allow_html=True)
+        st.markdown("Look for specific author by inputting his/her full name (family-first name).", unsafe_allow_html=True)
         st.markdown("--tobedone: citation network graph parser, codes & algos repository per category...", unsafe_allow_html=True)
     with col4:
         st.markdown("<h5 style='text-align: center; color: #289c68'>🛠️  NLP-based toolbox  🤖</h5>", unsafe_allow_html=True)
         st.markdown("Set of tools to help in the exploration and accessibility of research areas.", unsafe_allow_html=True)
-        st.markdown("Translater of abstracts (fr/es/pt) available.", unsafe_allow_html=True)
-        st.markdown("--tobedone: summarizer of full papers, recent papers interestingness scorer...", unsafe_allow_html=True)
+        st.markdown("Translater of abstracts (fr/es/pt), Summarizer of abstracts (2-3 sentences).", unsafe_allow_html=True)
+        st.markdown("--tobedone: recent papers interestingness scorer, GPT AI/ML sensei...", unsafe_allow_html=True)
     st.markdown('---')
     st.markdown('  ')
     st.markdown("<h5 style='text-align: center; color: #289c68'>website developed by team DeepDipper</h5>", unsafe_allow_html=True)
