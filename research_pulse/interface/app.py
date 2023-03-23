@@ -1006,6 +1006,10 @@ with Search:
                     st.markdown(' --- ')
                     st.text(' ')
 
+    with Search_Authors:
+        st.text(' ')
+        st.markdown('-- coming soon, stay tuned! --')
+
 with Papers:
     with st.form(key='params_for_api_research_paper'):
 
