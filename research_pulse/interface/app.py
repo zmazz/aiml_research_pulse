@@ -25,7 +25,7 @@ from pdf2image import convert_from_bytes
 
 st.set_page_config(
     page_title="Research Pulse",
-    page_icon="🔬",
+    page_icon="🧩",
     layout="wide",
     initial_sidebar_state="expanded",
     menu_items={
