@@ -1167,7 +1167,7 @@ with Authors:
 
 with Tools:
 
-    Translate,Summarize,Alert = Tools.tabs(["Translator","Summarizer","New papers interestingness (soon)"])
+    Translate,Summarize,Alert,Sensei = Tools.tabs(["Translator","Summarizer","New papers interestingness (soon)","AI/ML sensei (soon)"])
 
     with Translate:
 
@@ -1252,6 +1252,10 @@ with Tools:
 
 
     with Alert:
+
+        st.markdown("coming soon, stay tuned !")
+
+    with Sensei:
 
         st.markdown("coming soon, stay tuned !")
 
