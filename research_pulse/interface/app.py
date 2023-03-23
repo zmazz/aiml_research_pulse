@@ -915,7 +915,6 @@ with Dashboard:
         st.image('https://storage.googleapis.com/deepdipper_data/images/aggregate/agg_number_public_citations.png', caption='Number of papers and citations per year', use_column_width=True)
         st.markdown("  ")
 
-
     with Rankings:
         st.markdown("  ")
         st.markdown("<h6 style='text-align: center; color: #289c68'>Top 100 most cited papers</h6>", unsafe_allow_html=True)
