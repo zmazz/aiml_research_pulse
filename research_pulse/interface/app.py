@@ -893,7 +893,7 @@ categories_list={'group_name': {0: 'Computer Science',
   153: 'Work in statistics that does not fit into the other stat classifications',
   154: 'stat.TH is an alias for math.ST. Asymptotics, Bayesian Inference, Decision Theory, Estimation, Foundations, Inference, Testing.'}}
 
-st.markdown("<h3 style='text-align: center; color: #289c68'> Rᴇsᴇᴀʀcʜ Puʟsᴇ </h3>", unsafe_allow_html=True)
+st.markdown("<h3 style='text-align: center; color: #289c68'>🧩 Rᴇsᴇᴀʀcʜ Puʟsᴇ 🧩</h3>", unsafe_allow_html=True)
 st.markdown("<h4 style='text-align: center; color: #a62c19'> ﮩ٨ـﮩﮩ٨ـﮩ٨ـﮩـ</h4>", unsafe_allow_html=True)
 st.markdown("<h6 style='text-align: center; color: grey;'>NLP-powered assistive exploration of research papers in AI / ML related fields</h6>", unsafe_allow_html=True)
 
