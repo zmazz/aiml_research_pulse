@@ -40,31 +40,44 @@ Tools:
 ## Folder tree:
  as of 11.03.2023:
 
-├── Dockerfile\
-├── LICENSE\
-├── Makefile\
-├── README.md\
-├── requirements.txt\
-├── research_pulse\
-│   ├── api\
-│   │   └── fast.py\
-│   ├── interface\
-│   │   ├── app.py\
-│   │   └── main.py\
-│   ├── logic\
-│   │   ├── dashboard.py\
-│   │   ├── data_loader.py\
-│   │   ├── r_authors.py\
-│   │   ├── r_citations.py\
-│   │   ├── r_papers.py\
-│   │   ├── r_recommendation.py\
-│   │   ├── search.py\
-│   │   ├── t_alert.py\
-│   │   ├── t_summarize.py\
-│   │   └── t_translate.py\
-│   ├── params.py\
-│   └── utils.py\
-├── setup.py\
+├── Dockerfile
+├── LICENSE
+├── Makefile
+├── README.md
+├── doc_material
+│   ├── 20230305_deepdipper_pitch.pdf
+│   ├── 20230306_deepdipper_brainstorm_1.pdf
+│   └── 20230311_project _architecture.png
+├── requirements.txt
+├── research_pulse
+│   ├── __init__.py
+│   ├── api
+│   │   ├── __init__.py
+│   │   └── fast.py
+│   ├── interface
+│   │   ├── __init__.py
+│   │   ├── app.py
+│   │   ├── app2.py
+│   │   ├── app3.py
+│   │   ├── main.py
+│   │   └── setup.sh
+│   ├── logic
+│   │   ├── __init__.py
+│   │   ├── analytics_agg.py
+│   │   ├── analytics_general.py
+│   │   ├── analytics_rank.py
+│   │   ├── data_loader.py
+│   │   ├── r_authors.py
+│   │   ├── r_papers.py
+│   │   ├── search.py
+│   │   ├── t_summarize.py
+│   │   ├── t_translate.py
+│   │   ├── zzr_citations.py
+│   │   ├── zzr_recommend.py
+│   │   └── zzt_alert.py
+│   ├── params.py
+│   └── utils.py
+├── setup.py
 └── tests
 
 ## Team
