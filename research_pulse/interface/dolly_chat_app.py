@@ -3,6 +3,7 @@ from transformers import GPT2LMHeadModel, GPT2Tokenizer
 
 tokenizer = GPT2Tokenizer.from_pretrained("gpt2")
 model = GPT2LMHeadModel.from_pretrained("gpt2")
+# simple chatbot using Hugging Face's GPT-2 model, potentially a good starting point for a more complex chatbot for pdfs or other documents
 
 st.title("Dolly Chat App")
 
