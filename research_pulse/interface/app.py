@@ -22,6 +22,39 @@ import urllib3
 from pdf2image import convert_from_bytes
 #from PIL import Image
 #from io import StringIO
+import json
+
+
+# Load app data from JSON file
+def load_data():
+    with open("app_data.json", "r") as f:
+        data = json.load(f)
+    return data
+
+# Save updated app data to JSON file
+def save_data(data):
+    with open("app_data.json", "w") as f:
+        json.dump(data, f)
+
+# Increment page views
+def increment_page_views(data):
+    data["page_views"] += 1
+    save_data(data)
+
+# Load app data
+data = load_data()
+
+# Initialize session state
+if "page_viewed" not in st.session_state:
+    st.session_state.page_viewed = False
+
+# Increment and display page views
+if not st.session_state.page_viewed:
+    increment_page_views(data)
+    st.session_state.page_viewed = True
+
+
+
 
 st.set_page_config(
     page_title="Research Pulse",
@@ -1296,3 +1329,14 @@ with About:
     st.markdown('---')
     st.markdown('  ')
     st.markdown("<h5 style='text-align: center; color: #289c68'>website developed by team DeepDipper</h5>", unsafe_allow_html=True)
+
+st.markdown("""
+<p style='text-align: center; color: #289c68'>
+    🤗 experiment with care | spread these tools 🙏
+</p>
+""", unsafe_allow_html=True)
+st.markdown(f"""
+<p style='text-align: center; color: #289c68'>
+    page viewed {data['page_views']} times | built by team DeepDipper
+</p>
+""", unsafe_allow_html=True)
