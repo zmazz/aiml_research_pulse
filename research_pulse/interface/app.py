@@ -1330,6 +1330,7 @@ with About:
     st.markdown('  ')
     st.markdown("<h5 style='text-align: center; color: #289c68'>website developed by team DeepDipper</h5>", unsafe_allow_html=True)
 
+st.markdown('---')
 st.markdown("""
 <p style='text-align: center; color: #289c68'>
     🤗 experiment with care | spread these tools 🙏
