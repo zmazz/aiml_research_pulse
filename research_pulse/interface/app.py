@@ -27,13 +27,13 @@ import json
 
 # Load app data from JSON file
 def load_data():
-    with open("app_data.json", "r") as f:
+    with open("research_pulse/interface/app_data.json", "r") as f:
         data = json.load(f)
     return data
 
 # Save updated app data to JSON file
 def save_data(data):
-    with open("app_data.json", "w") as f:
+    with open("research_pulse/interface/app_data.json", "w") as f:
         json.dump(data, f)
 
 # Increment page views
